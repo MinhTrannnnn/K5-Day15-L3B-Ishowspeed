@@ -26,3 +26,8 @@ Codex triển khai CP2 fake nhiều lượt (cp2_demo.py, app.py, nhánh planner
 ## Rà và tinh gọn trước push
 
 Minh xác nhận đã kiểm bản nâng cấp và OK. Gộp hai hướng dẫn trùng nội dung (`docs/cp1.md`, `docs/checkpoints.md`) vào canvas/spec, TEAMS và checklist README; giữ kịch bản CLI cần để demo. Chưa ghi nhận Thành, Quang, Cường đã rà bản nâng cấp.
+
+
+## Hợp nhất lõi xử lý
+
+Theo yêu cầu Minh, Codex bỏ luồng điều phối trùng, đưa hội thoại vào agent.py, quy tắc chung vào policy.py và kho ca/ETA vào cases.py. CLI và harness dùng cùng agent, bỏ lệnh quay về bản trước và sơ đồ thiết kế lỗi thời. Giữ chuẩn/bộ thử/kết quả lịch sử. Các tên module trong mục lịch sử phía trên được đối chiếu về tên hiện tại; không tuyên bố các lần chấm trước đã chạy trên code mới.

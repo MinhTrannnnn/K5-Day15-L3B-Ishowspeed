@@ -3,8 +3,8 @@ import json
 import re
 
 import tracing
-from agent import answer
-from cp2_demo import CaseStore, Demo, LABELS, delivery_estimate, show_case
+from agent import Agent
+from cases import CaseStore, LABELS, delivery_estimate, show_case
 
 HELP = '''CP2 — AI GIẢ, DỮ LIỆU SYNTHETIC, KHÔNG GIAO DỊCH THẬT
 Đang dùng khách demo. Nhập câu hỏi tự nhiên, mã đơn sẽ được nhớ trong phiên.
@@ -16,7 +16,6 @@ HELP = '''CP2 — AI GIẢ, DỮ LIỆU SYNTHETIC, KHÔNG GIAO DỊCH THẬT
   /capnhat C001 1 verifying lý do       cập nhật với số phiên bản hiện tại
   /trangthai C001             khách xem ca của mình, nhân viên xem ca bất kỳ
   /shop S001                  xem khoảng thời gian giao từ lịch sử synthetic
-  /cau D004 đang ở đâu?       chạy một lượt độc lập như benchmark CP2 v1
   /moi                       xóa ngữ cảnh/nháp của phiên; giữ lịch sử ca đã tiếp nhận
   /help                       xem hướng dẫn; /thoat để thoát
 Trạng thái: received → verifying → pending_approval → in_progress → resolved.
@@ -42,8 +41,6 @@ def command(store, owner, role, text):
         return 'Khách demo: '+parts[1], parts[1], 'customer'
     if name == '/nhanvien':
         return 'Bàn nhân viên local. Cập nhật chỉ là mô phỏng, chưa giao dịch thật.', owner, 'staff'
-    if name == '/cau':
-        return answer(text.partition(' ')[2])['output'], owner, role
     if name == '/shop' and len(parts) == 2:
         result = delivery_estimate(owner, parts[1].upper())
         return ('ETA THỬ NGHIỆM SYNTHETIC — không bảo đảm giờ giao.\n'
@@ -72,7 +69,7 @@ def command(store, owner, role, text):
 
 def main():
     store = CaseStore()
-    demo = Demo(store)
+    demo = Agent(store)
     owner, role = 'demo', 'customer'
     print(HELP)
     blank = 0

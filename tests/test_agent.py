@@ -7,7 +7,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'codebase'))
-from cp2_demo import CaseStore, Demo, delivery_estimate
+from agent import Agent, answer
+from cases import CaseStore, delivery_estimate
 from app import command
 
 
@@ -15,7 +16,7 @@ class CP2DemoTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.store = CaseStore(Path(self.temp.name)/'cases.sqlite3')
-        self.demo = Demo(self.store)
+        self.demo = Agent(self.store)
 
     def tearDown(self):
         self.store.close()
@@ -31,6 +32,21 @@ class CP2DemoTests(unittest.TestCase):
         self.assertIn('cung cấp mã đơn', self.demo.chat('other', 'Tôi muốn hủy'))
         self.assertIsNone(self.store.session('other')['draft'])
 
+    def test_benchmark_calls_are_isolated_from_cli_sessions(self):
+        self.demo.chat('demo', 'D004 tôi muốn hủy')
+        self.store.receive('demo')
+        first = answer('D001 tôi muốn hủy')
+        second = answer('D005 khi nào hoàn tiền?')
+        missing = answer('Tôi muốn hủy')
+        self.assertEqual(first['action'], 'cancel_review')
+        self.assertEqual(second['action'], 'refund_status')
+        self.assertEqual(missing['action'], 'ask_order')
+        self.assertEqual(first['draft']['order_id'], 'D001')
+        self.assertEqual(second['draft']['order_id'], 'D005')
+        self.assertEqual(self.store.session('demo')['draft']['order_id'], 'D004')
+        self.assertEqual(len(self.store.find('demo', 'D004')), 1)
+        self.assertEqual(self.store.find('demo', 'D001'), [])
+
     def test_goal_before_order_is_retained(self):
         self.demo.chat('demo', 'Tôi muốn hủy')
         self.demo.chat('demo', 'D001')
@@ -42,7 +58,7 @@ class CP2DemoTests(unittest.TestCase):
         self.assertTrue(draft['conflicts'])
         self.assertEqual(draft['facts']['status'], 'delivered')
         self.assertEqual(draft['proposal_vnd'], 0)
-        self.assertIn('Nhân viên xác minh', draft['proposal'])
+        self.assertIn('nhân viên kiểm tra', draft['proposal'])
         self.assertIn('nhận món chưa', self.demo.chat('other', 'D007 cần hỗ trợ'))
 
     def test_only_operator_staff_can_receive_and_no_duplicate_or_cross_customer(self):
@@ -81,13 +97,13 @@ class CP2DemoTests(unittest.TestCase):
 
     def test_malicious_planner_cannot_run_mutation_and_loop_is_bounded(self):
         reply = {'text': json.dumps({'tool': 'issue_refund'})}
-        with patch('cp2_demo.call_model', return_value=reply) as model:
+        with patch('agent.call_model', return_value=reply) as model:
             self.assertIn('không hợp lệ', self.demo.chat('demo', 'D004 hỗ trợ'))
             self.assertEqual(model.call_count, 1)
         self.assertEqual(self.store.find('demo', 'D004'), [])
-        with patch('cp2_demo.call_model', return_value={'text': 'null'}):
+        with patch('agent.call_model', return_value={'text': 'null'}):
             self.assertIn('không hợp lệ', self.demo.chat('demo', 'D004 hỗ trợ'))
-        with patch('cp2_demo.call_model', return_value={'text': '{"tool":"finish"}'}):
+        with patch('agent.call_model', return_value={'text': '{"tool":"finish"}'}):
             self.assertIn('đủ căn cứ', self.demo.chat('demo', 'D004 hỗ trợ'))
 
     def test_estimate_uses_completed_history_and_fallback(self):
@@ -107,7 +123,7 @@ class CP2DemoTests(unittest.TestCase):
         self.store.receive('demo')
         self.store.close()
         self.store = CaseStore(path)
-        self.demo = Demo(self.store)
+        self.demo = Agent(self.store)
         self.assertEqual(len(self.store.find('demo', 'D001')), 1)
         self.demo.chat('demo', 'D005 khi nào hoàn tiền')
         self.assertEqual(self.store.session('demo')['draft']['order_id'], 'D005')

@@ -32,7 +32,7 @@ MODEL_PROVIDER=fake python3 run.py
 MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
 ```
 
-Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên; `/nhanvien` → `/tiepnhan` để nhận ca; `/trangthai C001` để xem tiến độ. `/shop S001` xem khoảng ETA. `/help` xem cú pháp, `/cau D004 đang ở đâu?` chạy đường một lượt cũ. [Kịch bản đầy đủ](docs/cp2-demo.md). Dữ liệu synthetic/snapshot, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
+Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên; `/nhanvien` → `/tiepnhan` để nhận ca; `/trangthai C001` để xem tiến độ. `/shop S001` xem khoảng ETA. `/help` xem cú pháp. [Kịch bản đầy đủ](docs/cp2-demo.md). Dữ liệu synthetic/snapshot, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
 
 **Bản nâng cấp hiện tại:** code do Codex triển khai theo yêu cầu Minh; Minh đã kiểm tra và xác nhận OK trong trao đổi. Chưa có xác nhận các thành viên khác đã rà bản nâng cấp. CP3 chưa triển khai.
 
@@ -43,7 +43,7 @@ Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên
 ## Kiểm trước khi nộp CP2
 
 - [x] Canvas/spec đồng bộ đề tài mới; khung fake nhiều lượt, hồ sơ/duyệt và ETA demo chạy được.
-- [x] Minh đã kiểm tra và xác nhận OK; kiểm tự động 14 test qua.
+- [x] Minh đã kiểm tra và xác nhận OK; kiểm tự động 15 test qua.
 - [ ] Thành, Quang, Cường rà và xác nhận phần phụ trách trong [TEAMS](TEAMS.md).
 - [ ] Lưu xác nhận chốt chuẩn theo mốc thật; kiểm nguồn bằng chứng và các giới hạn còn thiếu.
 - [ ] Minh kiểm link công khai và nộp form CP2; chưa ghi nhận đã nộp.
@@ -111,7 +111,7 @@ Nhóm dùng stack khác (Node, Streamlit, notebook…): sửa hàm `run_app()` t
 
 | File | Viết gì | Bước guide |
 |---|---|---|
-| `codebase/agent.py` | `answer(text)` — đường một lượt giữ nguyên cho benchmark; CLI mới ở `app.py`, luồng có phiên/hồ sơ ở `cp2_demo.py` | 3.2 |
+| `codebase/agent.py` | `Agent.chat` là lõi chung cho CLI và `answer(text)`; quy tắc ở `policy.py`, lưu ca/ETA ở `cases.py` | 3.2 |
 | `codebase/tools.py` | Công cụ của bài toán, mỗi công cụ một hàm có `@tool` | 2.2, 3.2 |
 | `codebase/ai.py` | `call_model(system, user)` — chỗ duy nhất gọi model. Chưa điền `.env` thì chạy **chế độ giả** | 3.3 |
 

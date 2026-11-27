@@ -45,9 +45,8 @@ class GuardTests(unittest.TestCase):
 
     def test_cancellation_is_draft_and_does_not_change_fixture(self):
         before = copy.deepcopy(get_order('D001'))
-        with patch('agent.call_model', return_value={'text': '{"action":"cancel_review"}'}):
-            result = answer('Hủy D001')
-            prepared = answer('Hủy D008')
+        result = answer('Hủy D001')
+        prepared = answer('Hủy D008')
         self.assertTrue(result['requires_approval'])
         self.assertFalse(result['executed'])
         self.assertIn('chưa hủy', result['output'])

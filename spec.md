@@ -60,7 +60,7 @@ Chi tiết nguồn và mã review ở [bản Google Play](evidence/data-mining.m
 - **Lát cắt chính:** Một khách phản ánh đơn giao trễ/bất thường → agent làm rõ và đối chiếu thông tin, đề xuất phương án và tổng hợp hồ sơ → nhân viên phản hồi/duyệt → khách theo dõi từng bước đến kết quả được ghi nhận.
 - **Ngoài phạm vi:** Không điều phối giao hàng, không kết nối sàn hoặc chuyển tiền thật, không tự kết luận bên nào sai khi thiếu chứng cứ. Thiếu/sai món khác lát cắt chuyển nhân viên; sự cố an toàn thực phẩm ưu tiên người xử lý ngay.
 - **Kiến trúc đích:** Một agent có công cụ đọc và bộ nhớ theo phiên; agent chọn bước tra cứu, hỏi bổ sung và soạn hồ sơ có cấu trúc. Workflow và code quản lý quyền, trạng thái, hạn mức và tác động. Không cần multi-agent. Khung fake hiện giới hạn 4 vòng model, tối đa 3 quyết định gọi công cụ đọc rồi kết thúc; code có thêm các kiểm tra công cụ phụ. Tên/đối tượng công cụ do dispatcher giới hạn theo mã đơn trong phiên. JSON/tool lạ, thiếu quan sát hoặc hết vòng thì dừng an toàn, không tạo ca.
-- **Trạng thái triển khai CP2:** Có vòng công cụ fake theo thứ tự mô phỏng, nhớ phiên, SQLite lưu nháp/ca/sự kiện, CLI khách/nhân viên, phản hồi/bổ sung và ETA thống kê. Planner fake dùng luật, không phải năng lực AI thật. Chưa có web, xác thực hoặc tích hợp sàn. Luồng một lượt cũ ở 4.4 giữ cho harness. [Kịch bản chạy](docs/cp2-demo.md), [kiểm kỹ thuật](eval/cp2-upgrade-check.md).
+- **Trạng thái triển khai CP2:** Có vòng công cụ fake theo thứ tự mô phỏng, nhớ phiên, SQLite lưu nháp/ca/sự kiện, CLI khách/nhân viên, phản hồi/bổ sung và ETA thống kê. Planner fake dùng luật, không phải năng lực AI thật. Chưa có web, xác thực hoặc tích hợp sàn. CLI và harness dùng chung một lõi, xem 4.4. [Kịch bản chạy](docs/cp2-demo.md), [kiểm kỹ thuật](eval/cp2-upgrade-check.md).
 
 ```mermaid
 flowchart TD
@@ -99,7 +99,7 @@ flowchart TD
 
 **Phân vai CP2 local:** Một người vận hành chuyển bàn khách/nhân viên bằng lệnh CLI; đây không phải xác thực production. Lệnh khách không gọi được tiếp nhận/cập nhật; model chỉ thấy công cụ đọc, không có quyền duyệt. SQLite kiểm owner khi khách xem/bổ sung ca và dùng version để chặn cập nhật cũ. Bản demo chưa có ghi chú nội bộ riêng hoặc đối soát thanh toán, mọi phản hồi nhân viên hiện là nội dung công khai trong ca. Trước khi triển khai nhiều người phải có xác thực server và quyền theo tài khoản.
 
-Giữ `answer(text)` một lượt độc lập, chỉ đề xuất, cho bộ chấm CP2. Luồng có phiên/nhân viên chạy qua CLI mới và được kiểm kỹ thuật riêng. Duyệt/đóng ca chỉ là trạng thái mô phỏng; `executed` luôn false, không thay snapshot hoặc giao dịch thật.
+`answer(text)` gọi cùng agent với phiên độc lập trong RAM cho bộ chấm CP2. CLI giữ phiên và bàn nhân viên, được kiểm kỹ thuật bổ sung. Duyệt/đóng ca chỉ là trạng thái mô phỏng; `executed` luôn false, không thay snapshot hoặc giao dịch thật.
 
 ### 4.3. ETA trước đặt hàng — đã có thống kê demo CP2
 
@@ -110,50 +110,17 @@ Giữ `answer(text)` một lượt độc lập, chỉ đề xuất, cho bộ ch
 - Đã có `data/demo_delivery_history.json`: 120 bản ghi synthetic, seed 27112026, sinh lại bằng `python3 data/build_delivery_history.py`; không sửa 10 snapshot cũ. Mới kiểm cách tính, lọc lịch sử và fallback; chưa có tập holdout hoặc đo MAE/độ phủ. Giao thức đánh giá sau ở eval/upgrade-plan.md. Kết quả synthetic không chứng minh khả năng dự báo thật.
 - CP2 dùng lệnh `/shop` mô phỏng thao tác xem shop; chưa có màn hình web. Chưa tích hợp vào ứng dụng đặt hàng thật. Đây là phần mở rộng cần xác nhận với coach nếu thay đổi phạm vi sau CP2; không đưa vào chuẩn chấm chính đã chốt.
 
-### 4.4. Khung hiện tại đã chạy — giữ làm mốc CP2 v1
+### 4.4. Một lõi xử lý dùng chung
 
-- **Lát cắt của khung cũ:** Một khách báo chờ lâu chưa nhận đồ ăn → AI chọn bước tiếp theo từ trạng thái đơn và chính sách → khách nhận hướng dẫn chờ, đề xuất kiểm tra hủy hoặc chuyển nhân viên có căn cứ.
-- **Ngoài phạm vi:** không điều phối tài xế, không sửa đơn thật, không tự hủy/hoàn/gửi tin; không xác minh mọi loại thiếu/sai món. Không xác thực tài khoản thật; chỉ dùng đơn demo.
-- **Hình dạng của code hiện tại:** workflow cố định; model chỉ chọn action, code kiểm quyền và trạng thái rồi dựng output từ snapshot. Không cần nhiều agent cho luồng hẹp này; giữ chi phí và đường đi dễ kiểm.
+- `agent.py`: `Agent.chat` điều phối công cụ, làm rõ, giữ ngữ cảnh, đối chiếu và soạn hồ sơ.
+- `policy.py`: chốt an toàn/riêng tư, điều kiện trạng thái, hạn mức và dựng phản hồi có căn cứ. Không có lời gọi model hoặc luồng điều phối thứ hai trong file này.
+- `cases.py`: lưu phiên, nháp, ca và sự kiện SQLite; công cụ timeline/ETA. Bàn nhân viên mới gọi thao tác tiếp nhận/cập nhật.
+- `app.py`: CLI gọi cùng `Agent.chat`; không có chế độ quay về phiên bản trước.
+- `answer(text)`: adapter của harness gọi chính `Agent.chat` trong SQLite RAM mới cho mỗi input, trả đúng dict. Không đọc/ghi ca demo local; ở đầu vào độc lập, agent trả đề xuất trực tiếp từ dữ kiện thay vì chờ lượt hội thoại tiếp. Quy tắc và bộ công cụ vẫn dùng chung.
 
-```mermaid
-flowchart TD
-    A[Khách gửi yêu cầu] --> B{Sự cố thực phẩm hoặc riêng tư?}
-    B -->|Có| C[Đề xuất người xử lý ngay hoặc từ chối tiết lộ]
-    B -->|Không| D{Có đúng một mã đơn?}
-    D -->|Chưa| E[Hỏi thêm hoặc chọn một mã]
-    D -->|Có| F[Tra đơn synthetic và DEMO-P1]
-    F --> G{Tìm thấy đơn?}
-    G -->|Không| H[Hỏi kiểm lại mã]
-    G -->|Có| I[Model chọn action từ dữ liệu]
-    I --> J[Code kiểm trạng thái và phạm vi action]
-    J --> K{Hướng xử lý}
-    K -->|Thiếu hoặc mâu thuẫn| L[Đề xuất nhân viên; chưa gửi ca]
-    K -->|Đã hủy| M[Nêu trạng thái khoản hoàn có căn cứ]
-    K -->|Muốn hủy| N[Code kiểm điều kiện; soạn đề xuất chờ duyệt]
-    K -->|Chờ| O[Code kiểm hạn mức voucher]
-    O --> P[Giải thích trạng thái và bước tiếp theo]
-```
+**Chính sách DEMO-P1:** trễ quá 30 phút mới đủ điều kiện đề xuất voucher tối đa 50.000 VND; đúng 30 phút không đủ. Chỉ đề xuất hủy khi đang chờ tài xế và quán chưa làm món. Đây là chính sách dựng, không phải chính sách hãng. Hủy/hoàn/phát voucher không được thực hiện thật.
 
-| Công cụ đã triển khai | Input | Output | Tác động ra ngoài? |
-|---|---|---|---|
-| `get_order(order_id)` | Một mã đơn | Snapshot synthetic hoặc không tìm thấy | Chỉ đọc |
-| `get_policy(issue_type)` | `late_delivery` | Chính sách dựng DEMO-P1 | Chỉ đọc |
-| `check_limit(order, amount)` | Snapshot, tiền VND | Đủ điều kiện, trong hạn mức và lý do | Không; kiểm bằng code |
-
-- **Mức tự động:** AI tự chọn bước và hệ thống soạn hướng dẫn. Model giả hiện dùng từ khóa, token 0. Mọi hủy, voucher, hoàn tiền, chuyển ca đều dừng ở đề xuất; không có API thực hiện.
-- **Chính sách dựng:** trễ **quá 30 phút**, snapshot nhất quán, chưa hủy mới đủ điều kiện đề xuất voucher tối đa **50.000 VND**; đúng 30 phút không đủ. Chỉ đề xuất hủy theo điều kiện khi đang chờ tài xế, quán chưa làm món. Đây không phải chính sách của ShopeeFood/GrabFood.
-- **Chặn rủi ro:** không dùng số tiền/văn bản tự do do model tạo để trả khách; model chỉ chọn action trong danh sách. Code dựng nội dung từ dữ liệu; model trả JSON lỗi hoặc action lạ thì đề xuất người kiểm tra. `check_limit` chặn số tiền âm, không nguyên, sai trạng thái, thiếu thời gian và vượt hạn mức.
-- **Người duyệt:** mọi tác động ra ngoài phải có nhân viên duyệt; chưa triển khai thao tác duyệt/giao dịch thật. Hủy sai gây thiệt hại cho quán; hoàn sai làm quán/khách mất tiền.
-
-| Nguyên tắc | Chỗ thực hiện |
-|---|---|
-| G10 — thu hẹp phạm vi khi không chắc | Thiếu mã hỏi thêm; snapshot mâu thuẫn/thiếu thời gian đề xuất nhân viên |
-| G1/G2 — nói rõ khả năng và giới hạn | Output gắn nhãn demo, snapshot cố định; không bảo đảm giờ giao/ngày hoàn |
-| G11 — giải thích có căn cứ | Output ghi mã đơn và DEMO-P1, nêu trạng thái/mốc trễ từ snapshot |
-| G8/G9 — người dùng sửa được | Mỗi lượt độc lập, người dùng có thể gửi mã đúng ở lượt mới; chưa có ghi thay đổi ra ngoài |
-
-Dữ liệu: 10 đơn synthetic, seed `27112026`; snapshot 12:30 ngày 27/11/2026 UTC+07, không live. Model fake chỉ mô phỏng luồng, chưa đo chất lượng AI thật. Luồng chưa hỗ trợ hội thoại có bộ nhớ; mỗi lượt cần mã đơn.
+10 snapshot synthetic và seed 27112026 vẫn là dữ liệu dùng cho bộ thử; 120 lịch sử synthetic phục vụ ETA. Snapshot không live. Kết quả chấm trước đây giữ nguyên làm bằng chứng của phiên bản đã chạy, không phải tính năng hoặc phiên bản người dùng có thể chọn.
 
 ## §5. Chỗ khó và bộ câu thử
 
@@ -182,7 +149,7 @@ Dữ liệu: 10 đơn synthetic, seed `27112026`; snapshot 12:30 ngày 27/11/202
 - Ngoài quyền: không lộ thông tin cá nhân hoặc ghi chú nội bộ; sự cố thực phẩm đề xuất chuyển người ngay; không tự thực hiện giao dịch.
 - Trước đặt hàng: màn hình shop gọi công cụ ETA, nêu khoảng/số mẫu; thiếu lịch sử thì báo thiếu dữ liệu, không khẳng định dự báo cá nhân hóa.
 
-**Mức đã chạy:** hỏi mục tiêu/mã và nhớ qua lượt, đối chiếu snapshot/lời khách, tạo nháp, nhân viên nhận/cập nhật/bổ sung, khách xem cùng ca, chống trùng và version cũ, ETA cá nhân/fallback/thiếu mẫu. Lời hỏi/nháp dùng luật và template CP2; chưa có AI thật, công cụ lỗi mạng, web hoặc phân quyền production. Đường `answer(text)` cũ vẫn độc lập cho harness.
+**Mức đã chạy:** hỏi mục tiêu/mã và nhớ qua lượt, đối chiếu snapshot/lời khách, tạo nháp, nhân viên nhận/cập nhật/bổ sung, khách xem cùng ca, chống trùng và version cũ, ETA cá nhân/fallback/thiếu mẫu. Lời hỏi/nháp dùng luật và template CP2; chưa có AI thật, công cụ lỗi mạng, web hoặc phân quyền production. Adapter `answer(text)` dùng cùng lõi và tạo phiên độc lập cho mỗi input của harness.
 
 ## §7. Đánh giá & chuẩn đạt — CP2 v1
 
@@ -247,3 +214,8 @@ Nâng từ hướng dẫn trạng thái một lượt sang agent làm rõ, đố
 ### Nâng thực thi CP1–CP2 cùng ngày 27/11/2026
 
 Theo yêu cầu Minh, đồng bộ lại nội dung CP1 (canvas, pain, phạm vi), không ghi lại lịch sử nộp. Triển khai ngay khung CP2 fake nhiều lượt và công cụ đọc giới hạn, SQLite lưu nháp/ca, CLI nhân viên tiếp nhận/cập nhật/bổ sung, khách theo dõi, ETA thống kê từ 120 đơn lịch sử synthetic. Không triển khai CP3: chưa nối API/model thật, chưa chạy lượt đánh giá AI thật hoặc chi phí. Chuẩn §7 CP2 v1 và artifact cũ giữ nguyên. Kết quả kiểm khung mới báo riêng tại eval/cp2-upgrade-check.md.
+
+
+### Hợp nhất về một phiên bản hiện tại
+
+Theo yêu cầu Minh, bỏ module điều phối CP2 tách riêng và nhánh fake model cũ; `Agent.chat` trong agent.py là lõi duy nhất cho CLI và adapter answer(text). Tách quy tắc chung sang policy.py và kho ca/ETA sang cases.py. Bỏ lệnh /cau và sơ đồ workflow cũ; giữ nguyên chuẩn/bộ thử và kết quả lịch sử. Không xóa dữ liệu ca người dùng đã lưu.

@@ -1,6 +1,6 @@
-# Hồ sơ đánh giá — mốc CP2 v1 và kế hoạch nâng cấp
+# Hồ sơ đánh giá — agent xử lý khiếu nại giao trễ
 
-**Phạm vi các kết quả hiện có:** workflow fake một lượt CP2 v1. Khung CP2 mới đã có phiên/hồ sơ/CLI nhân viên/ETA synthetic và kiểm kỹ thuật riêng tại [cp2-upgrade-check](cp2-upgrade-check.md); chưa chấm chất lượng AI thật. Giữ nguyên benchmark/metric/phiếu cũ; kế hoạch kiểm phần mới tại [upgrade-plan.md](upgrade-plan.md), mốc nộp tại [phân công](../TEAMS.md).
+**Phạm vi kết quả:** phiếu 5/5 và preview là bằng chứng lịch sử của lần chạy được ghi trong file. Bản hiện tại chỉ có một lõi `Agent.chat` cho CLI/harness; không còn luồng sản phẩm cũ để chọn. Khung CP2 mới đã có phiên/hồ sơ/CLI nhân viên/ETA synthetic và kiểm kỹ thuật riêng tại [cp2-upgrade-check](cp2-upgrade-check.md); chưa chấm chất lượng AI thật. Giữ nguyên benchmark/metric/phiếu cũ; kế hoạch kiểm phần mới tại [upgrade-plan.md](upgrade-plan.md), mốc nộp tại [phân công](../TEAMS.md).
 
 ## 1. Dataset → xử lý
 

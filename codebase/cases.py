@@ -4,14 +4,11 @@ Không có đăng nhập production: local CLI là bàn mô phỏng của một 
 Không có quyền duyệt trong danh sách công cụ model. Không giao dịch/gửi tin thật.
 """
 import json
-import re
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-from agent import answer, normalize
-from ai import call_model
-from tools import get_order, get_policy, check_limit
+from tools import get_order
 from tracing import tool
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -173,119 +170,3 @@ def show_case(case):
     for event in case['events']:
         lines.append('%s · %s · %s: %s' % (event['at'], event['actor'], LABELS[event['status']], event['note']))
     return '\n'.join(lines)
-
-
-class Demo:
-    def __init__(self, store):
-        self.store = store
-
-    def chat(self, owner, message):
-        session = self.store.session(owner)
-        user = normalize(message)
-        # Dùng chốt an toàn cũ trước khi nhận văn bản vào hồ sơ.
-        if any(term in user for term in ('ngo doc', 'di ung', 'di vat', 'so dien thoai', 'dia chi', 'sdt', 'so the')):
-            return answer(message)['output']
-        ids = set(re.findall(r'\bD\d{3,}\b', message.upper()))
-        if len(ids) > 1:
-            return 'Bạn muốn xử lý đơn nào? Hãy chọn một mã.'
-        if ids and next(iter(ids)) != session['order_id']:
-            if session['order_id'] is None:
-                session['order_id'] = next(iter(ids))
-            else:
-                session = {'order_id': next(iter(ids)), 'goal': None, 'messages': [], 'draft': None}
-        session['messages'].append(message)
-        session['messages'] = session['messages'][-12:]
-        if 'huy' in user:
-            session['goal'] = 'cancel_review'
-        elif 'hoan' in user:
-            session['goal'] = 'refund_status'
-        elif any(w in user for w in ('nhan vien', 'khieu nai', 'chua nhan', 'chua thay', 'ho tro', 'xu ly')):
-            session['goal'] = 'human_review'
-        elif any(w in user for w in ('cho tiep', 'theo doi', 'dang o dau', 'trang thai')):
-            session['goal'] = 'wait'
-        self.store.save_session(owner, session)
-        if not session['order_id']:
-            return 'Bạn cung cấp mã đơn (ví dụ D004) nhé; mình sẽ giữ thông tin trong phiên demo này.'
-        if any(w in user for w in ('thieu mon', 'sai mon', 'doi tai xe', 'khoa shop')):
-            return answer(message)['output']
-        observations = {}
-        allowed = {
-            'get_order': lambda: get_order(session['order_id']),
-            'get_policy': lambda: get_policy('late_delivery'),
-            'order_timeline': lambda: order_timeline(session['order_id']),
-        }
-        # Fake planner chọn công cụ; dispatcher không nhận tên/args tự do từ model.
-        # 4 vòng: tối đa 3 công cụ đọc và 1 quyết định kết thúc.
-        for _ in range(4):
-            reply = call_model('CP2: chỉ gọi công cụ đọc cho mã đơn đã chọn, rồi kết thúc.',
-                               json.dumps({'mode': 'cp2_demo', 'message': message,
-                                           'observations': observations}, ensure_ascii=False))
-            try:
-                decision = json.loads(reply['text'])
-                step = decision.get('tool') if isinstance(decision, dict) else None
-            except (ValueError, TypeError, KeyError):
-                return 'Không đọc được quyết định model; cần nhân viên kiểm tra, chưa tạo ca.'
-            if step == 'finish':
-                break
-            if step not in allowed or step in observations:
-                return 'Dừng vì bước công cụ không hợp lệ; chưa tạo hoặc cập nhật ca.'
-            observations[step] = allowed[step]()
-        else:
-            return 'Đã chạm giới hạn bước demo; đề xuất nhân viên kiểm tra, chưa tạo ca.'
-        if 'get_order' not in observations:
-            return 'Chưa đủ căn cứ công cụ để soạn hồ sơ; cần nhân viên kiểm tra.'
-        order = observations.get('get_order')
-        if not order:
-            return 'Không tìm thấy đơn demo; hãy kiểm tra mã.'
-        if 'get_policy' not in observations or 'order_timeline' not in observations:
-            return 'Chưa đủ căn cứ công cụ để soạn hồ sơ; cần nhân viên kiểm tra.'
-        existing = self.store.find(owner, session['order_id'])
-        active = next((c for c in existing if c['status'] != 'resolved'), None)
-        if active:
-            if active['status'] == 'needs_info':
-                case = self.store.supplement(active['id'], owner, message)
-                return 'Đã lưu lời khách bổ sung trong ca mô phỏng, chưa xác minh nội dung.\n' + show_case(case)
-            return 'Đơn này đã có ca đang mở; không tạo ca trùng.\n' + show_case(active)
-        if not session['goal']:
-            return ('Đơn %s: %s, snapshot %s. Bạn muốn theo dõi, kiểm tra hủy hay nhờ nhân viên xử lý?'
-                    % (order['order_id'], order['status'], order['updated_at']))
-        claim_text = normalize(' '.join(session['messages']))
-        conflicts = []
-        if not order['consistent']:
-            conflicts.append('Snapshot có cờ mâu thuẫn; chưa xác nhận trạng thái.')
-        if order['status'] == 'delivered' and any(w in claim_text for w in ('chua nhan', 'chua thay')):
-            conflicts.append('Hệ thống ghi đã giao; khách nói chưa nhận. Chưa xác minh bên nào đúng.')
-        missing = []
-        if order['status'] == 'delivered' and not any(w in claim_text for w in ('chua nhan', 'da nhan', 'chua thay')):
-            return 'Hệ thống ghi đã giao. Bạn đã nhận món chưa? Mình cần làm rõ trước khi lập hồ sơ.'
-        if type(order['delay_minutes']) is not int:
-            missing.append('Chưa có dữ liệu thời gian trễ đáng tin.')
-        action = session['goal']
-        if conflicts or missing or any(w in claim_text for w in ('bo qua', '500k', '500.000', '100%')):
-            action = 'human_review'
-        amount = 0
-        if action == 'cancel_review':
-            if order['status'] == 'awaiting_driver' and not order['prepared']:
-                proposal = 'Đủ điều kiện đề xuất hủy theo DEMO-P1; chờ nhân viên duyệt, chưa hủy.'
-            else:
-                proposal = 'Chưa đủ điều kiện đề xuất hủy theo DEMO-P1; nhân viên xem xét yêu cầu.'
-        elif order['status'] == 'cancelled':
-            proposal = 'Khoản hoàn: %s theo snapshot; chưa xác nhận ngày hoàn hoặc giao dịch mới.' % order['refund_status']
-        elif action == 'human_review':
-            proposal = 'Nhân viên xác minh dữ kiện và xem xét phương án; chưa hủy/hoàn/phát voucher.'
-        else:
-            limit = check_limit(order, observations['get_policy']['max_voucher_vnd'])
-            amount = limit['max_vnd'] if limit['allowed'] else 0
-            proposal = ('Đề xuất voucher %s VND chờ duyệt; chưa phát hành.' % amount if amount
-                        else 'Theo dõi hoặc nhờ nhân viên; chưa đủ điều kiện voucher theo DEMO-P1.')
-        draft = {'order_id': order['order_id'], 'customer_goal': session['goal'],
-                 'customer_claims': session['messages'], 'facts': order,
-                 'sources': [order['order_id'], 'DEMO-P1'], 'timeline': observations['order_timeline'],
-                 'conflicts': conflicts, 'missing': missing, 'proposal': proposal,
-                 'proposal_vnd': amount, 'requires_approval': True, 'executed': False,
-                 'synthetic': True, 'created_at': now()}
-        session['draft'] = draft
-        self.store.save_session(owner, session)
-        return ('HỒ SƠ NHÁP — chưa gửi ca/chưa giao dịch thật.\n'
-                + json.dumps(draft, ensure_ascii=False, indent=2)
-                + '\nNhân viên dùng /tiepnhan để xác nhận lưu ca mô phỏng.')

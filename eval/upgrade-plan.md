@@ -4,7 +4,7 @@ Ngày soạn: 27/11/2026. **Chưa có kết quả AI thật hoặc đo hiệu qu
 
 ## 1. Hai luồng đánh giá tách biệt
 
-- **Bộ nền BTC:** giữ 20 input độc lập và chuẩn CP2; dùng `answer(text)` ở chế độ chỉ đề xuất. Mỗi câu không nhận bộ nhớ từ câu khác. Chạy model thật qua harness BTC, chấm pass rồi score, ghi run ID.
+- **Bộ nền BTC:** giữ 20 input độc lập và chuẩn CP2; dùng `answer(text)` gọi cùng agent với CLI, mỗi input có phiên RAM riêng và chỉ trả đề xuất. Mỗi câu không nhận bộ nhớ từ câu khác. Chạy model thật qua harness BTC, chấm pass rồi score, ghi run ID.
 - **Bộ bổ sung:** dùng phiên hội thoại và dữ liệu ca riêng, mô phỏng khách/nhân viên. Lưu thứ tự tin nhắn, tool calls, nháp, sự kiện duyệt, trạng thái và phiên bản code/model/prompt/policy. Không gọi kết quả này là run-N của harness BTC; không cộng vào tỷ lệ đạt nền.
 
 ## 2. Ma trận ca cần dựng trước khi chạy

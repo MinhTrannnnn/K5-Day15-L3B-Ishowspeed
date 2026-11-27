@@ -97,4 +97,4 @@ MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
 
 Phiên, nháp, ca và sự kiện lưu trong `data/runtime/cp2.sqlite3`, được gitignore, còn sau khi thoát. `/moi` chỉ xóa ngữ cảnh/nháp của khách, không xóa ca đã lưu. Muốn xem mã/phiên bản hiện tại dùng `/danhsach` ở bàn nhân viên. Không sửa artifact đánh giá đã chạy để làm sạch demo.
 
-`/cau D004 đang ở đâu?` chạy đường một lượt cũ. `answer(text)` và benchmark/metric CP2 v1 vẫn giữ nguyên cho harness. [Kết quả kiểm kỹ thuật CP2](../eval/cp2-upgrade-check.md) tách khỏi phiếu 5/5 cũ và kết quả model thật.
+CLI và `answer(text)` của harness cùng gọi `Agent.chat` trong `agent.py`; harness tạo phiên RAM độc lập mỗi input. Không có lệnh quay lại bản cũ. Benchmark/metric CP2 v1 giữ nguyên. [Kết quả kiểm kỹ thuật CP2](../eval/cp2-upgrade-check.md) tách khỏi phiếu 5/5 cũ và kết quả model thật.
