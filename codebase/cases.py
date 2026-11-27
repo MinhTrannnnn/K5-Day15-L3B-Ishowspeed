@@ -10,6 +10,7 @@ from pathlib import Path
 
 from tools import get_order
 from tracing import tool
+from case_review import review_case
 
 ROOT = Path(__file__).resolve().parents[1]
 STATES = {
@@ -100,7 +101,11 @@ class CaseStore:
             if not any(e.get('actor') == case['owner'] for e in case['events'][
                     max(i for i, e in enumerate(case['events']) if e['status'] == 'needs_info' and e['actor'] == 'staff-demo') + 1:]):
                 raise ValueError('Chưa có thông tin bổ sung của khách.')
-        events = case['events'] + [{'actor': 'staff-demo', 'at': now(), 'status': target,
+        if target in ('pending_approval', 'in_progress', 'resolved'):
+            review = self.checklist(case_id)
+            if not review['ready_for_approval']:
+                raise ValueError('Checklist chưa sẵn sàng: ' + '; '.join(review['blockers'] + review['warnings']))
+        events = case['events'] + [{'actor': 'staff-demo', 'at': now(), 'status': target, 'type': 'status',
                                     'note': note.strip(), 'synthetic': True}]
         with self.db:
             cur = self.db.execute('UPDATE cases SET status=?,version=version+1,events=? WHERE id=? AND version=?',
@@ -121,6 +126,81 @@ class CaseStore:
             if cur.rowcount != 1:
                 raise ValueError('Ca vừa thay đổi; vui lòng gửi lại phần bổ sung.')
         return self.get(case_id, owner)
+
+
+    def checklist(self, case_id):
+        case = self.get(case_id)
+        return review_case(case['body'], case['events'])
+
+    def _append(self, case, event, expected_version, status=None):
+        target = status or case['status']
+        try:
+            with self.db:
+                cur = self.db.execute('UPDATE cases SET status=?,version=version+1,events=? WHERE id=? AND version=?',
+                    (target, json.dumps(case['events']+[event], ensure_ascii=False), case['id'], expected_version))
+                if cur.rowcount != 1:
+                    raise ValueError('Phiên bản cũ; tải lại ca.')
+        except sqlite3.IntegrityError:
+            raise ValueError('Đơn đã có ca đang mở khác; cần nhân viên đối chiếu, không tự gộp.')
+        return self.get(case['id'])
+
+    def verify(self, case_id, version, evidence_ref, note):
+        case = self.get(case_id)
+        if case['status'] != 'verifying' or not evidence_ref.strip() or not note.strip():
+            raise ValueError('Chỉ xác minh ở bước verifying, cần mã căn cứ và nhận định nhân viên.')
+        event = {'actor': 'staff-demo', 'at': now(), 'status': case['status'],
+                 'type': 'verification', 'evidence_ref': evidence_ref.strip(), 'note': note.strip()}
+        return self._append(case, event, version)
+
+    def reminder_drafts(self, threshold_minutes, at=None):
+        if type(threshold_minutes) is not int or threshold_minutes <= 0:
+            raise ValueError('Ngưỡng nhắc nội bộ phải là số phút nguyên dương.')
+        clock = datetime.fromisoformat(at or now())
+        if clock.tzinfo is None:
+            raise ValueError('Thời điểm kiểm cần múi giờ.')
+        drafts = []
+        for row in self.db.execute("SELECT id FROM cases WHERE status!='resolved' ORDER BY id").fetchall():
+            case = self.get(row['id'])
+            status_event = next(e for e in reversed(case['events'])
+                                if e.get('actor') == 'staff-demo' and e.get('type', 'status') == 'status')
+            elapsed = (clock-datetime.fromisoformat(status_event['at'])).total_seconds()/60
+            if elapsed >= threshold_minutes:
+                drafts.append({'case_id': case['id'], 'status': case['status'],
+                    'wait_minutes': round(elapsed, 1), 'threshold_minutes': threshold_minutes,
+                    'reminder_key': '%s:%s' % (case['id'], status_event['at']),
+                    'draft_only': True, 'sent': False,
+                    'note': 'Nháp nhắc nhân viên theo ngưỡng nội bộ; không phải SLA hãng, chưa gửi tin.'})
+        return drafts
+
+    def feedback(self, case_id, owner, rating, note):
+        case = self.get(case_id, owner)
+        if case['status'] != 'resolved' or rating not in ('satisfied', 'unresolved') or not note.strip():
+            raise ValueError('Phản hồi sau kết quả cần satisfied/unresolved và nội dung.')
+        event = {'actor': owner, 'at': now(), 'status': 'resolved', 'type': 'feedback',
+                 'rating': rating, 'note': note.strip(), 'verified': False}
+        latest = next((e for e in reversed(case['events']) if e.get('type') == 'feedback'), None)
+        if latest and latest['rating'] == rating and latest['note'] == note.strip():
+            return case  # gửi lặp không thêm sự kiện hoặc tăng đếm
+        return self._append(case, event, case['version'])
+
+    def reopen(self, case_id, version, reason):
+        case = self.get(case_id)
+        if case['status'] != 'resolved' or not reason.strip():
+            raise ValueError('Chỉ nhân viên mở lại ca đã có kết quả, cần lý do.')
+        event = {'actor': 'staff-demo', 'at': now(), 'status': 'verifying',
+                 'type': 'status', 'note': 'Mở lại để xác minh: '+reason.strip(), 'reopened': True}
+        return self._append(case, event, version, 'verifying')
+
+    def feedback_summary(self):
+        counts = {'cases_with_feedback': 0, 'satisfied': 0, 'unresolved': 0,
+                  'unverified_customer_feedback': True}
+        for row in self.db.execute('SELECT id FROM cases').fetchall():
+            events = self.get(row['id'])['events']
+            latest = next((e for e in reversed(events) if e.get('type') == 'feedback'), None)
+            if latest:
+                counts['cases_with_feedback'] += 1
+                counts[latest['rating']] += 1
+        return counts
 
 
 @tool

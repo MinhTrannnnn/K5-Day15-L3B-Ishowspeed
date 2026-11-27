@@ -90,7 +90,9 @@ class CP2DemoTests(unittest.TestCase):
         case = self.store.get(cid, 'demo')
         self.assertEqual(case['version'], 4)
         self.assertEqual(case['events'][-1]['type'], 'customer_claim')
-        for version, status in [(4, 'verifying'), (5, 'pending_approval'), (6, 'in_progress'), (7, 'resolved')]:
+        self.store.update(cid, 4, 'verifying', 'Đã nhận bổ sung')
+        self.store.verify(cid, 5, 'DEMO-EVIDENCE', 'Nhân viên ghi nhận đã đối chiếu mô phỏng; chưa quy lỗi bên nào')
+        for version, status in [(6, 'pending_approval'), (7, 'in_progress'), (8, 'resolved')]:
             case = self.store.update(cid, version, status, 'Kết quả thao tác mô phỏng: '+status)
         self.assertEqual(case['status'], 'resolved')
         self.assertFalse(case['body']['executed'])

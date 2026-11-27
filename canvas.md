@@ -12,7 +12,7 @@
 
 **ETA trong phạm vi chính:** App giao đồ ăn cung cấp và thông báo ETA; agent chỉ đọc, đối chiếu mốc ban đầu/cập nhật với phản ánh khách và soạn hồ sơ. CP2 dùng snapshot giả lập, không live, không tự dự báo hoặc bảo đảm giờ giao.
 
-**Phần mở rộng đề xuất, chưa triển khai:** checklist hồ sơ trước duyệt; nhắc ca chờ xử lý theo ngưỡng nội bộ; tổng hợp phản hồi khách sau kết quả. Ưu tiên checklist, cần kiểm chứng nhu cầu và không đổi chuẩn CP2.
+**Phần mở rộng CP2 đã triển khai:** checklist chặn duyệt khi chưa đủ căn cứ; nháp nhắc ca theo ngưỡng nội bộ, không tự gửi; khách phản hồi sau kết quả, nhân viên mở lại và xem tổng hợp. Chưa chứng minh hiệu quả thực tế, không đổi chuẩn CP2.
 
 **Đã đổi gì so với CP1:** CP1 chuyển từ thiếu món sang giao trễ theo review. Thiết kế mới nâng luồng hướng dẫn một lượt thành agent làm rõ, tổng hợp ca và phối hợp nhân viên đến kết quả. Chốt ETA là đầu vào từ nền tảng; giữ phạm vi chính là khiếu nại giao trễ. Không có bằng chứng mới hoặc kết quả model thật từ lần cập nhật tài liệu này.
 

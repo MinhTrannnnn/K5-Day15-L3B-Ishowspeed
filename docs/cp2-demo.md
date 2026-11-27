@@ -95,3 +95,34 @@ MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
 Phiên, nháp, ca và sự kiện lưu trong `data/runtime/cp2.sqlite3`, được gitignore, còn sau khi thoát. `/moi` chỉ xóa ngữ cảnh/nháp của khách, không xóa ca đã lưu. Muốn xem mã/phiên bản hiện tại dùng `/danhsach` ở bàn nhân viên. Không sửa artifact đánh giá đã chạy để làm sạch demo.
 
 CLI và `answer(text)` của harness cùng gọi `Agent.chat` trong `agent.py`; harness tạo phiên RAM độc lập mỗi input. Không có lệnh quay lại bản cũ. Benchmark/metric CP2 v1 giữ nguyên. [Kết quả kiểm kỹ thuật CP2](../eval/cp2-upgrade-check.md) tách khỏi phiếu 5/5 cũ và kết quả model thật.
+
+## 6. Checklist, nhắc ca và phản hồi sau xử lý — đã có ở CP2
+
+Ở bàn nhân viên, dùng mã ca và số phiên bản hiện tại:
+
+```text
+/checklist C001
+/nhac 30
+```
+
+Checklist chỉ đọc; thiếu trường/nguồn, số tiền trái chính sách hoặc thông tin chưa xác minh thì không cho chuyển sang `pending_approval`, `in_progress`, `resolved`. Nhân viên vẫn có thể tiếp nhận và xác minh để giải quyết phần thiếu. Với ca mâu thuẫn hoặc thiếu thời gian, sau khi kiểm chứng mô phỏng, ghi mã căn cứ và nhận định ở bước `verifying`:
+
+```text
+/xacminh C002 5 DEMO-E1 Đã đối chiếu thông tin mô phỏng, cần người xử lý, chưa kết luận bên có lỗi
+```
+
+Lệnh tăng version; đọc số mới trước `/capnhat`. Ghi nhận xác minh không sửa snapshot hoặc cho phép voucher khi dữ kiện không đủ. Ở kịch bản C002 phần 3, sau `/capnhat C002 4 verifying ...`, ca là v5; `/xacminh` đưa lên v6.
+
+`/nhac 30` trả các nháp ca chưa có kết quả chờ ít nhất 30 phút từ lần đổi trạng thái cuối. Ngưỡng nội bộ, không phải SLA hãng; không tự gửi hoặc chạy lịch nền. Xem lại trả cùng khóa nháp, không thêm sự kiện. Mới tạo ca sẽ chưa có nháp quá ngưỡng; unit test dùng đồng hồ giả để kiểm mà không sửa timestamp thật của ca.
+
+Sau khi ca có kết quả:
+
+```text
+/khach demo
+/phanhoi C001 unresolved Tôi vẫn chưa thấy vấn đề được xử lý
+/nhanvien
+/tonghop
+/molai C001 6 Đã đọc phản hồi, cần xác minh tiếp
+```
+
+C001 ở kịch bản phần 2 là v5 sau khi có kết quả; phản hồi khách đưa lên v6. Đổi mã/version theo output khi chạy trên DB đã có ca. Phản hồi chỉ là lời khách chưa xác minh, không tự mở lại. Nhân viên mở lại thì về `verifying`; kiểm checklist và ghi căn cứ mới khi còn cảnh báo. Tổng hợp chỉ đếm phản hồi mới nhất mỗi ca, không hiển thị nội dung/định danh hoặc kết luận shop có lỗi.

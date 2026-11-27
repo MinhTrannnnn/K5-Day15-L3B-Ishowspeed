@@ -15,6 +15,12 @@ HELP = '''CP2 — AI GIẢ, DỮ LIỆU SYNTHETIC, KHÔNG GIAO DỊCH THẬT
   /danhsach                   nhân viên xem các ca
   /capnhat C001 1 verifying lý do       cập nhật với số phiên bản hiện tại
   /trangthai C001             khách xem ca của mình, nhân viên xem ca bất kỳ
+  /checklist C001             nhân viên xem trường thiếu, căn cứ và chặn duyệt
+  /xacminh C001 2 DEMO-E1 ghi nhận      nhân viên ghi căn cứ xác minh
+  /nhac 30                    nhân viên xem nháp nhắc ca chờ >=30 phút nội bộ
+  /phanhoi C001 unresolved nội dung    khách phản hồi sau kết quả (hoặc satisfied)
+  /molai C001 8 lý do         nhân viên mở lại ca để xác minh
+  /tonghop                    nhân viên xem số ca có phản hồi, không thông tin cá nhân
   /eta D004                   xem ETA do nền tảng cung cấp trong snapshot demo
   /moi                       xóa ngữ cảnh/nháp của phiên; giữ lịch sử ca đã tiếp nhận
   /help                       xem hướng dẫn; /thoat để thoát
@@ -58,8 +64,25 @@ def command(store, owner, role, text):
         return json.dumps(store.session(owner).get('draft'), ensure_ascii=False, indent=2), owner, role
     if name == '/trangthai' and len(parts) == 2:
         return show_case(store.get(case_number(parts[1]), owner if role == 'customer' else None)), owner, role
-    if name in ('/tiepnhan', '/capnhat', '/danhsach') and role != 'staff':
+    if name in ('/tiepnhan', '/capnhat', '/danhsach', '/checklist', '/xacminh', '/nhac', '/molai', '/tonghop') and role != 'staff':
         raise ValueError('Chức năng này chỉ có ở bàn nhân viên; model không được phép duyệt.')
+    if name == '/checklist' and len(parts) == 2:
+        return json.dumps(store.checklist(case_number(parts[1])), ensure_ascii=False, indent=2), owner, role
+    if name == '/xacminh' and len(parts) >= 5:
+        case = store.verify(case_number(parts[1]), int(parts[2]), parts[3], ' '.join(parts[4:]))
+        return show_case(case), owner, role
+    if name == '/nhac' and len(parts) == 2:
+        return json.dumps(store.reminder_drafts(int(parts[1])), ensure_ascii=False, indent=2), owner, role
+    if name == '/phanhoi' and len(parts) >= 4:
+        if role != 'customer':
+            raise ValueError('Phản hồi cần ở bàn khách, không phải đánh giá thay khách.')
+        case = store.feedback(case_number(parts[1]), owner, parts[2], ' '.join(parts[3:]))
+        return 'Đã ghi phản hồi của khách, chưa xác minh hoặc tự mở lại ca.\n'+show_case(case), owner, role
+    if name == '/molai' and len(parts) >= 4:
+        case = store.reopen(case_number(parts[1]), int(parts[2]), ' '.join(parts[3:]))
+        return show_case(case), owner, role
+    if name == '/tonghop':
+        return json.dumps(store.feedback_summary(), ensure_ascii=False, indent=2), owner, role
     if name == '/tiepnhan':
         case, created = store.receive(owner)
         return ('Đã tiếp nhận mô phỏng.' if created else 'Đã có ca đang mở; không tạo trùng.')+'\n'+show_case(case), owner, role

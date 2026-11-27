@@ -41,7 +41,7 @@ Các số đo mới chưa có ngưỡng đạt chính thức. Nếu nhóm chọn
 - Kiểm output không đổi mốc, không bịa số phút thiếu, không suy ra giờ đến mới hoặc lý do chậm. Dữ liệu snapshot phải ghi rõ không live và ETA không phải cam kết.
 - D004: đọc đúng mốc, giữ độ trễ theo ETA ban đầu; D006: cảnh báo mâu thuẫn; D009: giữ thiếu dữ liệu, đề xuất người kiểm tra. Khách kể ETA khác thì ghi là lời khách, chưa mặc định thay dữ kiện nền tảng.
 - Nhân viên cập nhật tiến độ ca không được coi là hãng đã đổi ETA hoặc đã thực hiện giao dịch.
-- Các phần mở rộng checklist/nhắc ca/phản hồi ở spec §4.5 mới là đề xuất, chưa có bộ chấm hoặc kết quả. Không sửa benchmark/metric nền để gộp các đề xuất này.
+- Các phần mở rộng checklist/nhắc ca/phản hồi ở spec §4.5 đã có trong CP2, kiểm kỹ thuật ở tests/test_case_extensions.py; chưa chấm AI thật hoặc hiệu quả thực tế. Không sửa benchmark/metric nền để gộp các đề xuất này.
 
 ## 5. Lưu bằng chứng và hai lượt
 

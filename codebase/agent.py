@@ -111,7 +111,8 @@ class Agent:
         result = render_response(order, observations['get_policy'], action)
         amount = result['proposal_vnd']
         proposal = result['output']
-        draft = {'order_id': order['order_id'], 'customer_goal': session['goal'],
+        draft = {'order_id': order['order_id'], 'session_id': owner,
+                 'policy_version': observations['get_policy']['version'], 'customer_goal': session['goal'],
                  'customer_claims': session['messages'], 'facts': order,
                  'sources': [order['order_id'], 'DEMO-P1'], 'timeline': observations['order_timeline'],
                  'conflicts': conflicts, 'missing': missing, 'proposal': proposal,

@@ -68,3 +68,11 @@ Chưa gọi model thật, chưa có run ID đạt chuẩn CP3; chưa kiểm đ�
 ## 7. Đánh giá thiết kế nâng cấp
 
 Chạy lại bộ nền với model thật qua hợp đồng `answer(text)` độc lập và chỉ đề xuất. Luồng nhiều lượt, lưu hồ sơ có người duyệt và đối chiếu ETA dùng bộ bổ sung riêng; lưu giao thức trước khi chạy, không gộp điểm hoặc sửa chuẩn CP2. Đo cả chất lượng hồ sơ, trạng thái, quyền và tổng chi phí phiên. Chi tiết: [upgrade-plan.md](upgrade-plan.md). Đã có kiểm kỹ thuật khung fake tại [cp2-upgrade-check](cp2-upgrade-check.md); chưa có kết quả model thật hoặc đo hiệu quả sản phẩm.
+
+
+## 8. Các điều kiện CP2 chưa đủ bằng chứng sau rà soát
+
+- Chưa lưu xác nhận mốc nhóm chốt chuẩn. Ngưỡng đã có trong commit, giữ nguyên; không ghi phạm vi thiết kế “đã thống nhất” là chuẩn chấm “đã chốt”.
+- Hai người đồng ý điểm Codex không thay thế hai bộ điểm độc lập. [Phiếu độc lập](independent-review.md) và output fake mới đã chuẩn bị, chưa có điểm; chưa tuyên bố khớp ≥4/5.
+- 7/20 nhãn data_that mới là thống kê cấu trúc; nguồn chưa xác minh đủ nên chưa tuyên bố đạt ≥1/3 dữ liệu thật. Data card ghi việc phải đối chiếu, không sửa benchmark/expected theo kết quả.
+- Các test mở rộng chỉ kiểm code. Không dùng chúng để điền điểm người chấm, bằng chứng pain hoặc kết quả AI thật.

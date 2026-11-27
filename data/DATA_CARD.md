@@ -45,3 +45,10 @@
 - Đã bỏ dữ liệu/generator 120 lịch sử đơn phục vụ hướng dự báo trước đây. Kết quả thử nghiệm đã lưu giữ nguyên làm lịch sử, không đại diện phạm vi hiện tại. Dữ liệu đơn, chính sách, benchmark và metric nền không đổi.
 
 Quang kiểm nguồn/đặc tả; Thành kiểm công cụ đọc và kho ca; Cường kiểm thiếu/mâu thuẫn và đầu ra có căn cứ; Minh tích hợp hội thoại. [Spec §4.3](../spec.md), [kiểm bổ sung](../eval/upgrade-plan.md).
+
+
+## 5. Trạng thái xác minh 7 câu gắn nhãn data_that
+
+Máy check chỉ đếm nhãn; 7/20 không tự chứng minh nguồn thật. Các mã SF054, GF071, GF006, R16, R18, R07, R24 cần đối chiếu bảng nguồn, link, ngày lấy và đoạn gốc ẩn danh từng câu. Ví dụ Google Play hiện là diễn giải, toàn mẫu chưa lưu đủ; chưa xác nhận đạt yêu cầu ≥1/3 nguồn thật. Không đổi nhãn/expected hoặc bịa bản gốc để đạt tỷ lệ.
+
+Phần mở rộng chỉ thêm trường hồ sơ `session_id`, `policy_version`, sự kiện nhân viên xác minh có `evidence_ref`, lời khách phản hồi `verified=False` và sự kiện mở lại. Nháp nhắc ca đọc timestamp sự kiện trạng thái, không dùng/đổi timestamp ETA, không ghi hoặc gửi nhắc tự động. Tất cả là dữ liệu demo, không bằng chứng pain.

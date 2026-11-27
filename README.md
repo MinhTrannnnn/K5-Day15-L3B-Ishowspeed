@@ -15,7 +15,7 @@
 
 **Lát cắt đích:** Khách phản ánh một đơn → một agent làm rõ, đối chiếu dữ kiện/mâu thuẫn, đề xuất phương án và tổng hợp hồ sơ → nhân viên phản hồi, duyệt và cập nhật → khách theo dõi từng bước. Mọi giao dịch chỉ mô phỏng, không kết nối hãng.
 
-**ETA:** do app giao đồ ăn cung cấp. Agent đọc ETA ban đầu/cập nhật, trạng thái và thời điểm dữ liệu để hỗ trợ ca; không tự dự báo giờ đến. CP2 dùng snapshot giả lập, chưa có API hãng. Phần mở rộng đề xuất: checklist trước duyệt, nhắc ca chờ lâu và tổng hợp phản hồi sau xử lý — chưa triển khai, xem spec §4.5.
+**ETA:** do app giao đồ ăn cung cấp. Agent đọc ETA ban đầu/cập nhật, trạng thái và thời điểm dữ liệu để hỗ trợ ca; không tự dự báo giờ đến. CP2 dùng snapshot giả lập, chưa có API hãng. CP2 đã có checklist trước duyệt, nháp nhắc ca chờ lâu, phản hồi/mở lại và tổng hợp sau xử lý; xem spec §4.5. Không gửi tin tự động hoặc giao dịch thật.
 
 - **[Kịch bản CP2 mới](docs/cp2-demo.md)**
 - [Canvas](canvas.md) · [Phân công](TEAMS.md) · [Thiết kế và hiện trạng](spec.md)
@@ -34,7 +34,7 @@ MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
 
 Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên; `/nhanvien` → `/tiepnhan` để nhận ca; `/trangthai C001` để xem tiến độ. `/eta D004` xem ETA nền tảng từ snapshot. `/help` xem cú pháp. [Kịch bản đầy đủ](docs/cp2-demo.md). Dữ liệu synthetic/snapshot, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
 
-**Bản nâng cấp hiện tại:** code do Codex triển khai theo yêu cầu Minh; Minh đã kiểm tra và xác nhận OK trong trao đổi. Chưa có xác nhận các thành viên khác đã rà bản nâng cấp. CP3 chưa triển khai.
+**Bản nâng cấp hiện tại:** code do Codex triển khai theo yêu cầu Minh; Minh đã kiểm tra bản lõi và xác nhận OK trước đợt mở rộng này. Phần mở rộng mới do Codex kiểm tự động, chưa có xác nhận nhóm đã rà. CP3 chưa triển khai.
 
 **Tiến độ lịch sử khung CP2 v1:** Nhóm trưởng đã nộp CP1. Cả nhóm đã kiểm tra bản CP2. Lượt chấm thử của Codex đạt 5/5 output từ model giả. Thành và Cường đã rà soát và đồng ý với kết quả 5/5 theo xác nhận của nhóm trưởng. Xem [phiếu chấm](eval/review-5.md).
 
@@ -43,8 +43,10 @@ Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên
 ## Kiểm trước khi nộp CP2
 
 - [x] Canvas/spec đồng bộ đề tài mới; khung fake nhiều lượt, hồ sơ/duyệt và đọc ETA demo chạy được.
-- [x] Minh đã kiểm tra và xác nhận OK; kiểm tự động 16 test qua.
+- [x] Minh đã kiểm bản lõi; 22 test lõi/mở rộng do Codex chạy đã qua, xem [báo cáo kiểm](eval/cp2-upgrade-check.md).
+- [ ] Nhóm rà phần mở rộng mới: checklist, nháp nhắc và phản hồi/mở lại.
 - [ ] Thành, Quang, Cường rà và xác nhận phần phụ trách trong [TEAMS](TEAMS.md).
+- [ ] Lưu hai bộ điểm độc lập và đối chiếu ≥4/5; kiểm lại nguồn 7 câu data_that, không coi máy check là xác minh nguồn.
 - [ ] Lưu xác nhận chốt chuẩn theo mốc thật; kiểm nguồn bằng chứng và các giới hạn còn thiếu.
 - [ ] Minh kiểm link công khai và nộp form CP2; chưa ghi nhận đã nộp.
 

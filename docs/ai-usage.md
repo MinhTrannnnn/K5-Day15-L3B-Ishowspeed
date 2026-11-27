@@ -36,3 +36,8 @@ Theo yêu cầu Minh, Codex bỏ luồng điều phối trùng, đưa hội tho�
 ## Chốt phạm vi ETA theo Minh
 
 Codex sửa spec §4.3/sơ đồ và tài liệu liên quan: ETA do app giao đồ ăn cung cấp; agent chỉ đọc/đối chiếu dữ kiện. Bỏ công cụ dự báo, /shop và dữ liệu/generator lịch sử, thay bằng /eta đọc snapshot. Cập nhật phân công và kiểm kỹ thuật, giữ chuẩn/bộ thử/artifact cũ. Các mô tả dự báo ở mục lịch sử phía trên không còn đại diện tính năng hiện tại. Đề xuất checklist/nhắc ca/phản hồi chỉ ghi kế hoạch, chưa triển khai.
+
+
+## Rà góp ý và phần mở rộng CP2
+
+Codex đối chiếu guide 2.1/2.2/2.4, bổ sung thiết kế và làm rõ thiếu mốc chốt/điểm độc lập/nguồn câu thử. Triển khai checklist, chặn chuyển duyệt, ghi căn cứ nhân viên, nháp nhắc, phản hồi/tổng hợp/mở lại; giữ ngưỡng/metric/benchmark và output đã lưu. Phiếu độc lập chỉ được tạo trống, không điền điểm hay xác nhận thay người thật.

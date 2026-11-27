@@ -37,3 +37,10 @@ Cách tái kiểm và thao tác: [kịch bản CP2](../docs/cp2-demo.md). Chuẩ
 Phạm vi hiện tại thay thế thử nghiệm tự dự báo: đã bỏ công cụ `delivery_estimate`, lệnh `/shop` và dữ liệu/generator lịch sử. CLI `/eta D004` chỉ đọc snapshot nền tảng, có nguồn và nhãn không live. Các kết quả ETA thống kê phía trên và trong output smoke là lịch sử của lần chạy trước, không đại diện tính năng hiện tại.
 
 16 test đã qua, gồm kiểm đọc đúng mốc ban đầu/cập nhật, không tự điền thời gian thiếu, cảnh báo dữ liệu mâu thuẫn và không bồi thường khi thiếu căn cứ. `python3 run.py check` không thấy vấn đề. Chưa gọi AI thật hoặc kết nối API hãng. Checklist/nhắc ca/phản hồi ở spec §4.5 mới là đề xuất, chưa có kết quả.
+
+## Kiểm phần mở rộng CP2 và rà góp ý
+
+- 22 test qua: gồm 6 test mới về checklist, căn cứ xác minh, nhắc ca theo đồng hồ, quyền phản hồi/mở lại, chống gửi lặp và xác minh lại sau mở ca. Các test lõi đã điều chỉnh để tuân theo checklist mới, không sửa chuẩn BTC hoặc expected.
+- [Output tích hợp CLI mở rộng](cp2-extensions-smoke.json): checklist → nháp nhắc → nhân viên duyệt → khách phản hồi → tổng hợp → mở lại; thêm ca mâu thuẫn phải ghi mã căn cứ xác minh. Chạy database tạm, không sửa ca của người dùng.
+- Checklist chỉ chặn/chỉ rõ điều thiếu, không tự xác minh thực tế; nhắc ca không gửi hoặc lên lịch nền; lời khách được gắn chưa xác minh. Tất cả là fake/synthetic, chưa có AI thật hoặc hiệu quả ngoài thực tế.
+- Hồ sơ thiết kế bổ sung điều học/tránh, hợp đồng hàm và nguyên tắc gắn sơ đồ. Còn thiếu bằng chứng chốt chuẩn, hai bộ điểm độc lập và xác minh nguồn 7 câu; không dùng kết quả test để thay thế.

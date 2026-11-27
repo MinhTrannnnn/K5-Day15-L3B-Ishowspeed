@@ -23,4 +23,4 @@ Ai nói trang nào (mỗi người ≥1 phần):
 | | |
 
 
-**ETA:** nền tảng cung cấp, agent đọc và đối chiếu trong ca; demo phải ghi snapshot synthetic/không live, không tự hứa giờ giao. Phần mở rộng checklist, nhắc ca và phản hồi chỉ trình bày là đề xuất chưa triển khai. Phân công: [TEAMS](../TEAMS.md).
+**ETA:** nền tảng cung cấp, agent đọc và đối chiếu trong ca; demo phải ghi snapshot synthetic/không live, không tự hứa giờ giao. Demo checklist chặn duyệt, nháp nhắc ca và phản hồi/mở lại đã có trong CP2; không trình bày là hiệu quả đã đo ngoài thực tế. Phân công: [TEAMS](../TEAMS.md).
