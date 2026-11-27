@@ -61,6 +61,30 @@ class CP2DemoTests(unittest.TestCase):
         self.assertIn('nhân viên kiểm tra', draft['proposal'])
         self.assertIn('nhận món chưa', self.demo.chat('other', 'D007 cần hỗ trợ'))
 
+    def test_short_receipt_reply_records_conflict_with_one_model_call(self):
+        reply = {'text': '{"action":"clarify"}'}
+        with patch('agent.MODEL_PROVIDER', 'ollama'), patch('agent.call_model', return_value=reply) as model:
+            self.assertIn('Bạn đã nhận món chưa?', self.demo.chat('demo', 'D007 kiểm tra đơn giúp mình'))
+            self.assertIn('HỒ SƠ NHÁP', self.demo.chat('demo', 'Chưa'))
+            model.assert_called_once()
+        draft = self.store.session('demo')['draft']
+        self.assertEqual(draft['customer_goal'], 'human_review')
+        self.assertTrue(draft['conflicts'])
+        self.assertFalse(draft['executed'])
+
+    def test_receipt_confirmation_leaves_staff_followup_optional(self):
+        self.assertIn('Bạn đã nhận món chưa?', self.demo.chat('demo', 'D007 nhờ nhân viên kiểm tra'))
+        self.assertIn('bạn có thể dừng ở đây', self.demo.chat('demo', 'Tôi đã nhận món.'))
+        self.assertIsNone(self.store.session('demo')['draft'])
+        self.assertIn('HỒ SƠ NHÁP', self.demo.chat('demo', 'Tôi vẫn cần nhân viên hỗ trợ đơn này.'))
+        self.assertEqual(self.store.session('demo')['draft']['customer_goal'], 'human_review')
+
+    def test_refund_question_does_not_offer_voucher_for_active_order(self):
+        self.demo.chat('demo', 'D004 khi nào hoàn tiền?')
+        draft = self.store.session('demo')['draft']
+        self.assertEqual(draft['proposal_vnd'], 0)
+        self.assertIn('chưa ghi nhận khoản hoàn', draft['proposal'])
+
     def test_only_operator_staff_can_receive_and_no_duplicate_or_cross_customer(self):
         self.demo.chat('demo', 'D001 tôi muốn hủy')
         with self.assertRaises(ValueError):
@@ -103,8 +127,9 @@ class CP2DemoTests(unittest.TestCase):
             self.assertIn('không hợp lệ', self.demo.chat('demo', 'D004 hỗ trợ'))
             self.assertEqual(model.call_count, 1)
         self.assertEqual(self.store.find('demo', 'D004'), [])
-        with patch('agent.call_model', return_value={'text': 'null'}):
-            self.assertIn('không hợp lệ', self.demo.chat('demo', 'D004 hỗ trợ'))
+        for raw in ('null', '{"tool":[]}'):
+            with patch('agent.call_model', return_value={'text': raw}):
+                self.assertIn('không hợp lệ', self.demo.chat('demo', 'D004 hỗ trợ'))
         with patch('agent.call_model', return_value={'text': '{"tool":"finish"}'}):
             self.assertIn('đủ căn cứ', self.demo.chat('demo', 'D004 hỗ trợ'))
 
