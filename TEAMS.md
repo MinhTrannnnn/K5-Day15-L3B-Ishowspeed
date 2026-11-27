@@ -29,7 +29,7 @@
 | Đầu việc | Người phụ trách | Trạng thái |
 |---|---|---|
 | Tạo repo và chọn Track D1 | Trần Quang Minh | Đã làm |
-| Cung cấp tài liệu tham khảo CP1-D1 | Nguyễn Hải Quang | Đã làm |
+| Cung cấp tài liệu phân tích review | Nguyễn Hải Quang | Đã làm |
 | Chuẩn bị khung repo, commit và push | Trần Quang Minh | Đã làm |
 | Soạn README và canvas | Trần Quang Minh | Đã làm |
 | Soạn spec và bảng so sánh 3 hướng | Trần Quang Minh | Đã làm |
@@ -48,8 +48,8 @@ Trần Quang Minh phụ trách chuẩn bị và tổng hợp bản CP2. Cả 4 t
 | Thành viên | Hai phần phụ trách chính | Kiểm chéo | Trạng thái |
 |---|---|---|---|
 | Trần Quang Minh | Workflow `agent.py`; demo CLI và tích hợp spec | Data card/bằng chứng của Quang | Đã được cả nhóm kiểm tra |
-| Trần Duy Thành | Công cụ `tools.py`; fixtures/chốt an toàn và test | Metric/câu thử của Cường; chấm độc lập 5 output | Đã được cả nhóm kiểm tra. Chờ chấm độc lập |
+| Trần Duy Thành | Công cụ `tools.py`; fixtures/chốt an toàn và test | Metric/câu thử của Cường; chấm độc lập 5 output | Đã rà soát và xác nhận 5/5 câu đạt theo xác nhận của nhóm trưởng |
 | Nguyễn Hải Quang | Bằng chứng và data card; canvas và sơ đồ | Workflow/demo của Minh | Đã được cả nhóm kiểm tra phần hồ sơ. Chưa đối chiếu review gốc |
-| Nguyễn Văn Cường | Benchmark; metric và hồ sơ đánh giá | Công cụ/fixtures của Thành; chấm độc lập 5 output | Đã được cả nhóm kiểm tra. Chờ chấm độc lập |
+| Nguyễn Văn Cường | Benchmark; metric và hồ sơ đánh giá | Công cụ/fixtures của Thành; chấm độc lập 5 output | Đã rà soát và xác nhận 5/5 câu đạt theo xác nhận của nhóm trưởng |
 
 Trần Quang Minh phụ trách nộp CP2 sau khi nhóm chốt chuẩn và hoàn tất chấm thử.

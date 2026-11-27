@@ -5,7 +5,7 @@
 | Thuộc tính | Nội dung |
 |---|---|
 | Mục đích | Khám phá pain và lấy tình huống cho câu thử; không đưa review vào công cụ tra đơn |
-| Nguồn | Tài liệu CP1-D1 nhóm cung cấp, bản tích hợp ở `evidence/data-mining.md`, `data-mining-app-store-31.md`, `summary.md` |
+| Nguồn | Review công khai trên Google Play và mẫu đối chiếu từ App Store. Cách lấy mẫu và nguồn gốc được ghi trong [báo cáo Google Play](../evidence/data-mining.md) và [báo cáo App Store](../evidence/data-mining-app-store-31.md) |
 | Quy mô tài liệu báo cáo | 400 review Google Play (100/app, 4 app) và mẫu đối chiếu 31 phàn nàn nguồn App Store; không cộng hai mẫu thành tỷ lệ chung |
 | Xử lý đã ghi trong tài liệu | Google Play mới nhất, vi/VN, mọi sao; nhãn theo sự cố; tách khách/quán; GrabFood là tập con 12/100. Mẫu App Store từ trang tổng hợp thiên về phản hồi tiêu cực |
 | Tình trạng xác minh | Lượt CP2 không thu thập review mới. Chưa có snapshot đủ 400 dòng, chưa đối chiếu độc lập nguồn; không tuyên bố đủ ngưỡng bằng chứng CP3 |

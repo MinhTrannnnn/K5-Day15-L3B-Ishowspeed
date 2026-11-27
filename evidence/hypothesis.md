@@ -9,7 +9,7 @@
 
 ---
 
-## Cập nhật hướng dự kiến sau khi nhận tài liệu CP1-D1 ngày 27/11/2026
+## Cập nhật giả thuyết sau khi xem mẫu review ngày 27/11/2026
 
 
 - Ngày ghi bản này: 27/11/2026. Giả thuyết ban đầu của trao đổi tập trung vào thiếu món. Hướng chờ lâu được hình thành sau khi quan sát review, nên các mẫu đã đọc có vai trò khám phá.
@@ -19,4 +19,4 @@
 - **Dấu hiệu cần kiểm:** Cùng một review mô tả cả việc chờ lâu và một trở ngại cụ thể khi tìm hỗ trợ cho chính đơn đó. Ghi số review thỏa cả hai trên mẫu đã rà. Nếu lấy một mẫu mới, chốt tiêu chí lấy mẫu và ngưỡng kiểm trước khi đọc.
 - **Nguồn:** [Google Play](data-mining.md) là mẫu chính. [31 lời phàn nàn ShopeeFood từ App Store](data-mining-app-store-31.md) dùng để đối chiếu. [Tóm tắt](summary.md).
 
-Các số liệu và quan sát ở hướng mới được kế thừa từ tài liệu CP1-D1 do nhóm cung cấp, chưa đối chiếu độc lập review gốc. Giữ nguyên giả thuyết thiếu món ở trên để lưu dấu thay đổi; chưa có kết quả phỏng vấn cho giả thuyết cũ.
+Số liệu và quan sát của hướng chờ lâu nằm trong [tổng hợp bằng chứng](summary.md). Repo chưa có kết quả phỏng vấn về giả thuyết thiếu món.

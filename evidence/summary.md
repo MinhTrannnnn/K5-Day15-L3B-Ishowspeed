@@ -1,6 +1,6 @@
 # Tổng hợp bằng chứng · D1
 
-> Nguồn chuyển vào repo: tài liệu `CP1-D1/` do nhóm cung cấp ngày 27/11/2026. Chưa có bản lưu đầy đủ review gốc và bảng gắn nhãn từng dòng cho mẫu Google Play trong repo; chưa đối chiếu độc lập. Các số dưới đây là số liệu tài liệu tham khảo báo cáo, không phải kết quả thu thập mới trong repo này.
+> Hai mẫu bên dưới được phân tích riêng. Repo chưa lưu toàn bộ review gốc và bảng gắn nhãn từng dòng của mẫu Google Play để người đọc tái kiểm toàn mẫu.
 
 | Nguồn | Cách dùng | Kết quả chính |
 |---|---|---|

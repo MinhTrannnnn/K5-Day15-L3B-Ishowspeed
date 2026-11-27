@@ -1,7 +1,7 @@
 # AI SPEC — Hỗ trợ khách chờ đơn giao đồ ăn · Nhóm Ishowspeed
 
 Track: [x] D — D1, khiếu nại đơn giao đồ ăn.
-Dữ liệu tham khảo (nguồn CP1-D1 do nhóm cung cấp; chưa đối chiếu độc lập review gốc): review công khai, gồm dữ liệu Google Play lấy trực tiếp và mẫu đối chiếu nguồn App Store.
+Dữ liệu tham khảo gồm review công khai từ Google Play và mẫu đối chiếu nguồn App Store. Xem [tổng hợp bằng chứng](evidence/summary.md).
 
 ## §0. Hiện tại việc này diễn ra thế nào *(guide 1.1)*
 
@@ -18,7 +18,7 @@ Các bước hỗ trợ và hủy đơn tham chiếu tài liệu công khai củ
 - **Việc họ muốn làm:** Xác định đơn còn được giao hay đã hủy để quyết định chờ tiếp hoặc yêu cầu xử lý khi đã đợi lâu.
 - **Họ đang xử lý thế nào:** Mở Chi tiết đơn, xem giờ dự kiến và trạng thái, rồi vào trợ giúp hoặc tìm nút hủy. Khi giờ dự kiến thay đổi nhiều lần hoặc phản hồi hỗ trợ chưa giải quyết được, họ vẫn chưa biết có nên chờ. Chi tiết đơn và trợ giúp trong app là các kênh khách có thể tìm ngay từ chính đơn đang chờ. [Quy trình ShopeeFood](https://help.shopee.vn/portal/4/article/79520-) · [Ví dụ GF071](evidence/data-mining.md#4-ví-dụ-ẩn-danh)
 - **Bài toán:** Khách đặt đồ ăn qua app kiểm tra đơn khi đã chờ lâu nhưng có lúc vẫn chưa rõ đơn còn được giao hay đã bị hủy. Họ có thể mất thêm thời gian tìm hỗ trợ trước khi biết nên chờ tiếp, hủy hay yêu cầu xử lý.
-- **Bằng chứng sơ bộ theo tài liệu CP1-D1, chưa đối chiếu nguồn gốc:** Trong 100 review ShopeeFood trên Google Play, 10 nói chờ lâu hoặc giao muộn. Trong 12 review nhận diện là GrabFood từ 100 review app Grab, 1 vừa nói chờ lâu vừa kể khó nhận hỗ trợ. Mẫu đối chiếu có 2/31 lời phàn nàn ShopeeFood mô tả cả hai. [Tổng hợp bằng chứng](evidence/summary.md)
+- **Bằng chứng sơ bộ từ các mẫu review công khai:** Trong 100 review ShopeeFood trên Google Play, 10 nói chờ lâu hoặc giao muộn. Trong 12 review nhận diện là GrabFood từ 100 review app Grab, 1 vừa nói chờ lâu vừa kể khó nhận hỗ trợ. Mẫu đối chiếu có 2/31 lời phàn nàn ShopeeFood mô tả cả hai. [Tổng hợp bằng chứng](evidence/summary.md)
 - **Tình huống minh họa với thời gian giả định:** Đặt bữa trưa qua app, thấy giờ giao dự kiến là 12:00. Đến 12:15 vẫn chưa nhận món; giờ dự kiến đổi thành 12:30 nhưng màn hình không nói rõ tài xế đã nhận đơn hay chưa. Mở Chi tiết đơn, tìm nút hủy rồi vào Trợ giúp để hỏi có nên chờ tiếp. Sau khoảng 10 phút tìm và gửi yêu cầu thì vẫn chưa biết đơn còn được giao hay có thể hủy, nên chưa thể quyết định đặt món khác.
 
 ## §2. Impact & quyết định chọn *(guide 1.3)*
@@ -39,7 +39,14 @@ Chi tiết nguồn và mã review ở [bản Google Play](evidence/data-mining.m
 
 ## §3. Giải pháp tương tự
 
-Tham chiếu là màn hình Chi tiết đơn và Trung tâm Trợ giúp ShopeeFood trong tài liệu CP1-D1; chưa có log nhóm trực tiếp thử sản phẩm. Điểm học: gắn hỗ trợ với một mã đơn. Điểm cần tránh: trả lời chung khi chưa rõ trạng thái hoặc lý do chậm. Khác biệt của demo: tổng hợp trạng thái, căn cứ và bước tiếp theo, có điểm người duyệt rõ. Không tuyên bố hiệu quả tốt hơn sản phẩm thật khi chưa đo.
+Đối chiếu theo tài liệu trợ giúp công khai của hai dịch vụ giao đồ ăn. Cột cuối ghi lựa chọn thiết kế của dự án.
+
+| Dịch vụ | Luồng được tài liệu mô tả | Áp dụng vào dự án |
+|---|---|---|
+| ShopeeFood | Khách mở Chi tiết đơn để gửi yêu cầu hỗ trợ. Khả năng hủy phụ thuộc vào việc quán đã chuẩn bị món hay tài xế đang giao. [Gửi khiếu nại](https://help.shopee.vn/portal/4/article/79520-) · [Điều kiện hủy đơn](https://help.shopee.vn/portal/4/article/79383-) | Gắn yêu cầu với một mã đơn. Kiểm tra trạng thái trước khi gợi ý hủy và ghi rõ khi cần nhân viên duyệt. |
+| GrabFood | Khách có thể xem trạng thái đơn theo thời gian thực trong ứng dụng. [Theo dõi đơn GrabFood](https://help.grab.com/passenger/vi-vn/360001018427) | Hiển thị trạng thái và mốc cập nhật cạnh hướng dẫn. Ghi rõ giờ đến là dự kiến. Khi dữ liệu thiếu hoặc mâu thuẫn, đề xuất nhân viên kiểm tra. |
+
+**Điểm khác trong phạm vi demo:** Khách hỏi về một đơn và nhận cùng lúc trạng thái tra được, căn cứ và bước tiếp theo. Chẳng hạn, nếu đơn đã hủy và khoản hoàn đang chờ xử lý, demo báo trạng thái khoản hoàn và nói rõ chưa có ngày hoàn xác nhận. Điều kiện hủy và hạn mức voucher trong demo dùng chính sách dựng DEMO-P1 ở §4.
 
 ## §4. Thiết kế — khung D1 đã chạy bằng AI giả
 
@@ -119,8 +126,8 @@ Dữ liệu: 10 đơn synthetic, seed `27112026`; snapshot 12:30 ngày 27/11/202
 - [DATA_CARD.md](data/DATA_CARD.md): nguồn, cách chuyển tình huống thành câu thử, dữ liệu giả và seed. Không suy rộng review thành tỷ lệ mọi người dùng.
 - `python3 run.py check`: không còn cảnh báo. CLI đã đi hết luồng với AI giả; harness eval chạy cả 20 câu nhưng ghi `run-mock`, không tính là lượt AI thật.
 - Unit test chặn rủi ro: 6 test method đã qua; output demo trong [cp2-preview.json](eval/cp2-preview.json). Không công bố tỷ lệ đạt AI thật từ các kiểm tra này.
-- **Chấm độc lập còn cần nhóm thực hiện:** Thành và Cường chấm [review-5.md](eval/review-5.md), khớp ≥4/5; nếu lệch ≥2/5 làm rõ metric trước khi chốt. Chưa có kết quả chấm của hai người.
-- **Tình trạng chốt:** Cả nhóm đã kiểm tra bản CP2. Chưa ghi nhận kết quả chấm độc lập hoặc xác nhận mốc chốt CP2. Phải duyệt và lưu chuẩn trước hạn CP2; sau chốt không sửa chuẩn theo kết quả. Chưa có run ID thật/tỷ lệ đạt CP3.
+- **Chấm thử:** Codex đối chiếu 5 output từ model giả với 4 metric, kết quả 5/5 đạt. Nhóm trưởng xác nhận Thành và Cường đã rà soát và đồng ý với kết quả ở cả 5 câu. Điểm xác nhận của từng người được lưu trên phiếu. Xem [phiếu chấm và lý do từng câu](eval/review-5.md).
+- **Tình trạng chốt:** Cả nhóm đã kiểm tra bản CP2. Đã ghi lượt chấm thử. Hai thành viên đã đồng ý với điểm chấm thử ở 5/5 câu. Repo chưa lưu hai bộ điểm trước đối chiếu hoặc xác nhận mốc chốt CP2. Phải duyệt và lưu chuẩn trước hạn CP2; sau chốt không sửa chuẩn theo kết quả. Chưa có run ID thật/tỷ lệ đạt CP3.
 
 ## §8. Chi phí khi dùng thật — chưa đo, chuẩn bị cho CP3–CP4
 
@@ -145,13 +152,13 @@ Xem [phân công CP1](TEAMS.md#phần-việc--cp1). Cả 4 cùng làm và cùng 
 | Nguyễn Hải Quang | Bằng chứng/data card; canvas/sơ đồ | Workflow và demo |
 | Nguyễn Văn Cường | Benchmark; metric/hồ sơ chấm | Công cụ và fixtures; chấm 5 output |
 
-Trần Quang Minh phụ trách chuẩn bị và tổng hợp bản CP2. Cả 4 thành viên rà phần được phân công. Chưa ghi nhận kết quả chấm độc lập. Xem [phân công và tiến độ](TEAMS.md).
+Trần Quang Minh phụ trách chuẩn bị và tổng hợp bản CP2. Cả 4 thành viên rà phần được phân công. Lượt chấm thử đã được lưu trong hồ sơ đánh giá. Xem [phân công và tiến độ](TEAMS.md).
 
 Việc sử dụng AI được ghi trong [khai báo công cụ](docs/ai-usage.md).
 
 | Giai đoạn | Thay đổi | Căn cứ |
 |---|---|---|
-| Chuẩn bị CP1 | Từ thiếu món sang chờ lâu/chưa rõ trạng thái | Các ví dụ trong tài liệu CP1-D1, chưa kiểm độc lập |
+| Chuẩn bị CP1 | Từ thiếu món sang chờ lâu/chưa rõ trạng thái | Ví dụ về chờ lâu kèm vướng hỗ trợ trong mẫu review |
 | Chuẩn bị CP2 | Giữ lát cắt; triển khai workflow fake, 10 đơn, chính sách dựng, 20 câu, 4 metric và phân công chung 4 người | Kịch bản §5; yêu cầu CP2 trong đề BTC |
 
-Trần Quang Minh xác nhận đã nộp form CP1. CP2 đang chờ nhóm chấm thử và chốt chuẩn. Mọi thay đổi sau chốt CP2/CP4 phải ghi thời điểm, nội dung và lý do tại đây; không sửa chuẩn đã chốt theo kết quả chạy.
+Trần Quang Minh xác nhận đã nộp form CP1. CP2 đã có lượt chấm thử và đang chờ nhóm xác nhận chuẩn. Mọi thay đổi sau chốt CP2/CP4 phải ghi thời điểm, nội dung và lý do tại đây; không sửa chuẩn đã chốt theo kết quả chạy.

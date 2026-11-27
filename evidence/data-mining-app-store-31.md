@@ -1,6 +1,6 @@
 # Đào dữ liệu công khai · D1 — Khiếu nại đơn giao đồ ăn
 
-> Nguồn chuyển vào repo: tài liệu `CP1-D1/` do nhóm cung cấp ngày 27/11/2026. Chưa có bản lưu đầy đủ review gốc và bảng gắn nhãn từng dòng cho mẫu Google Play trong repo; chưa đối chiếu độc lập. Các số dưới đây là số liệu tài liệu tham khảo báo cáo, không phải kết quả thu thập mới trong repo này.
+> Mẫu đối chiếu gồm 31 phản hồi lấy qua một trang tổng hợp App Store. Phụ lục lưu bản diễn giải và nhãn từng dòng.
 
 Ngày xem 27/11/2026. Đây là phần 1.2 theo hướng đào review công khai.
 

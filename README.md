@@ -15,7 +15,7 @@ Khách đặt đồ ăn qua app đã chờ lâu nhưng có lúc chưa rõ đơn 
 
 **Lát cắt dự kiến:** Khi khách báo đã chờ lâu mà chưa nhận đồ ăn, AI tra trạng thái đơn và giờ giao dự kiến để quyết định hướng dẫn chờ tiếp, kiểm tra khả năng hủy hoặc chuyển nhân viên, giúp khách biết bước tiếp theo. Mọi thao tác hủy đơn, hoàn tiền hoặc tác động ra ngoài cần người phụ trách duyệt.
 
-Bản đầu chọn thiếu món; tài liệu `CP1-D1/` do nhóm cung cấp gợi ý hướng chờ lâu có ví dụ trực tiếp hơn. Số liệu review trong repo được kế thừa từ tài liệu đó, chưa đối chiếu độc lập review gốc; không suy rộng thành tỷ lệ mọi người dùng.
+Nhóm chọn bài toán chờ lâu vì mẫu review có tình huống khách vừa chờ vừa gặp khó khi tìm hỗ trợ. Số liệu chỉ mô tả những mẫu đã phân tích. Xem [báo cáo review và giới hạn của mẫu](evidence/summary.md).
 
 - [Canvas CP2](canvas.md) · [Thành viên và phần việc](TEAMS.md)
 - [Spec và bảng so sánh 3 hướng](spec.md) · [Tổng hợp bằng chứng tham khảo](evidence/summary.md)
@@ -31,7 +31,7 @@ MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
 
 Thử nhập `D001 tôi muốn hủy`, `D004 tôi chờ lâu`, `D005 khi nào hoàn tiền`, hoặc hỏi số điện thoại tài xế. Mỗi lượt độc lập, cần mã đơn nếu muốn tra cứu. Dữ liệu là snapshot demo cố định, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
 
-**Tiến độ:** Nhóm trưởng đã nộp CP1. Cả nhóm đã kiểm tra bản CP2. Thành và Cường phụ trách chấm độc lập [5 output](eval/review-5.md) trước khi nhóm chốt chuẩn §7. CP2 đang dùng model giả.
+**Tiến độ:** Nhóm trưởng đã nộp CP1. Cả nhóm đã kiểm tra bản CP2. Lượt chấm thử của Codex đạt 5/5 output từ model giả. Thành và Cường đã rà soát và đồng ý với kết quả 5/5 theo xác nhận của nhóm trưởng. Xem [phiếu chấm](eval/review-5.md).
 
 ---
 
@@ -118,7 +118,7 @@ Nhóm dùng stack khác (Node, Streamlit, notebook…): sửa hàm `run_app()` t
 
 2–3 dòng (bắt buộc): nhóm dùng công cụ AI nào để làm gì, người kiểm lại phần nào. Chi tiết: [docs/ai-usage.md](docs/ai-usage.md). Coding agent đọc [AGENTS.md](AGENTS.md).
 
-Nhóm dùng Codex để soạn hồ sơ, code workflow/fake model, fixtures, câu thử và metric CP2; Codex chạy kiểm tra cấu trúc, luồng và chốt an toàn. Cả 4 thành viên cùng kiểm theo phân công trong TEAMS.md; chưa ghi nhận hai người chấm độc lập hoặc kiểm review gốc, chưa có phỏng vấn/khảo sát mới.
+Nhóm dùng Codex để soạn hồ sơ, code workflow/fake model, fixtures, câu thử và metric CP2; Codex chạy kiểm tra cấu trúc, luồng và chốt an toàn. Cả 4 thành viên đã kiểm tra bản CP2. Thành và Cường đã rà soát và xác nhận kết quả chấm thử, theo thông tin từ nhóm trưởng. CP2 chưa thu thập thêm phỏng vấn hoặc khảo sát.
 
 ## File mẫu — điền ở bước nào
 

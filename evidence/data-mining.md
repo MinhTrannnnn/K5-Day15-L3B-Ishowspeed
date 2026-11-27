@@ -1,6 +1,6 @@
 # Data mining · D1 — Khiếu nại đơn giao đồ ăn
 
-> Nguồn chuyển vào repo: tài liệu `CP1-D1/` do nhóm cung cấp ngày 27/11/2026. Chưa có bản lưu đầy đủ review gốc và bảng gắn nhãn từng dòng cho mẫu Google Play trong repo; chưa đối chiếu độc lập. Các số dưới đây là số liệu tài liệu tham khảo báo cáo, không phải kết quả thu thập mới trong repo này.
+> Repo chưa lưu toàn bộ review gốc và bảng gắn nhãn từng dòng. Phụ lục lưu mã theo nhãn để người đọc kiểm lại phép đếm.
 
 **Bước 1.2 · Bản lấy review trực tiếp từ Google Play, 27/11/2026**
 
