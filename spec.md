@@ -95,7 +95,7 @@ Chi tiết nguồn và mã review ở [bản Google Play](evidence/data-mining.m
 - Ai có thể bị hại nếu AI sai, và nhóm chặn thế nào:
 
 ## §10. Phân công & changelog
-- Phân công: Trần Quang Minh điều phối nhóm, quản lý repo và nộp checkpoint; các thành viên khác chờ bổ sung, khớp TEAMS.md.
+- Phân công: Trần Quang Minh đã tạo repo, chọn hướng D1, cung cấp tài liệu CP1-D1 và chuẩn bị hồ sơ CP1 với Codex; phụ trách hoàn thiện và nộp form CP1 (chưa nộp); các thành viên khác chờ bổ sung, khớp TEAMS.md.
 - Dùng AI: Codex đối chiếu tài liệu CP1-D1 do nhóm cung cấp và soạn bản đầu canvas, spec, tổng hợp bằng chứng. Chưa đối chiếu độc lập review gốc; Trần Quang Minh cần kiểm lại nội dung trước khi dùng số liệu làm kết luận. Chi tiết: `docs/ai-usage.md`.
 - Nhật ký thay đổi — **mọi thay đổi sau CP2 19:30 Thứ Sáu 27/11 phải có dòng ở đây**:
 
