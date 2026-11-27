@@ -1,11 +1,8 @@
-# Giả thuyết — viết TRƯỚC khi tìm bằng chứng (5 phút, commit ngay)
+# Giả thuyết — D1: khiếu nại đơn giao đồ ăn thiếu món
 
-> Điền ở guide bước 1.1. Ôn lại: ngày 2 · lab ngày 2.
-> Viết **trước** khi đọc dòng data đầu tiên hay hỏi người đầu tiên, để không sửa cho khớp kết quả. Kết quả ngược giả thuyết vẫn đủ điểm nếu số là thật.
-
-- Ngày giờ viết: __
-- Người dùng chính (một vai cụ thể): __
-- **Mình nghĩ:** [ai] gặp khó khi [việc] vì [lý do], hậu quả là [mất gì].
-- **Có thể còn cách giải thích khác:** __
-- **Mình đúng nếu thấy:** [một con số nhóm tự chọn] — vd "≥2/3 người kể được một lần như thế trong 1 tháng qua" hoặc "≥x/N học viên bỏ ở bước này" *(ví dụ)*
-- **Nguồn sẽ dùng** (≥1 nguồn đạt ngưỡng, guide 1.2): [ ] đào data · [ ] phỏng vấn ≥3 · [ ] khảo sát ≥20 — nguồn chính: __ · nguồn để kiểm lại: __
+- Ngày viết: 27/11/2026; chưa thu thập bằng chứng trong repo.
+- Người dùng chính: khách đặt đồ ăn qua app vừa nhận đơn thiếu một món.
+- **Mình nghĩ:** khách gặp khó khi yêu cầu hoàn đúng phần thiếu vì phải trao đổi nhiều lượt hoặc chưa rõ chính sách, gây mất thời gian và giảm niềm tin.
+- **Có thể còn cách giải thích khác:** việc chậm xử lý đến từ thiếu bằng chứng hoặc chờ quán xác nhận, thay vì cách trò chuyện của trợ lý.
+- **Mình đúng nếu thấy:** ít nhất 2/3 người được phỏng vấn kể được một lần khiếu nại thiếu món trong tháng qua phải trao đổi nhiều lượt hoặc không rõ bước tiếp theo. Đây là ngưỡng dự kiến, chưa phải kết quả.
+- **Nguồn sẽ dùng:** phỏng vấn ≥3 người ngoài nhóm, đúng người dùng; ghi chép từng người và tổng ≥5 trích dẫn/ví dụ có nguồn, ẩn danh. Kiểm lại bằng review công khai; ghi cách chọn mẫu trước khi đếm, không suy rộng tỷ lệ review thành tỷ lệ mọi người dùng.
