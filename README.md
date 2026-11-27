@@ -1,7 +1,7 @@
 > Repo nộp bài của nhóm Ishowspeed, phát triển từ khung BTC. Các chỗ `____` còn chờ bổ sung.
 > Giờ, mốc, luật, rubric: xem `README.md`, `02-guide.md`, `03-rubric.md` trong repo đề (bộ đề BTC phát).
 
-# Ishowspeed — Khiếu nại đơn giao đồ ăn thiếu món
+# Ishowspeed — Hỗ trợ khách chờ đơn giao đồ ăn
 
 **Thành viên, lớp, track:** xem [TEAMS.md](TEAMS.md). **Điền TEAMS.md đúng format**: khi chấm và đánh giá, BTC quét file này để ghép điểm cho từng người.
 
@@ -11,11 +11,17 @@
 
 ## Đề tài — Track D · D1
 
-Khách đặt đồ ăn nhận thiếu một món cần được xử lý đúng phần thiếu nhưng có thể phải trao đổi nhiều lượt và chưa rõ bước tiếp theo. Đây là giả thuyết cần kiểm chứng, chưa phải kết luận từ người dùng.
+Khách đặt đồ ăn qua app đã chờ lâu nhưng có lúc chưa rõ đơn còn được giao hay đã hủy, nên phải tìm thêm hỗ trợ để biết bước tiếp theo. Đây là pain dự kiến cần tiếp tục kiểm chứng.
 
-**Lát cắt dự kiến:** Một khách báo thiếu một món → AI tra đơn và chính sách để đề xuất hoàn phần thiếu, hỏi thêm hoặc chuyển nhân viên → khách biết phương án xử lý. Người phụ trách duyệt trước khi hoàn tiền; code kiểm số tiền và hạn mức.
+**Lát cắt dự kiến:** Khi khách báo đã chờ lâu mà chưa nhận đồ ăn, AI tra trạng thái đơn và giờ giao dự kiến để quyết định hướng dẫn chờ tiếp, kiểm tra khả năng hủy hoặc chuyển nhân viên, giúp khách biết bước tiếp theo. Mọi thao tác hủy đơn, hoàn tiền hoặc tác động ra ngoài cần người phụ trách duyệt.
 
-Canvas CP1: [canvas.md](canvas.md). Giả thuyết và kế hoạch kiểm chứng: [evidence/hypothesis.md](evidence/hypothesis.md). Hiện repo là khung ban đầu, chưa triển khai luồng D1.
+Bản đầu chọn thiếu món; tài liệu `CP1-D1/` do nhóm cung cấp gợi ý hướng chờ lâu có ví dụ trực tiếp hơn. Số liệu review trong repo được kế thừa từ tài liệu đó, chưa đối chiếu độc lập review gốc; không suy rộng thành tỷ lệ mọi người dùng.
+
+- [Canvas CP1](canvas.md) · [Nội dung nộp form](CP1-NOP.md)
+- [Spec và bảng so sánh 3 hướng](spec.md) · [Tổng hợp bằng chứng tham khảo](evidence/summary.md)
+- [Giả thuyết và lịch sử đổi hướng](evidence/hypothesis.md)
+
+Hiện repo là khung ban đầu, chưa triển khai luồng D1. Còn thiếu thông tin các thành viên khác và phân công tương ứng trong `TEAMS.md`.
 
 ---
 
@@ -101,7 +107,7 @@ Nhóm dùng stack khác (Node, Streamlit, notebook…): sửa hàm `run_app()` t
 
 2–3 dòng (bắt buộc): nhóm dùng công cụ AI nào để làm gì, người kiểm lại phần nào. Chi tiết: [docs/ai-usage.md](docs/ai-usage.md). Coding agent đọc [AGENTS.md](AGENTS.md).
 
-Nhóm dùng Codex để chuẩn bị repo, điền thông tin nhóm và soạn bản đầu README, canvas, giả thuyết D1. Trần Quang Minh cần kiểm lại nội dung và xác nhận bằng bằng chứng người dùng; chưa thu thập phỏng vấn hay khảo sát.
+Nhóm dùng Codex để chuẩn bị repo và tích hợp tài liệu CP1-D1 do nhóm cung cấp vào README, canvas, spec và hồ sơ bằng chứng. Lượt tích hợp chưa thu thập review mới hay đối chiếu độc lập review gốc; Trần Quang Minh cần kiểm lại nội dung và nguồn. Chưa có phỏng vấn hoặc khảo sát trong repo.
 
 ## File mẫu — điền ở bước nào
 
