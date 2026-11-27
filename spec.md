@@ -19,7 +19,7 @@ Các bước hỗ trợ và hủy đơn tham chiếu tài liệu công khai củ
 - **Họ đang xử lý thế nào:** Mở Chi tiết đơn, xem giờ dự kiến và trạng thái, rồi vào trợ giúp hoặc tìm nút hủy. Khi giờ dự kiến thay đổi nhiều lần hoặc phản hồi hỗ trợ chưa giải quyết được, họ vẫn chưa biết có nên chờ. Chi tiết đơn và trợ giúp trong app là các kênh khách có thể tìm ngay từ chính đơn đang chờ. [Quy trình ShopeeFood](https://help.shopee.vn/portal/4/article/79520-) · [Ví dụ GF071](evidence/data-mining.md#4-ví-dụ-ẩn-danh)
 - **Bài toán:** Khách đặt đồ ăn qua app kiểm tra đơn khi đã chờ lâu nhưng có lúc vẫn chưa rõ đơn còn được giao hay đã bị hủy. Họ có thể mất thêm thời gian tìm hỗ trợ trước khi biết nên chờ tiếp, hủy hay yêu cầu xử lý.
 - **Bằng chứng sơ bộ theo tài liệu CP1-D1, chưa đối chiếu nguồn gốc:** Trong 100 review ShopeeFood trên Google Play, 10 nói chờ lâu hoặc giao muộn. Trong 12 review nhận diện là GrabFood từ 100 review app Grab, 1 vừa nói chờ lâu vừa kể khó nhận hỗ trợ. Mẫu đối chiếu có 2/31 lời phàn nàn ShopeeFood mô tả cả hai. [Tổng hợp bằng chứng](evidence/summary.md)
-- **Tình huống cá nhân để thảo luận:** Đặt bữa trưa qua app, thấy giờ giao dự kiến là 12:00. Đến 12:15 vẫn chưa nhận món; giờ dự kiến đổi thành 12:30 nhưng màn hình không nói rõ tài xế đã nhận đơn hay chưa. Mở Chi tiết đơn, tìm nút hủy rồi vào Trợ giúp để hỏi có nên chờ tiếp. Sau khoảng 10 phút tìm và gửi yêu cầu thì vẫn chưa biết đơn còn được giao hay có thể hủy, nên chưa thể quyết định đặt món khác.
+- **Tình huống minh họa với thời gian giả định:** Đặt bữa trưa qua app, thấy giờ giao dự kiến là 12:00. Đến 12:15 vẫn chưa nhận món; giờ dự kiến đổi thành 12:30 nhưng màn hình không nói rõ tài xế đã nhận đơn hay chưa. Mở Chi tiết đơn, tìm nút hủy rồi vào Trợ giúp để hỏi có nên chờ tiếp. Sau khoảng 10 phút tìm và gửi yêu cầu thì vẫn chưa biết đơn còn được giao hay có thể hủy, nên chưa thể quyết định đặt món khác.
 
 ## §2. Impact & quyết định chọn *(guide 1.3)*
 
@@ -124,14 +124,9 @@ Chưa đưa các kịch bản này vào benchmark hoặc chạy đánh giá.
 
 | Đầu việc | Người phụ trách | Trạng thái |
 |---|---|---|
-| Tạo repo, chọn D1, cung cấp tài liệu | Trần Quang Minh | Đã làm |
-| Soạn README và canvas | Codex hỗ trợ; Trần Quang Minh phụ trách duyệt | Đã có bản nháp |
-| Soạn spec, tích hợp hồ sơ review | Codex hỗ trợ; Trần Quang Minh phụ trách duyệt | Đã có bản nháp, chưa kiểm review gốc |
-| Kiểm lại nguồn review | Chưa phân công | Chưa làm |
-| Bổ sung thành viên, xác nhận lát cắt, nộp form CP1 | Trần Quang Minh | Chưa hoàn tất |
 | Code, benchmark và mô phỏng | Chưa phân công | Chuẩn bị cho checkpoint sau |
 
-Chi tiết từng đầu việc: [TEAMS.md](TEAMS.md).
+Phân công và trạng thái từng đầu việc CP1 được cập nhật trong [TEAMS.md](TEAMS.md#phần-việc--cp1).
 
 **Dùng AI:** Codex tích hợp tài liệu CP1-D1 do nhóm cung cấp và soạn bản đầu hồ sơ. Chưa đối chiếu độc lập review gốc; nhóm trưởng cần kiểm lại nội dung và nguồn. Chi tiết: [docs/ai-usage.md](docs/ai-usage.md).
 

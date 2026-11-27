@@ -8,7 +8,7 @@ README của nhóm có mục "Dùng AI vào việc gì" (2–3 dòng, bắt bu�
 |---|---|---|---|---|
 | Code bản chạy thử | | | | |
 | Prompt / thiết kế lời gọi mô hình | | | | |
-| Tài liệu review tham khảo | ChatGPT Codex (theo khai báo tài liệu CP1-D1) | Tài liệu nguồn khai báo đã lấy review và gắn nhãn; lượt tích hợp này chỉ đọc và kiểm tính nhất quán của tài liệu | Chưa kiểm lại review gốc; chưa có bản lưu toàn mẫu trong repo | Trần Quang Minh phụ trách xác minh |
+| Tài liệu review tham khảo | ChatGPT Codex (theo khai báo tài liệu CP1-D1) | Tài liệu nguồn khai báo đã lấy review và gắn nhãn; lượt tích hợp này chỉ đọc và kiểm tính nhất quán của tài liệu | Chưa kiểm lại review gốc; chưa có bản lưu toàn mẫu trong repo | Trần Duy Thành phụ trách đối chiếu review gốc và nhãn, Nguyễn Văn Cường phụ trách duyệt bản tổng hợp |
 | Rà câu hỏi phỏng vấn / khảo sát | | Chỉ rà câu dẫn dắt | | |
 | Viết câu thử (benchmark) | | | Mỗi câu thử có `source`; câu thử AI viết được ghi rõ | |
 | Sinh data `synthetic` (nếu có) | | | Seed __ · kiểm tay __ dòng | |

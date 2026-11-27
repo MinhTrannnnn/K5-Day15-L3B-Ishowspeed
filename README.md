@@ -21,7 +21,7 @@ Bản đầu chọn thiếu món; tài liệu `CP1-D1/` do nhóm cung cấp gợ
 - [Spec và bảng so sánh 3 hướng](spec.md) · [Tổng hợp bằng chứng tham khảo](evidence/summary.md)
 - [Giả thuyết và lịch sử đổi hướng](evidence/hypothesis.md)
 
-Hiện repo là khung ban đầu, chưa triển khai luồng D1. Còn thiếu thông tin các thành viên khác và phân công tương ứng trong `TEAMS.md`.
+Repo hiện có hồ sơ CP1 và phân công cho bốn thành viên. Luồng D1 vẫn ở giai đoạn thiết kế. Xem [tiến độ CP1](TEAMS.md#phần-việc--cp1).
 
 ---
 
