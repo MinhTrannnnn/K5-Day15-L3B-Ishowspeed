@@ -17,7 +17,7 @@ Khách đặt đồ ăn qua app đã chờ lâu nhưng có lúc chưa rõ đơn 
 
 Bản đầu chọn thiếu món; tài liệu `CP1-D1/` do nhóm cung cấp gợi ý hướng chờ lâu có ví dụ trực tiếp hơn. Số liệu review trong repo được kế thừa từ tài liệu đó, chưa đối chiếu độc lập review gốc; không suy rộng thành tỷ lệ mọi người dùng.
 
-- [Canvas CP1](canvas.md) · [Nội dung nộp form](CP1-NOP.md)
+- [Canvas CP1](canvas.md) · [Thành viên và phần việc](TEAMS.md)
 - [Spec và bảng so sánh 3 hướng](spec.md) · [Tổng hợp bằng chứng tham khảo](evidence/summary.md)
 - [Giả thuyết và lịch sử đổi hướng](evidence/hypothesis.md)
 

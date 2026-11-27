@@ -11,7 +11,7 @@
 
 | STT | Họ và tên | Mã học viên | Vai trò | Phần việc chính |
 |---|---|---|---|---|
-| 1 | Trần Quang Minh | 2A202603929 | Đội trưởng | Tạo repo, chọn hướng D1, cung cấp tài liệu CP1-D1 và chuẩn bị hồ sơ CP1 với Codex |
+| 1 | Trần Quang Minh | 2A202603929 | Đội trưởng | Điều phối, quản lý repo và chuẩn bị nộp CP1 |
 | 2 | ____ | ____ | Thành viên | ____ |
 | 3 | ____ | ____ | Thành viên | ____ |
 
@@ -23,9 +23,19 @@
 - **Họ và tên** ghi đủ, có dấu.
 - **Phần việc chính:** 1 dòng ngắn, khớp với phần có tên người đó trong repo.
 
-## Tiến độ phần việc — CP1
+## Phần việc — CP1
 
-- **Trần Quang Minh đã thực hiện:** tạo repo GitHub công khai, cung cấp thông tin nhóm trưởng, chọn Track D hướng D1 và cung cấp tài liệu tham khảo `CP1-D1/`.
-- **Đã chuẩn bị với Codex hỗ trợ:** khởi tạo khung BTC; cập nhật README, canvas 7 dòng, spec với bảng so sánh 3 hướng, giả thuyết, tổng hợp tài liệu review và nội dung điền form `CP1-NOP.md`; commit và push lên GitHub.
-- **Còn cần hoàn tất:** bổ sung thành viên và phân công; nhóm trưởng đọc và xác nhận lát cắt dự kiến chờ đơn, kiểm lại nguồn số liệu, kiểm tra repo bằng cửa sổ ẩn danh và nộp form CP1. Chưa ghi nhận đã nộp checkpoint.
-- **Chưa thực hiện trong repo:** thu thập hoặc kiểm lại review gốc, phỏng vấn, khảo sát và triển khai luồng D1.
+| Đầu việc | Người phụ trách | Trạng thái |
+|---|---|---|
+| Tạo repo và chọn Track D1 | Trần Quang Minh | Đã làm |
+| Cung cấp tài liệu tham khảo CP1-D1 | Trần Quang Minh | Đã làm |
+| Chuẩn bị khung repo, commit và push | Trần Quang Minh, Codex hỗ trợ thao tác | Đã làm |
+| Soạn README và canvas | Codex hỗ trợ; Trần Quang Minh phụ trách duyệt | Đã có bản nháp |
+| Soạn spec và bảng so sánh 3 hướng | Codex hỗ trợ; Trần Quang Minh phụ trách duyệt | Đã có bản nháp |
+| Tích hợp hồ sơ review, tổng hợp bằng chứng | Codex hỗ trợ; Trần Quang Minh phụ trách duyệt | Đã tích hợp, chưa kiểm review gốc |
+| Đối chiếu review gốc và kiểm lại nhãn | Chưa phân công | Chưa làm |
+| Bổ sung thành viên và phân công | Trần Quang Minh | Chưa hoàn tất |
+| Xác nhận lát cắt, kiểm tra repo bằng cửa sổ ẩn danh | Trần Quang Minh | Chưa xác nhận |
+| Nộp form CP1 | Trần Quang Minh | Chưa ghi nhận đã nộp |
+
+Tên và phần việc các thành viên khác sẽ bổ sung khi có danh sách. Chưa thu thập phỏng vấn, khảo sát hoặc triển khai luồng D1 trong repo.
