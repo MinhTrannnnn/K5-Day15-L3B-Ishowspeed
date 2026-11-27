@@ -12,8 +12,9 @@
 | STT | Họ và tên | Mã học viên | Vai trò | Phần việc chính |
 |---|---|---|---|---|
 | 1 | Trần Quang Minh | 2A202603929 | Đội trưởng | Điều phối nhóm, quản lý repo và nộp checkpoint |
-| 2 | ____ | ____ | Thành viên | ____ |
-| 3 | ____ | ____ | Thành viên | ____ |
+| 2 | Trần Duy Thành | 2A202603919 | Thành viên | ____ |
+| 3 | Nguyễn Hải Quang | 2A202603936 | Thành viên | ____ |
+| 3 | Nguyễn Văn Cường | 2A202603750 | Thành viên | ____ |
 
 **Quy tắc điền**
 - **Lớp:** `L3A` hoặc `L3B`. **Track:** một chữ `A` (EdTech), `B` (Y tế), `C` (Du lịch), `D` (Thương mại điện tử), `E` (Tài chính) hoặc `F` (Làn khác). **Link repo:** link GitHub công khai của nhóm.
