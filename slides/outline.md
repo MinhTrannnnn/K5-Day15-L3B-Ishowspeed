@@ -23,4 +23,4 @@ Ai nói trang nào (mỗi người ≥1 phần):
 | | |
 
 
-**ETA mở rộng:** chỉ demo khi có dữ liệu và kết quả thật của thí nghiệm. Ghi số mẫu, khoảng thời gian, fallback và nhãn synthetic; không đưa dự báo minh họa thành hiệu quả đã chứng minh. Kịch bản và phân công: [phân công](../TEAMS.md).
+**ETA:** nền tảng cung cấp, agent đọc và đối chiếu trong ca; demo phải ghi snapshot synthetic/không live, không tự hứa giờ giao. Phần mở rộng checklist, nhắc ca và phản hồi chỉ trình bày là đề xuất chưa triển khai. Phân công: [TEAMS](../TEAMS.md).

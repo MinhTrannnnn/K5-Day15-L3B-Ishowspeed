@@ -31,3 +31,8 @@ Minh xác nhận đã kiểm bản nâng cấp và OK. Gộp hai hướng dẫn 
 ## Hợp nhất lõi xử lý
 
 Theo yêu cầu Minh, Codex bỏ luồng điều phối trùng, đưa hội thoại vào agent.py, quy tắc chung vào policy.py và kho ca/ETA vào cases.py. CLI và harness dùng cùng agent, bỏ lệnh quay về bản trước và sơ đồ thiết kế lỗi thời. Giữ chuẩn/bộ thử/kết quả lịch sử. Các tên module trong mục lịch sử phía trên được đối chiếu về tên hiện tại; không tuyên bố các lần chấm trước đã chạy trên code mới.
+
+
+## Chốt phạm vi ETA theo Minh
+
+Codex sửa spec §4.3/sơ đồ và tài liệu liên quan: ETA do app giao đồ ăn cung cấp; agent chỉ đọc/đối chiếu dữ kiện. Bỏ công cụ dự báo, /shop và dữ liệu/generator lịch sử, thay bằng /eta đọc snapshot. Cập nhật phân công và kiểm kỹ thuật, giữ chuẩn/bộ thử/artifact cũ. Các mô tả dự báo ở mục lịch sử phía trên không còn đại diện tính năng hiện tại. Đề xuất checklist/nhắc ca/phản hồi chỉ ghi kế hoạch, chưa triển khai.

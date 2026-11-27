@@ -51,7 +51,7 @@ CP2 có [kiểm kỹ thuật](cp2-upgrade-check.md) và [output smoke](cp2-upgra
 | Hội thoại/làm rõ/mâu thuẫn | Bộ ca, transcript, nguồn dữ kiện, output và lý do chấm | Chưa chạy |
 | Hồ sơ và người duyệt | Nháp, hành động nhân viên, nhật ký trạng thái, kiểm quyền/trùng | Chưa chạy |
 | Trải nghiệm khách/nhân viên | Cùng kịch bản so sánh, thời gian tạo hồ sơ đủ dùng, số lần hỏi lại | Chưa đo |
-| ETA | Seed, tập tách theo thời gian, baseline, MAE/độ phủ/độ rộng khoảng/tỷ lệ đủ mẫu | Chưa có dữ liệu/chưa đo |
+| ETA nền tảng | Đọc đúng mốc/nguồn/snapshot, xử lý thiếu và mâu thuẫn; không tự dự báo | Đã có kiểm kỹ thuật; chưa chấm AI thật |
 | Chi phí nhiều lượt | Toàn bộ model/tool calls và token theo phiên, phạm vi hạ tầng | Chưa đo |
 
-Kết quả ETA trên dữ liệu synthetic chỉ kiểm cách tính và luồng demo, không chứng minh độ chính xác ngoài thực tế. Duyệt phương án không đồng nghĩa giao dịch thành công.
+ETA là đầu vào nền tảng giả lập; không đánh giá mô hình dự báo riêng. Duyệt phương án không đồng nghĩa giao dịch thành công.

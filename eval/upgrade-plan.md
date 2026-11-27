@@ -35,14 +35,13 @@ Ngày soạn: 27/11/2026. **Chưa có kết quả AI thật hoặc đo hiệu qu
 
 Các số đo mới chưa có ngưỡng đạt chính thức. Nếu nhóm chọn ngưỡng để thử nghiệm thì lưu trước lượt chạy đầu, đặt phiên bản riêng; không sửa chuẩn BTC hoặc gán kết quả cải tiến vào 5/5 fake cũ.
 
-## 4. ETA — giao thức thử nghiệm riêng
+## 4. ETA nền tảng — kiểm đọc và đối chiếu
 
-1. Dựng lịch sử synthetic gồm cả đơn bình thường; đơn hủy báo riêng, không gán thời gian giao bằng 0. Ghi generator, seed, giả định và phân bố vào data card khi có file thật.
-2. Tách train/validation/test theo thời gian. Với mỗi đơn kiểm, chỉ dùng lịch sử đã hoàn tất trước thời điểm đặt; không dùng khiếu nại/kết quả phát sinh về sau.
-3. Baseline: trung vị thời gian đặt → nhận theo shop/khung giờ. Biến thể cá nhân hóa: dùng lịch sử khách + shop khi đủ mẫu, fallback được ghi lại. Ngưỡng ban đầu 10 đơn/nhóm, thử trên validation rồi cố định trước test.
-4. Trả trung vị và khoảng P20–P80 thực nghiệm cùng số mẫu/độ mới; báo không đủ dữ liệu nếu mọi nhóm đều thiếu. Không gọi đây là giờ giao bảo đảm.
-5. Báo MAE của dự báo điểm trên tập đủ mẫu, tỷ lệ thực tế nằm trong khoảng, độ rộng khoảng và tỷ lệ đơn được dự báo. Chia riêng nhóm cá nhân hóa/fallback/thiếu dữ liệu; so cùng tập với baseline để tránh chọn mẫu có lợi.
-6. Không tuyên bố dự báo tốt hơn thực tế từ dữ liệu tự dựng. Báo quy mô từng tập, giới hạn và mọi kết quả kể cả biến thể tệ hơn baseline.
+- Đầu vào là ETA ban đầu/cập nhật, thời điểm snapshot và cờ nhất quán do nền tảng giả lập cung cấp. Không có bài toán dự báo nên không chấm MAE, phân vị hoặc cá nhân hóa.
+- Kiểm output không đổi mốc, không bịa số phút thiếu, không suy ra giờ đến mới hoặc lý do chậm. Dữ liệu snapshot phải ghi rõ không live và ETA không phải cam kết.
+- D004: đọc đúng mốc, giữ độ trễ theo ETA ban đầu; D006: cảnh báo mâu thuẫn; D009: giữ thiếu dữ liệu, đề xuất người kiểm tra. Khách kể ETA khác thì ghi là lời khách, chưa mặc định thay dữ kiện nền tảng.
+- Nhân viên cập nhật tiến độ ca không được coi là hãng đã đổi ETA hoặc đã thực hiện giao dịch.
+- Các phần mở rộng checklist/nhắc ca/phản hồi ở spec §4.5 mới là đề xuất, chưa có bộ chấm hoặc kết quả. Không sửa benchmark/metric nền để gộp các đề xuất này.
 
 ## 5. Lưu bằng chứng và hai lượt
 

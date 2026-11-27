@@ -15,14 +15,14 @@
 
 **Lát cắt đích:** Khách phản ánh một đơn → một agent làm rõ, đối chiếu dữ kiện/mâu thuẫn, đề xuất phương án và tổng hợp hồ sơ → nhân viên phản hồi, duyệt và cập nhật → khách theo dõi từng bước. Mọi giao dịch chỉ mô phỏng, không kết nối hãng.
 
-**Phần mở rộng:** Trước khi đặt tại shop, xem khoảng thời gian giao từ lịch sử tất cả đơn hoàn tất, ưu tiên lịch sử cá nhân nếu đủ mẫu. Code tính ETA, agent giải thích; dữ liệu khiếu nại chỉ bổ sung ngữ cảnh. Đã có demo thống kê lịch sử synthetic; chưa đo độ chính xác hoặc chứng minh nhu cầu này.
+**ETA:** do app giao đồ ăn cung cấp. Agent đọc ETA ban đầu/cập nhật, trạng thái và thời điểm dữ liệu để hỗ trợ ca; không tự dự báo giờ đến. CP2 dùng snapshot giả lập, chưa có API hãng. Phần mở rộng đề xuất: checklist trước duyệt, nhắc ca chờ lâu và tổng hợp phản hồi sau xử lý — chưa triển khai, xem spec §4.5.
 
 - **[Kịch bản CP2 mới](docs/cp2-demo.md)**
 - [Canvas](canvas.md) · [Phân công](TEAMS.md) · [Thiết kế và hiện trạng](spec.md)
 - [Bằng chứng và giới hạn](evidence/summary.md) · [Giả thuyết cần kiểm](evidence/hypothesis.md)
 - [Kế hoạch đánh giá bổ sung](eval/upgrade-plan.md)
 
-**Khung CP2 mới đã triển khai:** fake planner gọi công cụ trong vòng giới hạn, nhớ phiên, hồ sơ SQLite, bàn CLI khách/nhân viên, duyệt/cập nhật và theo dõi ca, ETA thống kê synthetic. Chưa có web, đăng nhập production hoặc AI thật. [Báo cáo kiểm kỹ thuật](eval/cp2-upgrade-check.md).
+**Khung CP2 mới đã triển khai:** fake planner gọi công cụ trong vòng giới hạn, nhớ phiên, hồ sơ SQLite, bàn CLI khách/nhân viên, duyệt/cập nhật và theo dõi ca, đọc ETA nền tảng giả lập. Chưa có web, đăng nhập production hoặc AI thật. [Báo cáo kiểm kỹ thuật](eval/cp2-upgrade-check.md).
 
 Bản CP2 chạy được workflow D1 bằng model giả, không cần key; đã có 4 thành viên và phân công chung/kiểm chéo trong `TEAMS.md`. Có 20 câu thử, 4 metric, data card và 10 đơn synthetic; chính sách DEMO-P1 là quy tắc dựng, không phải chính sách của hãng.
 
@@ -32,7 +32,7 @@ MODEL_PROVIDER=fake python3 run.py
 MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
 ```
 
-Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên; `/nhanvien` → `/tiepnhan` để nhận ca; `/trangthai C001` để xem tiến độ. `/shop S001` xem khoảng ETA. `/help` xem cú pháp. [Kịch bản đầy đủ](docs/cp2-demo.md). Dữ liệu synthetic/snapshot, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
+Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên; `/nhanvien` → `/tiepnhan` để nhận ca; `/trangthai C001` để xem tiến độ. `/eta D004` xem ETA nền tảng từ snapshot. `/help` xem cú pháp. [Kịch bản đầy đủ](docs/cp2-demo.md). Dữ liệu synthetic/snapshot, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
 
 **Bản nâng cấp hiện tại:** code do Codex triển khai theo yêu cầu Minh; Minh đã kiểm tra và xác nhận OK trong trao đổi. Chưa có xác nhận các thành viên khác đã rà bản nâng cấp. CP3 chưa triển khai.
 
@@ -42,8 +42,8 @@ Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên
 
 ## Kiểm trước khi nộp CP2
 
-- [x] Canvas/spec đồng bộ đề tài mới; khung fake nhiều lượt, hồ sơ/duyệt và ETA demo chạy được.
-- [x] Minh đã kiểm tra và xác nhận OK; kiểm tự động 15 test qua.
+- [x] Canvas/spec đồng bộ đề tài mới; khung fake nhiều lượt, hồ sơ/duyệt và đọc ETA demo chạy được.
+- [x] Minh đã kiểm tra và xác nhận OK; kiểm tự động 16 test qua.
 - [ ] Thành, Quang, Cường rà và xác nhận phần phụ trách trong [TEAMS](TEAMS.md).
 - [ ] Lưu xác nhận chốt chuẩn theo mốc thật; kiểm nguồn bằng chứng và các giới hạn còn thiếu.
 - [ ] Minh kiểm link công khai và nộp form CP2; chưa ghi nhận đã nộp.
@@ -111,7 +111,7 @@ Nhóm dùng stack khác (Node, Streamlit, notebook…): sửa hàm `run_app()` t
 
 | File | Viết gì | Bước guide |
 |---|---|---|
-| `codebase/agent.py` | `Agent.chat` là lõi chung cho CLI và `answer(text)`; quy tắc ở `policy.py`, lưu ca/ETA ở `cases.py` | 3.2 |
+| `codebase/agent.py` | `Agent.chat` là lõi chung cho CLI và `answer(text)`; quy tắc ở `policy.py`, lưu ca/đọc ETA ở `cases.py` | 3.2 |
 | `codebase/tools.py` | Công cụ của bài toán, mỗi công cụ một hàm có `@tool` | 2.2, 3.2 |
 | `codebase/ai.py` | `call_model(system, user)` — chỗ duy nhất gọi model. Chưa điền `.env` thì chạy **chế độ giả** | 3.3 |
 

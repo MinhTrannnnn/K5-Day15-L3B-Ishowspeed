@@ -31,3 +31,9 @@ Cách tái kiểm và thao tác: [kịch bản CP2](../docs/cp2-demo.md). Chuẩ
 - Tái chạy tích hợp CLI trên database tạm: làm rõ → nháp → nhân viên tiếp nhận/cập nhật → kết quả → khách xem → ETA, không có lỗi.
 - Tái chạy trực tiếp 20 input benchmark: đều trả đúng hợp đồng, action khớp action kỳ vọng và `executed=False`. Đây chỉ là kiểm kỹ thuật fake, chưa chấm đầy đủ bốn metric hoặc AI thật.
 - Output smoke liên kết phía trên thuộc lần chạy trước được giữ nguyên làm bằng chứng lịch sử, không sửa lại để giả thành lần chạy trên code hiện tại.
+
+## Kiểm sau khi chốt ETA do nền tảng cung cấp
+
+Phạm vi hiện tại thay thế thử nghiệm tự dự báo: đã bỏ công cụ `delivery_estimate`, lệnh `/shop` và dữ liệu/generator lịch sử. CLI `/eta D004` chỉ đọc snapshot nền tảng, có nguồn và nhãn không live. Các kết quả ETA thống kê phía trên và trong output smoke là lịch sử của lần chạy trước, không đại diện tính năng hiện tại.
+
+16 test đã qua, gồm kiểm đọc đúng mốc ban đầu/cập nhật, không tự điền thời gian thiếu, cảnh báo dữ liệu mâu thuẫn và không bồi thường khi thiếu căn cứ. `python3 run.py check` không thấy vấn đề. Chưa gọi AI thật hoặc kết nối API hãng. Checklist/nhắc ca/phản hồi ở spec §4.5 mới là đề xuất, chưa có kết quả.

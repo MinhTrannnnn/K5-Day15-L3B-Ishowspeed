@@ -72,21 +72,18 @@ D005 tôi muốn kiểm tra khoản hoàn
 
 Hiển thị `pending` theo snapshot; chưa có ngày hoàn xác nhận hoặc thực hiện khoản hoàn mới.
 
-## 5. Ước tính thời gian giao trước đặt tại shop
+## 5. Đọc ETA do nền tảng cung cấp
 
 ```text
 /khach demo
-/shop S001
-/khach khach_moi
-/shop S001
-/shop S002
+/eta D004
+/eta D006
+/eta D009
 ```
 
-- `demo` + S001: đủ lịch sử cá nhân, trả P20/median/P80 và số mẫu.
-- Khách mới + S001: lùi về lịch sử shop, ghi rõ không cá nhân hóa.
-- S002: ít hơn 10 đơn hoàn tất, báo thiếu mẫu.
+D004 hiển thị ETA ban đầu 11:59, cập nhật 12:45 và snapshot 12:30 ngày 27/11/2026 UTC+07; đây là giờ dự kiến từ nền tảng giả lập, không bảo đảm giờ giao. D006 cảnh báo dữ liệu mâu thuẫn; D009 giữ nguyên thời gian ban đầu/độ trễ bị thiếu, không tự điền.
 
-Dùng 120 bản ghi synthetic gồm cả đơn bình thường, khiếu nại và hủy. Chỉ lấy đơn hoàn tất trước thời điểm dự báo; đơn hủy không có thời gian giao. Chưa xét khung giờ/khoảng cách, chưa đo MAE hoặc độ chính xác ngoài thực tế.
+Không có lệnh /shop hoặc công cụ tự dự báo thời gian giao. Chưa kết nối API nền tảng thật. Nhân viên cập nhật ca chỉ thay tiến độ xử lý, không thay ETA hãng hoặc tự cập nhật snapshot đơn.
 
 ## Kiểm và lưu trữ
 

@@ -1,6 +1,6 @@
 # Hồ sơ đánh giá — agent xử lý khiếu nại giao trễ
 
-**Phạm vi kết quả:** phiếu 5/5 và preview là bằng chứng lịch sử của lần chạy được ghi trong file. Bản hiện tại chỉ có một lõi `Agent.chat` cho CLI/harness; không còn luồng sản phẩm cũ để chọn. Khung CP2 mới đã có phiên/hồ sơ/CLI nhân viên/ETA synthetic và kiểm kỹ thuật riêng tại [cp2-upgrade-check](cp2-upgrade-check.md); chưa chấm chất lượng AI thật. Giữ nguyên benchmark/metric/phiếu cũ; kế hoạch kiểm phần mới tại [upgrade-plan.md](upgrade-plan.md), mốc nộp tại [phân công](../TEAMS.md).
+**Phạm vi kết quả:** phiếu 5/5 và preview là bằng chứng lịch sử của lần chạy được ghi trong file. Bản hiện tại chỉ có một lõi `Agent.chat` cho CLI/harness; không còn luồng sản phẩm cũ để chọn. Khung CP2 mới đã có phiên/hồ sơ/CLI nhân viên/đọc ETA nền tảng và kiểm kỹ thuật riêng tại [cp2-upgrade-check](cp2-upgrade-check.md); chưa chấm chất lượng AI thật. Giữ nguyên benchmark/metric/phiếu cũ; kế hoạch kiểm phần mới tại [upgrade-plan.md](upgrade-plan.md), mốc nộp tại [phân công](../TEAMS.md).
 
 ## 1. Dataset → xử lý
 
@@ -67,4 +67,4 @@ Chưa gọi model thật, chưa có run ID đạt chuẩn CP3; chưa kiểm đ�
 
 ## 7. Đánh giá thiết kế nâng cấp
 
-Chạy lại bộ nền với model thật qua hợp đồng `answer(text)` độc lập và chỉ đề xuất. Luồng nhiều lượt, lưu hồ sơ có người duyệt và ETA dùng bộ bổ sung riêng; lưu giao thức trước khi chạy, không gộp điểm hoặc sửa chuẩn CP2. Đo cả chất lượng hồ sơ, trạng thái, quyền và tổng chi phí phiên. Chi tiết: [upgrade-plan.md](upgrade-plan.md). Đã có kiểm kỹ thuật khung fake tại [cp2-upgrade-check](cp2-upgrade-check.md); chưa có kết quả model thật hoặc đo hiệu quả sản phẩm.
+Chạy lại bộ nền với model thật qua hợp đồng `answer(text)` độc lập và chỉ đề xuất. Luồng nhiều lượt, lưu hồ sơ có người duyệt và đối chiếu ETA dùng bộ bổ sung riêng; lưu giao thức trước khi chạy, không gộp điểm hoặc sửa chuẩn CP2. Đo cả chất lượng hồ sơ, trạng thái, quyền và tổng chi phí phiên. Chi tiết: [upgrade-plan.md](upgrade-plan.md). Đã có kiểm kỹ thuật khung fake tại [cp2-upgrade-check](cp2-upgrade-check.md); chưa có kết quả model thật hoặc đo hiệu quả sản phẩm.

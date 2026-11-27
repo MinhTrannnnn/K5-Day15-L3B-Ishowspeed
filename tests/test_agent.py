@@ -1,4 +1,4 @@
-"""Kiểm các hành vi mới: quyền, duyệt, bộ nhớ, trùng ca và dữ liệu ETA."""
+"""Kiểm các hành vi mới: quyền, duyệt, bộ nhớ, trùng ca và ETA từ nền tảng."""
 import json
 import sys
 import tempfile
@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'codebase'))
 from agent import Agent, answer
-from cases import CaseStore, delivery_estimate
+from cases import CaseStore, order_timeline
 from app import command
 
 
@@ -106,16 +106,29 @@ class CP2DemoTests(unittest.TestCase):
         with patch('agent.call_model', return_value={'text': '{"tool":"finish"}'}):
             self.assertIn('đủ căn cứ', self.demo.chat('demo', 'D004 hỗ trợ'))
 
-    def test_estimate_uses_completed_history_and_fallback(self):
-        result = delivery_estimate('demo', 'S001')
-        self.assertTrue(result['available'])
-        self.assertEqual(result['group'], 'personal_shop')
-        self.assertGreaterEqual(result['n'], 10)
-        self.assertLessEqual(result['p20_minutes'], result['median_minutes'])
-        self.assertLessEqual(result['median_minutes'], result['p80_minutes'])
-        self.assertEqual(delivery_estimate('new_customer', 'S001')['group'], 'shop_fallback')
-        self.assertFalse(delivery_estimate('demo', 'S002')['available'])
-        self.assertFalse(delivery_estimate('demo', 'S001', '2026-11-01T00:00:00+07:00')['available'])
+    def test_eta_reads_platform_snapshot_without_predicting(self):
+        row = order_timeline('D004')[0]
+        self.assertEqual(row['original_eta'], '11:59')
+        self.assertEqual(row['updated_eta'], '12:45')
+        self.assertEqual(row['delay_minutes'], 31)
+        self.assertEqual(row['eta_source'], 'platform_demo_snapshot')
+        self.assertFalse(row['live'])
+        output, _, _ = command(self.store, 'demo', 'customer', '/eta D004')
+        self.assertIn('agent không tự dự báo', output)
+        self.assertIn('không bảo đảm', output)
+        with self.assertRaises(ValueError):
+            command(self.store, 'demo', 'customer', '/eta D9999')
+
+    def test_eta_conflicting_and_missing_data_are_not_filled_in(self):
+        output, _, _ = command(self.store, 'demo', 'customer', '/eta D006')
+        self.assertIn('mâu thuẫn', output)
+        self.assertIn('chưa kết luận', output)
+        row = order_timeline('D009')[0]
+        self.assertIsNone(row['original_eta'])
+        self.assertIsNone(row['delay_minutes'])
+        result = answer('D009 thời gian giao không rõ')
+        self.assertEqual(result['action'], 'human_review')
+        self.assertEqual(result['proposal_vnd'], 0)
 
     def test_draft_survives_reopen_and_switch_order_clears_context(self):
         path = Path(self.temp.name)/'cases.sqlite3'

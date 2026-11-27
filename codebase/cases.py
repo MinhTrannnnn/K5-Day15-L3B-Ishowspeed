@@ -131,37 +131,9 @@ def order_timeline(order_id):
         return []
     return [{'source': order_id, 'snapshot_at': order['updated_at'],
              'original_eta': order['original_eta'], 'updated_eta': order['updated_eta'],
-             'status': order['status'], 'consistent': order['consistent']}]
-
-
-@tool
-def delivery_estimate(owner, shop, as_of='2026-11-27T12:30:00+07:00'):
-    """delivery_estimate · khách giả/shop/thời điểm → khoảng lịch sử, số mẫu · chỉ đọc synthetic, không hứa giờ giao."""
-    from datetime import datetime
-    path = ROOT / 'data/demo_delivery_history.json'
-    if not path.exists():
-        return {'available': False, 'reason': 'Chưa có dữ liệu lịch sử.'}
-    data = json.loads(path.read_text(encoding='utf-8'))
-    cutoff = datetime.fromisoformat(as_of)
-    all_rows = [r for r in data['orders'] if r['shop_id'] == shop
-                and r['status'] == 'completed'
-                and datetime.fromisoformat(r['received_at']) < cutoff]
-    personal = [r for r in all_rows if r['customer_id'] == owner]
-    rows = personal if len(personal) >= 10 else all_rows
-    if len(rows) < 10:
-        return {'available': False, 'n': len(rows), 'reason': 'Không đủ 10 đơn hoàn tất trước thời điểm dự báo.'}
-    values = sorted((datetime.fromisoformat(r['received_at']) - datetime.fromisoformat(r['placed_at'])).total_seconds()/60
-                    for r in rows)
-    def quantile(q):
-        position = (len(values)-1)*q
-        lo = int(position)
-        hi = min(lo+1, len(values)-1)
-        return round(values[lo]+(values[hi]-values[lo])*(position-lo), 1)
-    return {'available': True, 'synthetic': True, 'shop_id': shop, 'n': len(rows),
-            'group': 'personal_shop' if len(personal) >= 10 else 'shop_fallback',
-            'p20_minutes': quantile(.2), 'median_minutes': quantile(.5), 'p80_minutes': quantile(.8),
-            'as_of': as_of, 'latest_received_at': max(r['received_at'] for r in rows),
-            'limits': 'Chưa xét khoảng cách, khung giờ hay tình trạng tài xế hiện tại; chưa kiểm chứng ngoài thực tế.'}
+             'status': order['status'], 'consistent': order['consistent'],
+             'delay_minutes': order['delay_minutes'], 'eta_source': 'platform_demo_snapshot',
+             'live': False}]
 
 
 def show_case(case):

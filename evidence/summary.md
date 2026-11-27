@@ -29,6 +29,6 @@ Không có bằng chứng mới được thu thập trong lần sửa tài liệ
 |---|---|---|
 | Khách phải kể lại sự việc và chưa biết ca được xử lý đến đâu | Hỏi về lần gần nhất, các bước đã làm, thông tin phải lặp lại và kết quả; ghi cả trường hợp không gặp trở ngại | Quang |
 | Nhân viên cần hồ sơ có căn cứ và điểm mâu thuẫn | Trao đổi với người có trải nghiệm xử lý khiếu nại; kiểm họ có thể quyết định gì từ hồ sơ và còn thiếu gì. Chưa tiếp cận được thì ghi chưa xác minh | Quang, Minh |
-| Khách muốn xem thời gian giao từ lịch sử trước khi chọn shop | Hỏi lần chọn shop gần nhất, ETA đã ảnh hưởng quyết định thế nào, họ xử lý khi ETA không đáng tin ra sao; tránh chỉ hỏi có thích tính năng không | Quang |
+| Nhân viên cần checklist để thấy hồ sơ thiếu dữ kiện nào | Hỏi một ca cụ thể đã phải tra/hỏi lại gì trước khi duyệt; chưa xác nhận nhu cầu hay hiệu quả | Quang |
 
-Không suy từ tổng thời gian giao ra thời gian tìm hỗ trợ; không dùng số review để suy ra tần suất theo đơn. Kế hoạch kiểm trước thu thập: [hypothesis](hypothesis.md). Việc ETA cần dữ liệu tất cả đơn hoàn tất là yêu cầu dữ liệu, không phải kết quả nghiên cứu người dùng.
+Không suy từ tổng thời gian giao ra thời gian tìm hỗ trợ; không dùng số review để suy ra tần suất theo đơn. Kế hoạch kiểm trước thu thập: [hypothesis](hypothesis.md). ETA đã chốt là dữ kiện nền tảng cung cấp; hướng dự báo riêng không còn thuộc phạm vi sản phẩm.

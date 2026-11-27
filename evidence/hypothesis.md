@@ -26,8 +26,8 @@ Số liệu và quan sát của hướng chờ lâu nằm trong [tổng hợp b�
 
 - **H1 — xử lý ca:** Khách gặp đơn giao trễ/bất thường khó có phương án rõ ràng và biết ca đang ở đâu; một phần phải kể lại hoặc cung cấp lại thông tin. Hỗ trợ bằng review mới ở mức sơ bộ.
 - **H2 — nhân viên:** Hồ sơ tổng hợp có nguồn, điểm mâu thuẫn và phần thiếu có thể giảm việc hỏi lại. Chưa có dữ liệu trực tiếp từ nhân viên.
-- **H3 — trước đặt hàng:** Khách có thể dùng khoảng thời gian giao của shop từ các lần đặt tương tự để quyết định đặt; chưa có bằng chứng trực tiếp.
-- **Giải thích cạnh tranh:** Khó khăn có thể chủ yếu do thiếu tài xế, quyền xử lý hoặc chính sách, không phải hội thoại/hồ sơ. ETA có thể ít quan trọng hơn giá hoặc món; lịch sử có thể không dự báo được điều kiện hiện tại.
+- **H3 — mở rộng hồ sơ:** Checklist nguồn/thông tin thiếu có thể giúp nhân viên biết cần xác minh gì trước khi duyệt; chưa có bằng chứng trực tiếp. Hướng tự dự báo ETA trước đặt hàng đã bỏ khỏi phạm vi; ETA do nền tảng cung cấp.
+- **Giải thích cạnh tranh:** Khó khăn có thể chủ yếu do thiếu tài xế, quyền xử lý hoặc chính sách, không phải hội thoại/hồ sơ. Một checklist có thể không giải quyết được việc thiếu quyền xử lý; cần kiểm nhu cầu thật.
 
 **Kế hoạch đề xuất trước khi thu thập:** Phỏng vấn ít nhất 3 khách ngoài nhóm, khai thác một lần giao trễ cụ thể; nếu có thể tiếp cận, bổ sung người có kinh nghiệm xử lý khiếu nại. Chỉ ghi vai/mã người, có sự đồng ý, không bịa người hoặc câu trả lời. Dấu hiệu để tiếp tục H1: ít nhất 2/3 khách kể được trở ngại hỗ trợ cụ thể trong ca của mình; giữ cả phản hồi phủ định. Đây là ngưỡng khám phá do nhóm đề xuất, không thay thế ngưỡng bằng chứng BTC hoặc chuẩn CP2. H2/H3 chưa chốt ngưỡng; chưa được tuyên bố xác nhận.
 
@@ -36,7 +36,7 @@ Câu hỏi gợi mở:
 1. Lần gần nhất đơn trễ, bạn muốn kết quả gì và đã làm các bước nào?
 2. Ở bước nào bạn mắc, đã cung cấp thông tin gì, có phải cung cấp lại không?
 3. Bạn biết yêu cầu đã được tiếp nhận và có kết quả bằng cách nào?
-4. Lần gần nhất chọn shop, bạn dựa vào thông tin gì về thời gian giao? Nó ảnh hưởng quyết định thực tế thế nào?
+4. Khi ETA thay đổi, bạn cần biết thông tin hoặc được xử lý điều gì tiếp theo?
 5. Với nhân viên: một ca gần đây thiếu thông tin gì, phải tra/hỏi lại ở đâu, ai có quyền duyệt và xác nhận kết quả?
 
 Khi có ghi chép thật, lưu nguồn và ví dụ nguyên văn đã ẩn danh vào hồ sơ, cập nhật summary; không điền câu trả lời dự kiến thành bằng chứng.

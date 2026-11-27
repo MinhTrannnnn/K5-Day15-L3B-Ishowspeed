@@ -4,7 +4,7 @@ import re
 
 import tracing
 from agent import Agent
-from cases import CaseStore, LABELS, delivery_estimate, show_case
+from cases import CaseStore, LABELS, order_timeline, show_case
 
 HELP = '''CP2 — AI GIẢ, DỮ LIỆU SYNTHETIC, KHÔNG GIAO DỊCH THẬT
 Đang dùng khách demo. Nhập câu hỏi tự nhiên, mã đơn sẽ được nhớ trong phiên.
@@ -15,7 +15,7 @@ HELP = '''CP2 — AI GIẢ, DỮ LIỆU SYNTHETIC, KHÔNG GIAO DỊCH THẬT
   /danhsach                   nhân viên xem các ca
   /capnhat C001 1 verifying lý do       cập nhật với số phiên bản hiện tại
   /trangthai C001             khách xem ca của mình, nhân viên xem ca bất kỳ
-  /shop S001                  xem khoảng thời gian giao từ lịch sử synthetic
+  /eta D004                   xem ETA do nền tảng cung cấp trong snapshot demo
   /moi                       xóa ngữ cảnh/nháp của phiên; giữ lịch sử ca đã tiếp nhận
   /help                       xem hướng dẫn; /thoat để thoát
 Trạng thái: received → verifying → pending_approval → in_progress → resolved.
@@ -41,10 +41,16 @@ def command(store, owner, role, text):
         return 'Khách demo: '+parts[1], parts[1], 'customer'
     if name == '/nhanvien':
         return 'Bàn nhân viên local. Cập nhật chỉ là mô phỏng, chưa giao dịch thật.', owner, 'staff'
-    if name == '/shop' and len(parts) == 2:
-        result = delivery_estimate(owner, parts[1].upper())
-        return ('ETA THỬ NGHIỆM SYNTHETIC — không bảo đảm giờ giao.\n'
-                + json.dumps(result, ensure_ascii=False, indent=2)), owner, role
+    if name == '/eta' and len(parts) == 2:
+        timeline = order_timeline(parts[1].upper())
+        if not timeline:
+            raise ValueError('Không tìm thấy mã đơn trong dữ liệu demo.')
+        row = timeline[0]
+        warning = ('Dữ liệu mâu thuẫn; cần nhân viên xác minh, chưa kết luận giờ giao.'
+                   if not row['consistent'] else
+                   'ETA là dự kiến của nền tảng tại thời điểm chụp, không bảo đảm giờ đến.')
+        return ('ETA TỪ NỀN TẢNG — snapshot giả lập, không live; agent không tự dự báo.\n'
+                + warning + '\n' + json.dumps(row, ensure_ascii=False, indent=2)), owner, role
     if name == '/moi':
         store.save_session(owner, {'order_id': None, 'goal': None, 'messages': [], 'draft': None})
         return 'Đã xóa ngữ cảnh/nháp; ca đã tiếp nhận vẫn được giữ.', owner, role

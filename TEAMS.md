@@ -13,8 +13,8 @@
 |---|---|---|---|---|
 | 1 | Trần Quang Minh | 2A202603929 | Đội trưởng | Agent, hội thoại, giao diện khách, tích hợp demo và nộp CP |
 | 2 | Trần Duy Thành | 2A202603919 | Thành viên | Công cụ, dữ liệu, hồ sơ/trạng thái, quyền duyệt và giao diện nhân viên |
-| 3 | Nguyễn Hải Quang | 2A202603936 | Thành viên | Bằng chứng, data card, canvas và đặc tả dữ liệu lịch sử/ETA |
-| 4 | Nguyễn Văn Cường | 2A202603750 | Thành viên | Benchmark, metric, đánh giá/chi phí và tính ETA bằng code |
+| 3 | Nguyễn Hải Quang | 2A202603936 | Thành viên | Bằng chứng, data card, canvas và đặc tả ETA nền tảng/nguồn dữ kiện |
+| 4 | Nguyễn Văn Cường | 2A202603750 | Thành viên | Benchmark, metric, đánh giá/chi phí và kiểm ETA đầu vào |
 
 **Quy tắc điền**
 - **Lớp:** `L3A` hoặc `L3B`. **Track:** một chữ `A` (EdTech), `B` (Y tế), `C` (Du lịch), `D` (Thương mại điện tử), `E` (Tài chính) hoặc `F` (Làn khác). **Link repo:** link GitHub công khai của nhóm.
@@ -63,10 +63,10 @@ Trần Quang Minh phụ trách nộp CP2 sau khi nhóm chốt chuẩn và hoàn 
 |---|---|---|---|
 | Trần Quang Minh | CP1/canvas/spec; agent giả, nhớ phiên, CLI khách, tích hợp và nộp CP2 | Bằng chứng/data card của Quang | Khung fake do Codex triển khai; Minh đã kiểm tra và xác nhận OK |
 | Trần Duy Thành | Công cụ, dữ liệu synthetic, lưu hồ sơ/nhật ký, quyền duyệt và giao diện nhân viên | Bộ kiểm bổ sung và hạn mức của Cường | Khung fake do Codex triển khai; chờ thành viên rà/xác nhận |
-| Nguyễn Hải Quang | Kiểm chứng pain, nguồn chính sách, data card/canvas; đặc tả lịch sử đơn và màn hình ETA cùng Minh | Hội thoại/trải nghiệm khách của Minh | Kế hoạch; chưa có bằng chứng mới |
-| Nguyễn Văn Cường | Giữ bộ chấm nền, thêm đánh giá nhiều lượt/hồ sơ, kiểm kỹ thuật CP2; tính ETA demo bằng code | Công cụ, trạng thái, quyền duyệt của Thành | Khung fake có kiểm tự động; chờ thành viên rà/xác nhận; chưa có AI thật |
+| Nguyễn Hải Quang | Kiểm chứng pain, nguồn chính sách, data card/canvas; đặc tả ETA nền tảng và nhu cầu nhân viên | Hội thoại/trải nghiệm khách của Minh | Kế hoạch; chưa có bằng chứng mới |
+| Nguyễn Văn Cường | Giữ bộ chấm nền, thêm đánh giá nhiều lượt/hồ sơ, kiểm kỹ thuật CP2; kiểm nguồn ETA và chất lượng hồ sơ | Công cụ, trạng thái, quyền duyệt của Thành | Khung fake có kiểm tự động; chờ thành viên rà/xác nhận; chưa có AI thật |
 
-Khung CP2 gồm luồng khiếu nại và ETA thống kê synthetic; chưa triển khai CP3. Hồ sơ [CP1 cập nhật](canvas.md) và [kịch bản CP2](docs/cp2-demo.md). Không thay đổi chuẩn CP2 v1 hoặc ghi lại lịch sử CP1 là đã làm theo thiết kế mới.
+Khung CP2 gồm luồng khiếu nại và đọc ETA nền tảng giả lập; chưa triển khai CP3. Hồ sơ [CP1 cập nhật](canvas.md) và [kịch bản CP2](docs/cp2-demo.md). Không thay đổi chuẩn CP2 v1 hoặc ghi lại lịch sử CP1 là đã làm theo thiết kế mới.
 
 
 ## Link phần việc và bằng chứng hiện có

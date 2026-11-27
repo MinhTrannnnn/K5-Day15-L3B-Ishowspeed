@@ -1,7 +1,7 @@
 # AI SPEC — Trợ lý AI xử lý khiếu nại giao trễ có người duyệt · Nhóm Ishowspeed
 
 Track: [x] D — D1, khiếu nại đơn giao đồ ăn.
-**Bản thiết kế cập nhật 27/11/2026 theo hướng Minh chọn.** Đã nâng khung CP2: vòng công cụ fake, phiên hội thoại, hồ sơ SQLite, bàn CLI nhân viên và ETA thống kê synthetic. Chưa có AI thật, web hoặc đăng nhập production. Hồ sơ [canvas](canvas.md), [phân công](TEAMS.md) và [cách demo](docs/cp2-demo.md). Chuẩn CP2 v1 ở §7 được giữ nguyên.
+**Bản thiết kế cập nhật 27/11/2026 theo hướng Minh chọn.** Đã nâng khung CP2: vòng công cụ fake, phiên hội thoại, hồ sơ SQLite, bàn CLI nhân viên và đọc ETA từ snapshot nền tảng. Chưa có AI thật, web hoặc đăng nhập production. Hồ sơ [canvas](canvas.md), [phân công](TEAMS.md) và [cách demo](docs/cp2-demo.md). Chuẩn CP2 v1 ở §7 được giữ nguyên.
 
 Dữ liệu tham khảo gồm review công khai từ Google Play và mẫu đối chiếu nguồn App Store. Xem [tổng hợp bằng chứng](evidence/summary.md).
 
@@ -22,7 +22,7 @@ Các bước hỗ trợ và hủy đơn tham chiếu tài liệu công khai củ
 - **Họ đang xử lý thế nào:** Mở Chi tiết đơn, xem giờ dự kiến và trạng thái, rồi vào trợ giúp hoặc tìm nút hủy. Khi giờ dự kiến thay đổi nhiều lần hoặc phản hồi hỗ trợ chưa giải quyết được, họ vẫn chưa biết có nên chờ. Chi tiết đơn và trợ giúp trong app là các kênh khách có thể tìm ngay từ chính đơn đang chờ. [Quy trình ShopeeFood](https://help.shopee.vn/portal/4/article/79520-) · [Ví dụ GF071](evidence/data-mining.md#4-ví-dụ-ẩn-danh)
 - **Pain chính đề xuất:** Khi đơn giao trễ hoặc trạng thái bất thường, khách khó nhận được một phương án xử lý rõ ràng và biết yêu cầu đã được tiếp nhận đến đâu.
 - **Giả thuyết cần kiểm thêm:** Khách phải giải thích lại qua nhiều lượt; nhân viên thiếu hồ sơ tổng hợp; khách không theo dõi được ca. Review hiện có chưa chứng minh đầy đủ các điểm này.
-- **Pain mở rộng trước đặt hàng:** Khách thiếu kỳ vọng đáng tin về thời gian giao của shop theo những lần đặt tương tự. Chưa có bằng chứng trực tiếp trong repo; đây là giả thuyết riêng, không dùng review khiếu nại để suy ra độ chính xác ETA.
+- **Phạm vi ETA đã chốt:** App giao đồ ăn cung cấp ETA. Agent sử dụng ETA ban đầu/cập nhật và thời điểm snapshot để làm rõ khiếu nại; không xây hệ thống dự báo riêng hoặc đề xuất giờ đến mới.
 - **Bằng chứng sơ bộ từ các mẫu review công khai:** Trong 100 review ShopeeFood trên Google Play, 10 nói chờ lâu hoặc giao muộn. Trong 12 review nhận diện là GrabFood từ 100 review app Grab, 1 vừa nói chờ lâu vừa kể khó nhận hỗ trợ. Mẫu đối chiếu có 2/31 lời phàn nàn ShopeeFood mô tả cả hai. [Tổng hợp bằng chứng](evidence/summary.md)
 - **Tình huống minh họa với thời gian giả định:** Đặt bữa trưa qua app, thấy giờ giao dự kiến là 12:00. Đến 12:15 vẫn chưa nhận món; giờ dự kiến đổi thành 12:30 nhưng màn hình không nói rõ tài xế đã nhận đơn hay chưa. Mở Chi tiết đơn, tìm nút hủy rồi vào Trợ giúp để hỏi có nên chờ tiếp. Sau khoảng 10 phút tìm và gửi yêu cầu thì vẫn chưa biết đơn còn được giao hay có thể hủy, nên chưa thể quyết định đặt món khác.
 
@@ -51,7 +51,7 @@ Chi tiết nguồn và mã review ở [bản Google Play](evidence/data-mining.m
 | ShopeeFood | Khách mở Chi tiết đơn để gửi yêu cầu hỗ trợ. Khả năng hủy phụ thuộc vào việc quán đã chuẩn bị món hay tài xế đang giao. [Gửi khiếu nại](https://help.shopee.vn/portal/4/article/79520-) · [Điều kiện hủy đơn](https://help.shopee.vn/portal/4/article/79383-) | Gắn yêu cầu với một mã đơn. Kiểm tra trạng thái trước khi gợi ý hủy và ghi rõ khi cần nhân viên duyệt. |
 | GrabFood | Khách có thể xem trạng thái đơn theo thời gian thực trong ứng dụng. [Theo dõi đơn GrabFood](https://help.grab.com/passenger/vi-vn/360001018427) | Hiển thị trạng thái và mốc cập nhật cạnh hướng dẫn. Ghi rõ giờ đến là dự kiến. Khi dữ liệu thiếu hoặc mâu thuẫn, đề xuất nhân viên kiểm tra. |
 
-**Điểm khác trong khung CP2 mới:** Giữ ngữ cảnh theo phiên, tách lời khách khỏi snapshot, tạo hồ sơ nháp và để nhân viên tiếp nhận/cập nhật; khách theo dõi và bổ sung trong cùng ca. ETA lịch sử có số mẫu và fallback. Tất cả dùng fake/synthetic; chưa chứng minh cải thiện ngoài thực tế. Điều kiện hủy và hạn mức voucher trong demo dùng chính sách dựng DEMO-P1 ở §4.
+**Điểm khác trong khung CP2 mới:** Giữ ngữ cảnh theo phiên, tách lời khách khỏi snapshot, tạo hồ sơ nháp và để nhân viên tiếp nhận/cập nhật; khách theo dõi và bổ sung trong cùng ca. ETA là dữ kiện nền tảng cung cấp, không phải dự báo của agent. Tất cả dùng fake/synthetic; chưa chứng minh cải thiện ngoài thực tế. Điều kiện hủy và hạn mức voucher trong demo dùng chính sách dựng DEMO-P1 ở §4.
 
 ## §4. Thiết kế đích — một agent trong workflow quản lý hồ sơ
 
@@ -60,7 +60,7 @@ Chi tiết nguồn và mã review ở [bản Google Play](evidence/data-mining.m
 - **Lát cắt chính:** Một khách phản ánh đơn giao trễ/bất thường → agent làm rõ và đối chiếu thông tin, đề xuất phương án và tổng hợp hồ sơ → nhân viên phản hồi/duyệt → khách theo dõi từng bước đến kết quả được ghi nhận.
 - **Ngoài phạm vi:** Không điều phối giao hàng, không kết nối sàn hoặc chuyển tiền thật, không tự kết luận bên nào sai khi thiếu chứng cứ. Thiếu/sai món khác lát cắt chuyển nhân viên; sự cố an toàn thực phẩm ưu tiên người xử lý ngay.
 - **Kiến trúc đích:** Một agent có công cụ đọc và bộ nhớ theo phiên; agent chọn bước tra cứu, hỏi bổ sung và soạn hồ sơ có cấu trúc. Workflow và code quản lý quyền, trạng thái, hạn mức và tác động. Không cần multi-agent. Khung fake hiện giới hạn 4 vòng model, tối đa 3 quyết định gọi công cụ đọc rồi kết thúc; code có thêm các kiểm tra công cụ phụ. Tên/đối tượng công cụ do dispatcher giới hạn theo mã đơn trong phiên. JSON/tool lạ, thiếu quan sát hoặc hết vòng thì dừng an toàn, không tạo ca.
-- **Trạng thái triển khai CP2:** Có vòng công cụ fake theo thứ tự mô phỏng, nhớ phiên, SQLite lưu nháp/ca/sự kiện, CLI khách/nhân viên, phản hồi/bổ sung và ETA thống kê. Planner fake dùng luật, không phải năng lực AI thật. Chưa có web, xác thực hoặc tích hợp sàn. CLI và harness dùng chung một lõi, xem 4.4. [Kịch bản chạy](docs/cp2-demo.md), [kiểm kỹ thuật](eval/cp2-upgrade-check.md).
+- **Trạng thái triển khai CP2:** Có vòng công cụ fake theo thứ tự mô phỏng, nhớ phiên, SQLite lưu nháp/ca/sự kiện, CLI khách/nhân viên, phản hồi/bổ sung và đọc ETA nền tảng. Planner fake dùng luật, không phải năng lực AI thật. Chưa có web, xác thực hoặc tích hợp sàn. CLI và harness dùng chung một lõi, xem 4.4. [Kịch bản chạy](docs/cp2-demo.md), [kiểm kỹ thuật](eval/cp2-upgrade-check.md).
 
 ```mermaid
 flowchart TD
@@ -75,8 +75,7 @@ flowchart TD
     H --> I[Nhật ký sự kiện và trạng thái hồ sơ]
     I --> J[Khách xem tiến độ và kết quả trong cùng ca]
     H -->|Cần bổ sung| E
-    K[Lịch sử tất cả đơn hoàn tất trước thời điểm đặt] --> L[Code tính khoảng ETA và số mẫu]
-    L --> M[Màn hình shop trước đặt hàng: giải thích và giới hạn]
+    K[App giao đồ ăn cung cấp ETA và trạng thái đơn] --> C
 ```
 
 ### 4.2. Công cụ, hồ sơ và người duyệt — đích và mức CP2
@@ -87,9 +86,9 @@ flowchart TD
 | `draft_case`, `draft_resolution` | Trả bản nháp, không tự gửi ca, không cập nhật giao dịch; code kiểm schema và chính sách |
 | Dịch vụ nhân viên duyệt | Người có vai trò nhân viên xác nhận tạo ca từ nháp, yêu cầu bổ sung, duyệt/từ chối phương án hoặc cập nhật bước; agent không có quyền duyệt |
 | `get_case_status` | Chỉ đọc sự kiện đã lưu; khách chỉ thấy ca của mình và nội dung công khai |
-| `estimate_delivery` | Code tính thống kê lịch sử, trả khoảng, số mẫu, nhóm so sánh và thời điểm dữ liệu; không cho model tự tạo số |
+| `order_timeline` | Đọc ETA ban đầu/cập nhật, thời điểm snapshot và cờ nhất quán từ nền tảng giả lập; không dự báo |
 
-**Mức CP2 đã có:** `get_order`, `get_policy`, `order_timeline` được vòng fake chọn và dispatcher gọi; `check_limit` do code kiểm. `CaseStore.find/get` đọc ca theo khách, `Demo.chat` tạo nháp; `CaseStore.receive/update` chỉ được bàn nhân viên gọi, không có trong allowlist model. `delivery_estimate` tính ETA. Các tên `find_cases`, `draft_case`, `draft_resolution`, `estimate_delivery` trong bảng là hợp đồng đích, chưa phải tên hàm tool riêng đã triển khai.
+**Mức CP2 đã có:** `get_order`, `get_policy`, `order_timeline` được vòng fake chọn và dispatcher gọi; `check_limit` do code kiểm. `CaseStore.find/get` đọc ca theo khách, `Agent.chat` tạo nháp; `CaseStore.receive/update` chỉ được bàn nhân viên gọi, không có trong allowlist model. `order_timeline` đọc ETA từ snapshot. Các tên `find_cases`, `draft_case`, `draft_resolution` trong bảng là hợp đồng đích, chưa phải tên hàm tool riêng đã triển khai.
 
 **Hồ sơ tối thiểu:** `case_id`, `order_id`, `session_id`, mục tiêu khách, lời khách được gắn nhãn, dữ kiện xác nhận kèm nguồn/thời điểm, điểm mâu thuẫn, thông tin thiếu, phiên bản chính sách, phương án nháp, người phụ trách, phản hồi nhân viên, trạng thái và lịch sử sự kiện. Mục tiêu đích là phát hiện ca theo khách + đơn + loại vấn đề. Khung CP2 hiện dùng khách + đơn cho một ca giao trễ đang mở; chưa tách nhiều loại khiếu nại độc lập cùng đơn. Đã có ca thì đề xuất dùng lại, không tạo thêm.
 
@@ -101,26 +100,40 @@ flowchart TD
 
 `answer(text)` gọi cùng agent với phiên độc lập trong RAM cho bộ chấm CP2. CLI giữ phiên và bàn nhân viên, được kiểm kỹ thuật bổ sung. Duyệt/đóng ca chỉ là trạng thái mô phỏng; `executed` luôn false, không thay snapshot hoặc giao dịch thật.
 
-### 4.3. ETA trước đặt hàng — đã có thống kê demo CP2
+### 4.3. Sử dụng ETA do app giao đồ ăn cung cấp
 
-- Dùng lịch sử **tất cả đơn hoàn tất**, không chỉ các đơn khiếu nại. Lưu giờ đặt/nhận thực tế, shop, khung giờ, vùng/khoảng cách dạng synthetic và mã khách giả. Đơn hủy không có thời gian giao hoàn tất; báo riêng tỷ lệ hủy, không gán thành 0 phút.
-- Ưu tiên các lần khách từng đặt cùng shop và điều kiện tương tự. Quy tắc thử nghiệm ban đầu: ít nhất 10 đơn ở nhóm được chọn; không đủ thì lùi về lịch sử shop/khung giờ và ghi rõ không cá nhân hóa, tiếp tục thiếu thì báo không đủ dữ liệu. Ngưỡng 10 là lựa chọn kỹ thuật, chưa được kiểm chứng.
-- Baseline đích theo shop/khung giờ; khung CP2 hiện dùng nhóm khách + shop hoặc toàn shop, chưa xét khung giờ/khoảng cách. Code trả trung vị và khoảng P20–P80 của thời gian đặt → nhận; chỉ dùng dữ liệu có trước thời điểm cần dự báo. Đây là khoảng thực nghiệm, không phải cam kết hoặc khoảng tin cậy thống kê đã hiệu chỉnh. Hiển thị số mẫu, nhóm, độ mới và giới hạn thiếu tình trạng tài xế/thời tiết hiện tại.
-- Khiếu nại đã xác minh chỉ cung cấp ngữ cảnh riêng; không dùng số lượng khiếu nại để cộng phút tùy ý. Agent giải thích kết quả công cụ, không bịa ETA hoặc lý do chậm.
-- Đã có `data/demo_delivery_history.json`: 120 bản ghi synthetic, seed 27112026, sinh lại bằng `python3 data/build_delivery_history.py`; không sửa 10 snapshot cũ. Mới kiểm cách tính, lọc lịch sử và fallback; chưa có tập holdout hoặc đo MAE/độ phủ. Giao thức đánh giá sau ở eval/upgrade-plan.md. Kết quả synthetic không chứng minh khả năng dự báo thật.
-- CP2 dùng lệnh `/shop` mô phỏng thao tác xem shop; chưa có màn hình web. Chưa tích hợp vào ứng dụng đặt hàng thật. Đây là phần mở rộng cần xác nhận với coach nếu thay đổi phạm vi sau CP2; không đưa vào chuẩn chấm chính đã chốt.
+**Trách nhiệm đã chốt:** Nền tảng giao đồ ăn tính và thông báo ETA. Dự án là trợ lý xử lý khiếu nại, chỉ đọc/đối chiếu dữ liệu đó, không dự báo thời gian giao riêng hoặc thay thế ETA của nền tảng. Tài liệu GrabFood mô tả việc nền tảng cập nhật thời gian dự kiến theo trạng thái đơn: [nguồn chính thức](https://www.grab.com/vn/blog/driver/grabfood-cap-nhat-tinh-nang-trang-thai-don-hang-tu-18-01-2021/).
+
+- **Đầu vào:** mã đơn, ETA ban đầu (`original_eta`), ETA cập nhật (`updated_eta`), thời điểm snapshot (`updated_at`), trạng thái, độ trễ và cờ nhất quán. Khi tích hợp thật, nền tảng phải cung cấp dữ liệu qua kênh được phép; repo chưa kết nối API hãng.
+- **Agent thực hiện:** nêu mốc nào là ban đầu/cập nhật, dữ liệu được ghi nhận khi nào; đối chiếu với phản ánh khách, làm rõ phần thiếu và đưa thông tin vào hồ sơ cho nhân viên. Không suy ra lý do chậm hoặc lỗi của quán/tài xế chỉ từ ETA.
+- **Code thực hiện:** đọc snapshot và kiểm điều kiện chính sách. `delay_minutes` hiện do fixture cung cấp so với ETA ban đầu; không đổi mốc sang ETA cập nhật để làm giảm số phút trễ. Không lấy giờ máy hiện tại trừ snapshot cố định để bịa số phút mới.
+- **Thiếu/mâu thuẫn:** giữ nguyên giá trị thiếu, nêu cần xác minh; không nội suy, tự bù giờ đến hoặc khẳng định snapshot là live. Chính sách demo vẫn chặn bồi thường khi thiếu thời gian hoặc dữ liệu không nhất quán.
+- **Thông báo khách:** ETA là dự kiến của nền tảng tại thời điểm ghi nhận, không phải cam kết giao; nhân viên cập nhật tiến độ ca không có nghĩa ETA đã được hãng thay đổi.
+- **CP2 đã có:** `get_order`/`order_timeline` đọc 10 snapshot synthetic, gắn nguồn `platform_demo_snapshot` và `live=False`; CLI `/eta D004` hiển thị dữ kiện này. Đã bỏ `/shop`, công cụ tự dự báo và dữ liệu/generator lịch sử phục vụ dự báo. Không đổi snapshot/bộ thử/chuẩn chấm đã lưu.
 
 ### 4.4. Một lõi xử lý dùng chung
 
 - `agent.py`: `Agent.chat` điều phối công cụ, làm rõ, giữ ngữ cảnh, đối chiếu và soạn hồ sơ.
 - `policy.py`: chốt an toàn/riêng tư, điều kiện trạng thái, hạn mức và dựng phản hồi có căn cứ. Không có lời gọi model hoặc luồng điều phối thứ hai trong file này.
-- `cases.py`: lưu phiên, nháp, ca và sự kiện SQLite; công cụ timeline/ETA. Bàn nhân viên mới gọi thao tác tiếp nhận/cập nhật.
+- `cases.py`: lưu phiên, nháp, ca và sự kiện SQLite; công cụ đọc timeline/ETA nền tảng. Bàn nhân viên mới gọi thao tác tiếp nhận/cập nhật.
 - `app.py`: CLI gọi cùng `Agent.chat`; không có chế độ quay về phiên bản trước.
 - `answer(text)`: adapter của harness gọi chính `Agent.chat` trong SQLite RAM mới cho mỗi input, trả đúng dict. Không đọc/ghi ca demo local; ở đầu vào độc lập, agent trả đề xuất trực tiếp từ dữ kiện thay vì chờ lượt hội thoại tiếp. Quy tắc và bộ công cụ vẫn dùng chung.
 
 **Chính sách DEMO-P1:** trễ quá 30 phút mới đủ điều kiện đề xuất voucher tối đa 50.000 VND; đúng 30 phút không đủ. Chỉ đề xuất hủy khi đang chờ tài xế và quán chưa làm món. Đây là chính sách dựng, không phải chính sách hãng. Hủy/hoàn/phát voucher không được thực hiện thật.
 
-10 snapshot synthetic và seed 27112026 vẫn là dữ liệu dùng cho bộ thử; 120 lịch sử synthetic phục vụ ETA. Snapshot không live. Kết quả chấm trước đây giữ nguyên làm bằng chứng của phiên bản đã chạy, không phải tính năng hoặc phiên bản người dùng có thể chọn.
+10 snapshot synthetic và seed 27112026 là dữ liệu đơn và ETA nền tảng giả lập dùng cho bộ thử. Snapshot không live. Kết quả chấm trước đây giữ nguyên làm bằng chứng của phiên bản đã chạy, không phải tính năng hoặc phiên bản người dùng có thể chọn.
+
+### 4.5. Phần mở rộng đề xuất — chưa triển khai
+
+Ưu tiên theo giá trị với luồng khiếu nại; không thuộc chuẩn chấm nền CP2 và chưa có bằng chứng hiệu quả.
+
+| Ưu tiên | Đề xuất | Đầu ra và cách kiểm |
+|---|---|---|
+| 1 | Checklist hồ sơ trước khi duyệt | Nêu trường thiếu, nguồn chưa xác minh, phương án trái chính sách; nhân viên thấy cần bổ sung gì. Kiểm phát hiện đúng thiếu/mâu thuẫn và không tự đổi dữ kiện |
+| 2 | Nhắc ca chờ xử lý quá ngưỡng nội bộ | Dựa trên thời điểm sự kiện và ngưỡng do nhóm cấu hình, tạo nháp nhắc cho nhân viên. Không gọi ngưỡng demo là SLA hãng hoặc tự gửi tin; kiểm ca đúng/sai hạn và tránh nhắc trùng |
+| 3 | Tổng hợp phản hồi sau xử lý | Ghi khách còn vấn đề gì sau kết quả, nhân viên xem xét mở lại ca khi cần; tổng hợp loại vấn đề đã xác minh. Báo số mẫu, tách lời khách khỏi kết luận, không dự báo ETA hoặc quy lỗi shop từ số khiếu nại |
+
+Chỉ triển khai khi nhóm chọn và có tình huống kiểm chứng; hiện vẫn ưu tiên hoàn thiện lõi tiếp nhận → xác minh → duyệt → theo dõi. Đây là đề xuất sản phẩm, chưa phải việc các thành viên đã làm.
 
 ## §5. Chỗ khó và bộ câu thử
 
@@ -147,9 +160,9 @@ flowchart TD
 - Ca trùng/cập nhật lặp: đề xuất ca đang mở, kiểm phiên bản và sự kiện để không tạo hai khoản xử lý hoặc hạ trạng thái do cập nhật cũ.
 - Không có căn cứ/hết vòng gọi: nói rõ thiếu gì, lưu nháp và đề xuất người xử lý, không tạo kết luận giả.
 - Ngoài quyền: không lộ thông tin cá nhân hoặc ghi chú nội bộ; sự cố thực phẩm đề xuất chuyển người ngay; không tự thực hiện giao dịch.
-- Trước đặt hàng: màn hình shop gọi công cụ ETA, nêu khoảng/số mẫu; thiếu lịch sử thì báo thiếu dữ liệu, không khẳng định dự báo cá nhân hóa.
+- Khi khách hỏi giờ giao: đọc ETA nền tảng và thời điểm snapshot; thiếu hoặc mâu thuẫn thì đề xuất xác minh, không đưa giờ dự báo mới.
 
-**Mức đã chạy:** hỏi mục tiêu/mã và nhớ qua lượt, đối chiếu snapshot/lời khách, tạo nháp, nhân viên nhận/cập nhật/bổ sung, khách xem cùng ca, chống trùng và version cũ, ETA cá nhân/fallback/thiếu mẫu. Lời hỏi/nháp dùng luật và template CP2; chưa có AI thật, công cụ lỗi mạng, web hoặc phân quyền production. Adapter `answer(text)` dùng cùng lõi và tạo phiên độc lập cho mỗi input của harness.
+**Mức đã chạy:** hỏi mục tiêu/mã và nhớ qua lượt, đối chiếu snapshot/lời khách, tạo nháp, nhân viên nhận/cập nhật/bổ sung, khách xem cùng ca, chống trùng và version cũ, ETA ban đầu/cập nhật và cảnh báo thiếu/mâu thuẫn. Lời hỏi/nháp dùng luật và template CP2; chưa có AI thật, công cụ lỗi mạng, web hoặc phân quyền production. Adapter `answer(text)` dùng cùng lõi và tạo phiên độc lập cho mỗi input của harness.
 
 ## §7. Đánh giá & chuẩn đạt — CP2 v1
 
@@ -170,7 +183,7 @@ Giữ nguyên ngưỡng, benchmark và metric phía trên. 5/5 output fake khôn
 ## §8. Chi phí khi dùng thật — chưa đo, chuẩn bị cho CP3–CP4
 
 - Chưa chọn model, cập nhật giá có nguồn hoặc xác nhận persona D1; `cost/personas.yaml` vẫn là khung.
-- Chưa chạy mô phỏng, chưa có chi phí/phiên, /task thành công hoặc /tháng. Agent mới phải cộng tất cả lượt hỏi/đáp và gọi công cụ/model trong một ca; báo riêng chi phí hạ tầng lưu hồ sơ và tính ETA nếu có. Harness hiện chỉ đo hợp đồng một lượt, không đại diện toàn bộ chi phí hội thoại nhiều lượt.
+- Chưa chạy mô phỏng, chưa có chi phí/phiên, /task thành công hoặc /tháng. Agent mới phải cộng tất cả lượt hỏi/đáp và gọi công cụ/model trong một ca; báo riêng chi phí hạ tầng lưu hồ sơ/đọc dữ liệu nền tảng nếu có. Harness hiện chỉ đo hợp đồng một lượt, không đại diện toàn bộ chi phí hội thoại nhiều lượt.
 - Chưa đủ căn cứ kết luận lợi ích so với chi phí; impact ở §2 mới có ví dụ tự ước tính.
 
 ## §9. Rủi ro & an toàn
@@ -180,7 +193,7 @@ Giữ nguyên ngưỡng, benchmark và metric phía trên. 5/5 output fake khôn
 - Nếu AI sai, khách có thể chờ thêm hoặc mất quyền xử lý; quán có thể mất tiền cho món đã chuẩn bị. Đã chặn bằng tra dữ liệu đơn, kiểm chính sách bằng code và chỉ tạo đề xuất; chưa có kết nối giao dịch hoặc giao diện người duyệt thật.
 
 - Thiết kế mới cần kiểm quyền ca theo khách, quyền duyệt phía server, chống tạo/cập nhật trùng và giới hạn vòng gọi. Nội dung khiếu nại là dữ liệu không tin cậy, không được ghi đè chỉ dẫn hoặc quyền. CP2 có allowlist, giới hạn vòng, owner/version/transition trong kho local; chưa có xác thực production hoặc bảo vệ môi trường nhiều người dùng.
-- ETA chỉ có lịch sử có trước thời điểm dự báo; không dùng thông tin tương lai hoặc mẫu chỉ gồm khiếu nại, không hứa giờ giao.
+- ETA do nền tảng cung cấp; agent không tự dự báo, không lấy dữ liệu chụp làm live hoặc bảo đảm giờ giao.
 
 ## §10. Phân công & changelog
 
@@ -190,8 +203,8 @@ Xem [phân công CP1](TEAMS.md#phần-việc--cp1). Cả 4 cùng làm và cùng 
 |---|---|---|
 | Trần Quang Minh | Agent/phiên hội thoại; giao diện khách và tích hợp demo | Data card và bằng chứng |
 | Trần Duy Thành | Công cụ, kho hồ sơ/trạng thái; quyền duyệt và giao diện nhân viên | Bộ kiểm bổ sung và hạn mức |
-| Nguyễn Hải Quang | Bằng chứng/data card; đặc tả lịch sử và màn hình ETA cùng Minh | Hội thoại và trải nghiệm khách |
-| Nguyễn Văn Cường | Đánh giá/chi phí; tính và đánh giá ETA bằng code | Công cụ, trạng thái và quyền duyệt |
+| Nguyễn Hải Quang | Bằng chứng/data card; đặc tả ETA đầu vào và nhu cầu nhân viên | Hội thoại và trải nghiệm khách |
+| Nguyễn Văn Cường | Đánh giá/chi phí; kiểm nguồn ETA và chất lượng hồ sơ | Công cụ, trạng thái và quyền duyệt |
 
 Trần Quang Minh phụ trách chuẩn bị và tổng hợp bản CP2. Cả 4 thành viên rà phần được phân công. Lượt chấm thử đã được lưu trong hồ sơ đánh giá. Xem [phân công và tiến độ](TEAMS.md).
 
@@ -219,3 +232,8 @@ Theo yêu cầu Minh, đồng bộ lại nội dung CP1 (canvas, pain, phạm vi
 ### Hợp nhất về một phiên bản hiện tại
 
 Theo yêu cầu Minh, bỏ module điều phối CP2 tách riêng và nhánh fake model cũ; `Agent.chat` trong agent.py là lõi duy nhất cho CLI và adapter answer(text). Tách quy tắc chung sang policy.py và kho ca/ETA sang cases.py. Bỏ lệnh /cau và sơ đồ workflow cũ; giữ nguyên chuẩn/bộ thử và kết quả lịch sử. Không xóa dữ liệu ca người dùng đã lưu.
+
+
+### Chốt lại phạm vi ETA theo Minh
+
+App giao đồ ăn cung cấp ETA; agent đọc và đối chiếu khi xử lý ca. Bỏ tính thống kê/dự báo riêng, lệnh /shop và dữ liệu lịch sử dự báo khỏi phiên bản hiện tại; thay bằng /eta đọc snapshot có nguồn, không live. Cập nhật 4.3, sơ đồ, canvas, phân công và kiểm dữ liệu. Các mô tả/lượt kiểm ETA thống kê trong changelog và artifact trước đó chỉ là lịch sử, không còn là tính năng hiện tại. Phần mở rộng mới ở 4.5 chỉ là đề xuất, chưa triển khai.
