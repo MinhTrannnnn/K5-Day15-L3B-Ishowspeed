@@ -19,3 +19,16 @@
 ## Tiến độ chuẩn bị CP2
 
 Đã tích hợp hai tài liệu và đưa 7 tình huống nguồn (SF054, GF071, GF006, R16, R18, R07, R24) thành 7 câu diễn giải trong bộ 20 câu thử. Mọi mã đơn và snapshot dùng để chạy là synthetic. Sổ phân công CP1 ghi Thành đã đối chiếu review gốc và rà nhãn. Repo chưa có bản lưu toàn mẫu để tái kiểm độc lập. CP2 chưa thu thập thêm review, phỏng vấn hoặc khảo sát. Quang phụ trách hồ sơ nguồn và data card, Cường kiểm chéo.
+
+
+## Giả thuyết mở rộng sau khi Minh chọn thiết kế mới — 27/11/2026
+
+Không có bằng chứng mới được thu thập trong lần sửa tài liệu này. Review hiện có chỉ hỗ trợ sơ bộ giao trễ và khó nhận hỗ trợ; chưa xác nhận đầy đủ nhu cầu dưới đây.
+
+| Giả thuyết | Cần kiểm trước khi kết luận | Phụ trách |
+|---|---|---|
+| Khách phải kể lại sự việc và chưa biết ca được xử lý đến đâu | Hỏi về lần gần nhất, các bước đã làm, thông tin phải lặp lại và kết quả; ghi cả trường hợp không gặp trở ngại | Quang |
+| Nhân viên cần hồ sơ có căn cứ và điểm mâu thuẫn | Trao đổi với người có trải nghiệm xử lý khiếu nại; kiểm họ có thể quyết định gì từ hồ sơ và còn thiếu gì. Chưa tiếp cận được thì ghi chưa xác minh | Quang, Minh |
+| Khách muốn xem thời gian giao từ lịch sử trước khi chọn shop | Hỏi lần chọn shop gần nhất, ETA đã ảnh hưởng quyết định thế nào, họ xử lý khi ETA không đáng tin ra sao; tránh chỉ hỏi có thích tính năng không | Quang |
+
+Không suy từ tổng thời gian giao ra thời gian tìm hỗ trợ; không dùng số review để suy ra tần suất theo đơn. Kế hoạch kiểm trước thu thập: [hypothesis](hypothesis.md). Việc ETA cần dữ liệu tất cả đơn hoàn tất là yêu cầu dữ liệu, không phải kết quả nghiên cứu người dùng.

@@ -34,3 +34,31 @@
 - Mã đơn, trạng thái, số phút gắn vào mọi input đều là synthetic. Tình huống gốc và phần biến đổi được ghi trong cột `source`.
 - Đây là bộ thiết kế nhìn thấy được, chưa có test holdout độc lập. Model/công cụ không đọc benchmark hoặc expected khi chạy.
 - Người phụ trách kiểm nguồn: Nguyễn Hải Quang; kiểm chéo Nguyễn Văn Cường. Chưa ghi nhận kiểm độc lập đã hoàn tất.
+
+
+## 4. Dữ liệu khung CP2 mới — synthetic, chưa đo hiệu quả thực tế
+
+Lịch sử 10 snapshot CP2 và kết quả chấm cũ giữ nguyên. Không dùng 10 snapshot này để tuyên bố dự báo ETA. Phiên/nháp/ca/sự kiện đã lưu trong `data/runtime/cp2.sqlite3` khi chạy CLI (gitignore). Các trường bên dưới là hợp đồng đích; CP2 đã có mã khách/đơn, messages, goal, draft và hồ sơ/sự kiện; chưa có ghi chú nội bộ hoặc loại sự cố độc lập cùng đơn.
+
+| Nhóm dữ liệu dự kiến | Trường tối thiểu và quy tắc |
+|---|---|
+| Phiên hội thoại | session_id, mã khách giả, mã đơn đang chọn, tin nhắn/thời điểm; tách phiên và khách; không dữ liệu cá nhân thật |
+| Timeline đơn | event_id, order_id, loại sự kiện, thời điểm xảy ra/ghi nhận, nguồn; phân biệt lời khách với trạng thái hệ thống |
+| Hồ sơ/nhật ký | case_id, mục tiêu, nguồn căn cứ, mâu thuẫn, thông tin thiếu, phương án, policy version, status, version, actor, timestamp; ghi chú nội bộ tách nội dung khách xem |
+| Lịch sử giao hàng | mã khách/shop giả, giờ đặt, giờ nhận thực tế, khung giờ, vùng/khoảng cách synthetic, trạng thái cuối; có cả đơn bình thường và đơn có khiếu nại |
+| Khiếu nại đã xác minh | loại sự cố, nội dung đã ẩn danh, kết quả xác minh và thời điểm biết thông tin; không mặc định phản ánh là sự thật |
+
+Khi tạo file phải ghi generator, seed, phiên bản, quy mô, cách phân bố và kiểm tra dữ liệu. Không ghi dữ liệu kế hoạch là đã tồn tại. Không dùng dữ liệu tự dựng làm bằng chứng người dùng.
+
+ETA dùng lịch sử đã hoàn tất trước thời điểm dự báo; chia tập theo thời gian, không lọt đơn tương lai. Đơn hủy không được coi là giao trong 0 phút. Khiếu nại chỉ bổ sung ngữ cảnh, không thay thế mẫu toàn bộ đơn. Quy tắc số mẫu/fallback và giao thức đánh giá ở [spec §4.3](../spec.md) và [upgrade-plan](../eval/upgrade-plan.md).
+
+Quang phụ trách đặc tả/nguồn và giới hạn; Thành dựng/lưu dữ liệu; Cường kiểm chia tập và tính ETA; Minh tích hợp theo quyền phiên.
+
+
+### Lịch sử ETA đã tạo cho CP2
+
+- File: `data/demo_delivery_history.json`; generator `python3 data/build_delivery_history.py`, seed `27112026`, version `cp2-upgrade-v1`.
+- 120 đơn hoàn toàn synthetic, shop S001/S002, khách demo/other; thời điểm đặt cách nhau 5 giờ từ 01/11/2026 11:00 UTC+07. Thời gian giao lấy số nguyên ngẫu nhiên đều 25–65 phút. Đây là giả định kỹ thuật, không suy từ review.
+- Mỗi chỉ số chia hết 13 là đơn hủy, không có received_at; mỗi chỉ số chia hết 7 được gắn cờ khiếu nại để minh họa. Không dùng cờ đó lọc mẫu ETA.
+- `delivery_estimate` chỉ lấy completed có received_at trước as_of; ưu tiên khách+shop khi ≥10 mẫu, fallback toàn shop khi đủ 10, nếu không thì báo thiếu dữ liệu. Trả P20/median/P80 nội suy tuyến tính, số mẫu, độ mới và giới hạn. Chưa lọc khung giờ/khoảng cách.
+- Dữ liệu phục vụ kiểm luồng và tính thống kê; chưa chia holdout, chưa đo MAE/độ phủ khoảng hoặc chứng minh độ chính xác thực tế. Trường khách/shop đều là mã giả; không dùng lịch sử đơn thật.

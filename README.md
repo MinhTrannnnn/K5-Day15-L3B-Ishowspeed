@@ -1,7 +1,7 @@
 > Repo nộp bài của nhóm Ishowspeed, phát triển từ khung BTC. Các chỗ `____` còn chờ bổ sung.
 > Giờ, mốc, luật, rubric: xem `README.md`, `02-guide.md`, `03-rubric.md` trong repo đề (bộ đề BTC phát).
 
-# Ishowspeed — Hỗ trợ khách chờ đơn giao đồ ăn
+# Ishowspeed — Trợ lý AI xử lý khiếu nại giao trễ
 
 **Thành viên, lớp, track:** xem [TEAMS.md](TEAMS.md). **Điền TEAMS.md đúng format**: khi chấm và đánh giá, BTC quét file này để ghép điểm cho từng người.
 
@@ -11,15 +11,18 @@
 
 ## Đề tài — Track D · D1
 
-Khách đặt đồ ăn qua app đã chờ lâu nhưng có lúc chưa rõ đơn còn được giao hay đã hủy, nên phải tìm thêm hỗ trợ để biết bước tiếp theo. Đây là pain dự kiến cần tiếp tục kiểm chứng.
+**Pain chính đề xuất:** Khi đơn giao trễ/bất thường, khách khó nhận được phương án xử lý rõ ràng và biết yêu cầu đã được tiếp nhận đến đâu. Review hiện có hỗ trợ sơ bộ việc giao trễ và khó nhận hỗ trợ; việc phải kể lại, thiếu hồ sơ và thiếu theo dõi ca còn cần kiểm chứng.
 
-**Lát cắt dự kiến:** Khi khách báo đã chờ lâu mà chưa nhận đồ ăn, AI tra trạng thái đơn và giờ giao dự kiến để quyết định hướng dẫn chờ tiếp, kiểm tra khả năng hủy hoặc chuyển nhân viên, giúp khách biết bước tiếp theo. Mọi thao tác hủy đơn, hoàn tiền hoặc tác động ra ngoài cần người phụ trách duyệt.
+**Lát cắt đích:** Khách phản ánh một đơn → một agent làm rõ, đối chiếu dữ kiện/mâu thuẫn, đề xuất phương án và tổng hợp hồ sơ → nhân viên phản hồi, duyệt và cập nhật → khách theo dõi từng bước. Mọi giao dịch chỉ mô phỏng, không kết nối hãng.
 
-Nhóm chọn bài toán chờ lâu vì mẫu review có tình huống khách vừa chờ vừa gặp khó khi tìm hỗ trợ. Số liệu chỉ mô tả những mẫu đã phân tích. Xem [báo cáo review và giới hạn của mẫu](evidence/summary.md).
+**Phần mở rộng:** Trước khi đặt tại shop, xem khoảng thời gian giao từ lịch sử tất cả đơn hoàn tất, ưu tiên lịch sử cá nhân nếu đủ mẫu. Code tính ETA, agent giải thích; dữ liệu khiếu nại chỉ bổ sung ngữ cảnh. Đã có demo thống kê lịch sử synthetic; chưa đo độ chính xác hoặc chứng minh nhu cầu này.
 
-- [Canvas CP2](canvas.md) · [Thành viên và phần việc](TEAMS.md)
-- [Spec và bảng so sánh 3 hướng](spec.md) · [Tổng hợp bằng chứng tham khảo](evidence/summary.md)
-- [Giả thuyết và lịch sử đổi hướng](evidence/hypothesis.md)
+- **[Kịch bản CP2 mới](docs/cp2-demo.md)**
+- [Canvas](canvas.md) · [Phân công](TEAMS.md) · [Thiết kế và hiện trạng](spec.md)
+- [Bằng chứng và giới hạn](evidence/summary.md) · [Giả thuyết cần kiểm](evidence/hypothesis.md)
+- [Kế hoạch đánh giá bổ sung](eval/upgrade-plan.md)
+
+**Khung CP2 mới đã triển khai:** fake planner gọi công cụ trong vòng giới hạn, nhớ phiên, hồ sơ SQLite, bàn CLI khách/nhân viên, duyệt/cập nhật và theo dõi ca, ETA thống kê synthetic. Chưa có web, đăng nhập production hoặc AI thật. [Báo cáo kiểm kỹ thuật](eval/cp2-upgrade-check.md).
 
 Bản CP2 chạy được workflow D1 bằng model giả, không cần key; đã có 4 thành viên và phân công chung/kiểm chéo trong `TEAMS.md`. Có 20 câu thử, 4 metric, data card và 10 đơn synthetic; chính sách DEMO-P1 là quy tắc dựng, không phải chính sách của hãng.
 
@@ -29,11 +32,21 @@ MODEL_PROVIDER=fake python3 run.py
 MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
 ```
 
-Thử nhập `D001 tôi muốn hủy`, `D004 tôi chờ lâu`, `D005 khi nào hoàn tiền`, hoặc hỏi số điện thoại tài xế. Mỗi lượt độc lập, cần mã đơn nếu muốn tra cứu. Dữ liệu là snapshot demo cố định, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
+Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên; `/nhanvien` → `/tiepnhan` để nhận ca; `/trangthai C001` để xem tiến độ. `/shop S001` xem khoảng ETA. `/help` xem cú pháp, `/cau D004 đang ở đâu?` chạy đường một lượt cũ. [Kịch bản đầy đủ](docs/cp2-demo.md). Dữ liệu synthetic/snapshot, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
 
-**Tiến độ:** Nhóm trưởng đã nộp CP1. Cả nhóm đã kiểm tra bản CP2. Lượt chấm thử của Codex đạt 5/5 output từ model giả. Thành và Cường đã rà soát và đồng ý với kết quả 5/5 theo xác nhận của nhóm trưởng. Xem [phiếu chấm](eval/review-5.md).
+**Bản nâng cấp hiện tại:** code do Codex triển khai theo yêu cầu Minh; Minh đã kiểm tra và xác nhận OK trong trao đổi. Chưa có xác nhận các thành viên khác đã rà bản nâng cấp. CP3 chưa triển khai.
+
+**Tiến độ lịch sử khung CP2 v1:** Nhóm trưởng đã nộp CP1. Cả nhóm đã kiểm tra bản CP2. Lượt chấm thử của Codex đạt 5/5 output từ model giả. Thành và Cường đã rà soát và đồng ý với kết quả 5/5 theo xác nhận của nhóm trưởng. Xem [phiếu chấm](eval/review-5.md).
 
 ---
+
+## Kiểm trước khi nộp CP2
+
+- [x] Canvas/spec đồng bộ đề tài mới; khung fake nhiều lượt, hồ sơ/duyệt và ETA demo chạy được.
+- [x] Minh đã kiểm tra và xác nhận OK; kiểm tự động 14 test qua.
+- [ ] Thành, Quang, Cường rà và xác nhận phần phụ trách trong [TEAMS](TEAMS.md).
+- [ ] Lưu xác nhận chốt chuẩn theo mốc thật; kiểm nguồn bằng chứng và các giới hạn còn thiếu.
+- [ ] Minh kiểm link công khai và nộp form CP2; chưa ghi nhận đã nộp.
 
 ## Nhóm làm gì, khung làm gì
 
@@ -98,13 +111,15 @@ Nhóm dùng stack khác (Node, Streamlit, notebook…): sửa hàm `run_app()` t
 
 | File | Viết gì | Bước guide |
 |---|---|---|
-| `codebase/agent.py` | `answer(text)` — luồng chính, đúng hình dạng ở `spec.md` §4. Workflow D1: tra đơn, model chọn bước, code kiểm, soạn đề xuất | 3.2 |
+| `codebase/agent.py` | `answer(text)` — đường một lượt giữ nguyên cho benchmark; CLI mới ở `app.py`, luồng có phiên/hồ sơ ở `cp2_demo.py` | 3.2 |
 | `codebase/tools.py` | Công cụ của bài toán, mỗi công cụ một hàm có `@tool` | 2.2, 3.2 |
 | `codebase/ai.py` | `call_model(system, user)` — chỗ duy nhất gọi model. Chưa điền `.env` thì chạy **chế độ giả** | 3.3 |
 
 - **Trước CP2:** để chế độ giả, công cụ trả dữ liệu giả — `python run.py` đi hết luồng là đủ.
 - **Trước CP3:** nối model thật theo [docs/connect-model.md](docs/connect-model.md), `eval --try` thấy token > 0 rồi mới `eval`.
 - Bộ chạy gửi **nguyên ô `input`** của câu thử vào `answer(text)`. Dữ liệu nền (bài học, thông báo, lịch…) để trong `data/`, đọc qua công cụ.
+
+**Lưu trạng thái demo:** `data/runtime/cp2.sqlite3` được gitignore. Hai vai CLI do người vận hành chuyển, chưa xác thực tài khoản; không dùng dữ liệu cá nhân thật.
 
 ## Phần nào thật, phần nào giả
 

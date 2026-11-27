@@ -11,10 +11,10 @@
 
 | STT | Họ và tên | Mã học viên | Vai trò | Phần việc chính |
 |---|---|---|---|---|
-| 1 | Trần Quang Minh | 2A202603929 | Đội trưởng | Cùng làm CP2; phụ trách workflow, demo và tích hợp |
-| 2 | Trần Duy Thành | 2A202603919 | Thành viên | Cùng làm CP2; phụ trách công cụ, fixtures và kiểm rủi ro |
-| 3 | Nguyễn Hải Quang | 2A202603936 | Thành viên | Cùng làm CP2; phụ trách bằng chứng, data card và canvas |
-| 4 | Nguyễn Văn Cường | 2A202603750 | Thành viên | Cùng làm CP2; phụ trách benchmark, metric và hồ sơ chấm |
+| 1 | Trần Quang Minh | 2A202603929 | Đội trưởng | Agent, hội thoại, giao diện khách, tích hợp demo và nộp CP |
+| 2 | Trần Duy Thành | 2A202603919 | Thành viên | Công cụ, dữ liệu, hồ sơ/trạng thái, quyền duyệt và giao diện nhân viên |
+| 3 | Nguyễn Hải Quang | 2A202603936 | Thành viên | Bằng chứng, data card, canvas và đặc tả dữ liệu lịch sử/ETA |
+| 4 | Nguyễn Văn Cường | 2A202603750 | Thành viên | Benchmark, metric, đánh giá/chi phí và tính ETA bằng code |
 
 **Quy tắc điền**
 - **Lớp:** `L3A` hoặc `L3B`. **Track:** một chữ `A` (EdTech), `B` (Y tế), `C` (Du lịch), `D` (Thương mại điện tử), `E` (Tài chính) hoặc `F` (Làn khác). **Link repo:** link GitHub công khai của nhóm.
@@ -41,7 +41,7 @@
 | Nộp form CP1 | Trần Quang Minh | Đã nộp |
 
 
-## Phân công CP2 — 4 người cùng làm, chia đều phần phụ trách
+## Lịch sử phân công khung CP2 v1 — trước khi nâng thiết kế
 
 Trần Quang Minh phụ trách chuẩn bị và tổng hợp bản CP2. Cả 4 thành viên cùng rà bài, thử demo và thống nhất chuẩn đạt. Mỗi người có hai phần phụ trách chính và kiểm chéo một phần của bạn khác.
 
@@ -53,3 +53,31 @@ Trần Quang Minh phụ trách chuẩn bị và tổng hợp bản CP2. Cả 4 t
 | Nguyễn Văn Cường | Benchmark; metric và hồ sơ đánh giá | Công cụ/fixtures của Thành; chấm độc lập 5 output | Đã rà soát và xác nhận 5/5 câu đạt theo xác nhận của nhóm trưởng |
 
 Trần Quang Minh phụ trách nộp CP2 sau khi nhóm chốt chuẩn và hoàn tất chấm thử.
+
+
+## Phân công rà bản CP1–CP2 nâng cấp — 27/11/2026
+
+Đây là phân công theo hướng Minh chọn. Minh đã kiểm tra bản nâng cấp và xác nhận OK trong trao đổi; chưa có xác nhận các thành viên khác đã rà phần mới. Không dùng trạng thái kiểm khung fake cũ để xác nhận tính năng mới. Cả nhóm cùng rà và giải thích được phần có tên mình.
+
+| Thành viên | Đầu ra phụ trách | Kiểm chéo | Trạng thái |
+|---|---|---|---|
+| Trần Quang Minh | CP1/canvas/spec; agent giả, nhớ phiên, CLI khách, tích hợp và nộp CP2 | Bằng chứng/data card của Quang | Khung fake do Codex triển khai; Minh đã kiểm tra và xác nhận OK |
+| Trần Duy Thành | Công cụ, dữ liệu synthetic, lưu hồ sơ/nhật ký, quyền duyệt và giao diện nhân viên | Bộ kiểm bổ sung và hạn mức của Cường | Khung fake do Codex triển khai; chờ thành viên rà/xác nhận |
+| Nguyễn Hải Quang | Kiểm chứng pain, nguồn chính sách, data card/canvas; đặc tả lịch sử đơn và màn hình ETA cùng Minh | Hội thoại/trải nghiệm khách của Minh | Kế hoạch; chưa có bằng chứng mới |
+| Nguyễn Văn Cường | Giữ bộ chấm nền, thêm đánh giá nhiều lượt/hồ sơ, kiểm kỹ thuật CP2; tính ETA demo bằng code | Công cụ, trạng thái, quyền duyệt của Thành | Khung fake có kiểm tự động; chờ thành viên rà/xác nhận; chưa có AI thật |
+
+Khung CP2 gồm luồng khiếu nại và ETA thống kê synthetic; chưa triển khai CP3. Hồ sơ [CP1 cập nhật](canvas.md) và [kịch bản CP2](docs/cp2-demo.md). Không thay đổi chuẩn CP2 v1 hoặc ghi lại lịch sử CP1 là đã làm theo thiết kế mới.
+
+
+## Link phần việc và bằng chứng hiện có
+
+Code/hồ sơ được soạn với Codex; bảng này chỉ ra phần mỗi người phụ trách và những xác nhận đã ghi nhận, không khẳng định mỗi người tự viết toàn bộ file.
+
+| Thành viên | Phần phụ trách và link xem | Xác nhận đã có |
+|---|---|---|
+| Minh | [Spec](spec.md), [canvas](canvas.md), [hội thoại và hồ sơ](codebase/cp2_demo.py), [CLI/tích hợp](codebase/app.py) | CP1 đã nộp; bản CP2 nâng cấp đã kiểm và xác nhận OK trong trao đổi; chưa xác nhận đã nộp CP2 |
+| Thành | [Công cụ/kiểm hạn mức](codebase/tools.py), [kho ca và trạng thái](codebase/cp2_demo.py), [fixtures đơn](data/demo_orders.json), [test](tests/test_cp2_demo.py) | Lịch sử CP1 ghi đối chiếu review/nhãn; đã đồng ý 5/5 output khung cũ theo nhóm trưởng. Chưa xác nhận rà code nâng cấp |
+| Quang | [Bằng chứng](evidence/summary.md), [data card](data/DATA_CARD.md), [giả thuyết](evidence/hypothesis.md), [canvas](canvas.md) | Đã cung cấp tài liệu review, xác nhận lát cắt và kiểm quyền repo ở CP1 theo sổ phân công. Chưa kiểm độc lập toàn bộ review hoặc giả thuyết mở rộng |
+| Cường | [Benchmark](eval/benchmark.csv), [metric](eval/metric_spec.yaml), [phiếu chấm cũ](eval/review-5.md), [kiểm CP2 mới](eval/cp2-upgrade-check.md) | Đã đồng ý 5/5 output khung cũ theo nhóm trưởng; kiểm kỹ thuật mới do Codex chạy. Chưa có lượt AI thật hoặc xác nhận rà bản nâng cấp |
+
+CP2 còn cần nhóm rà/xác nhận, lưu mốc chốt chuẩn và nộp form. Không sửa chuẩn chấm theo output. CP3/CP4 để sau.

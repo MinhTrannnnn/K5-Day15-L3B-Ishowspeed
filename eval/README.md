@@ -1,4 +1,6 @@
-# Hồ sơ đánh giá — D1 · CP2 v1
+# Hồ sơ đánh giá — mốc CP2 v1 và kế hoạch nâng cấp
+
+**Phạm vi các kết quả hiện có:** workflow fake một lượt CP2 v1. Khung CP2 mới đã có phiên/hồ sơ/CLI nhân viên/ETA synthetic và kiểm kỹ thuật riêng tại [cp2-upgrade-check](cp2-upgrade-check.md); chưa chấm chất lượng AI thật. Giữ nguyên benchmark/metric/phiếu cũ; kế hoạch kiểm phần mới tại [upgrade-plan.md](upgrade-plan.md), mốc nộp tại [phân công](../TEAMS.md).
 
 ## 1. Dataset → xử lý
 
@@ -61,3 +63,8 @@ CP3: nối model thật trong `codebase/ai.py`, cấu hình `.env` riêng; chạ
 ## 6. Giới hạn và việc còn lại
 
 Chưa gọi model thật, chưa có run ID đạt chuẩn CP3; chưa kiểm độc lập nguồn review; phiếu đã ghi điểm xác nhận của hai người, chưa có hai bộ điểm trước đối chiếu. Fake model dùng luật từ khóa đơn giản để demo nên không phản ánh khả năng hiểu ngôn ngữ của AI thật. Sau khi có model, phải đo lại bằng bộ thử đã chốt.
+
+
+## 7. Đánh giá thiết kế nâng cấp
+
+Chạy lại bộ nền với model thật qua hợp đồng `answer(text)` độc lập và chỉ đề xuất. Luồng nhiều lượt, lưu hồ sơ có người duyệt và ETA dùng bộ bổ sung riêng; lưu giao thức trước khi chạy, không gộp điểm hoặc sửa chuẩn CP2. Đo cả chất lượng hồ sơ, trạng thái, quyền và tổng chi phí phiên. Chi tiết: [upgrade-plan.md](upgrade-plan.md). Đã có kiểm kỹ thuật khung fake tại [cp2-upgrade-check](cp2-upgrade-check.md); chưa có kết quả model thật hoặc đo hiệu quả sản phẩm.

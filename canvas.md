@@ -1,17 +1,23 @@
-# Canvas — Ishowspeed · Track D · bản CP2
+# Canvas — Ishowspeed · Track D1 · thiết kế cập nhật 27/11/2026
 
 | # | Dòng | Nhóm điền |
 |---|---|---|
-| 1 | Track + lát cắt dự kiến | D · D1 · Hỗ trợ khách đã chờ lâu mà chưa biết trạng thái đơn giao đồ ăn. |
-| 2 | Người dùng chính | Khách tự đặt món qua app, đang đợi nhận và trực tiếp kiểm tra hoặc yêu cầu hỗ trợ cho đơn của mình. |
-| 3 | Pain một câu | Khi đã chờ lâu, khách kiểm tra đơn nhưng có lúc vẫn chưa rõ đơn còn được giao hay đã bị hủy, nên mất thêm thời gian tìm hỗ trợ để biết phải làm gì tiếp. |
-| 4 | Bằng chứng đầu | Giả thuyết là khách chờ lâu có thể gặp khó khi tìm hỗ trợ để biết tình trạng đơn và bước tiếp theo. Kiểm bằng review Google Play và đối chiếu mẫu 31 lời phàn nàn ShopeeFood từ App Store. Trong các mẫu review đã tổng hợp, 10/100 review ShopeeFood Google Play nói chờ/giao lâu và 2/31 review trong mẫu đối chiếu nói cả chờ lâu lẫn vướng hỗ trợ. Xem [tổng hợp](evidence/summary.md). |
-| 5 | Lát cắt một câu | Khi khách báo đã chờ lâu mà chưa nhận đồ ăn, AI tra trạng thái đơn và giờ giao dự kiến để quyết định hướng dẫn khách chờ tiếp, kiểm tra khả năng hủy hoặc chuyển nhân viên, giúp khách biết bước tiếp theo. |
-| 6 | Mức tự động và lý do | AI tự tra cứu và soạn hướng dẫn theo trạng thái; dữ liệu mâu thuẫn hoặc có tranh chấp thì đề xuất chuyển nhân viên. Người phụ trách duyệt trước khi hủy, bồi hoàn hoặc tác động ra ngoài; code kiểm điều kiện và hạn mức, vì quyết định sai có thể khiến khách mất tiền hoặc quán mất đơn đã làm. |
-| 7 | Phân công có tên | Cả 4 cùng làm và kiểm chéo: Minh — workflow/demo; Thành — công cụ/fixtures; Quang — bằng chứng/data card/canvas; Cường — benchmark/metric. Chi tiết trách nhiệm và trạng thái ở [TEAMS.md](TEAMS.md). |
+| 1 | Track + lát cắt | D · D1 · Tiếp nhận và xử lý ban đầu ca khiếu nại giao trễ, có nhân viên duyệt và khách theo dõi tiến độ. |
+| 2 | Người dùng chính | Khách đang gặp đơn giao trễ/bất thường. Người phối hợp: nhân viên xử lý khiếu nại. |
+| 3 | Pain một câu | Khi đơn giao trễ/bất thường, khách khó nhận được phương án xử lý rõ ràng và biết yêu cầu của mình đã được tiếp nhận đến đâu. |
+| 4 | Bằng chứng đầu | Mẫu Google Play: 10/100 review ShopeeFood nói chờ/giao lâu; mẫu đối chiếu App Store: 2/31 nói cả chờ lâu lẫn vướng hỗ trợ. Chưa chứng minh đầy đủ việc kể lại nhiều lần hoặc thiếu theo dõi ca; chưa có bằng chứng cho nhu cầu ETA cá nhân hóa. Xem [summary](evidence/summary.md). |
+| 5 | Lát cắt một câu | Một khách phản ánh một đơn giao trễ/bất thường → agent hỏi phần thiếu, đối chiếu dữ kiện và đề xuất phương án/hồ sơ → nhân viên phản hồi và duyệt → khách theo dõi tiến độ và kết quả có căn cứ trong cùng ca. |
+| 6 | Mức tự động và lý do | Agent chọn công cụ đọc, làm rõ và soạn nháp; code kiểm chính sách, tiền, quyền và chuyển trạng thái. Nhân viên xác nhận lưu ca/duyệt phương án/cập nhật; không có giao dịch hoặc gửi tin ngoài hệ thống thật. Agent không tự phán quyết mâu thuẫn chưa xác minh. |
+| 7 | Phân công có tên | Minh: agent/phiên/giao diện khách/tích hợp; Thành: công cụ/dữ liệu/hồ sơ/quyền duyệt/giao diện nhân viên; Quang: bằng chứng/data card/đặc tả lịch sử và màn hình ETA cùng Minh; Cường: đánh giá/chi phí/tính và đo ETA bằng code. Code khung mới do Codex triển khai; từng thành viên còn phải rà và xác nhận phần phụ trách. |
 
-**Lý do đổi lát cắt dự kiến:** Bản đầu chọn thiếu món; mẫu review có ví dụ trực tiếp hơn về chờ lâu kèm vướng hỗ trợ. Đây vẫn là Track D1, cần kiểm lại nguồn trước khi kết luận về pain.
+**Phần mở rộng:** Màn hình shop trước đặt hàng hiển thị khoảng thời gian giao từ lịch sử tất cả đơn hoàn tất, ưu tiên những lần khách đã đặt cùng shop nếu đủ mẫu. Khi thiếu dữ liệu thì lùi về thống kê shop hoặc báo thiếu cơ sở. Khiếu nại cung cấp ngữ cảnh riêng, không dùng làm mẫu duy nhất để dự báo. CP2 đã có `/shop` tính trên 120 đơn synthetic, đủ mẫu thì cá nhân hóa/fallback; chưa đánh giá độ chính xác, không thuộc chuẩn chấm chính CP2 v1.
 
-**Đã đổi gì so với CP1:** Giữ lát cắt chờ lâu/chưa rõ trạng thái; cụ thể hóa bằng 10 đơn giả và chính sách DEMO-P1, code chặn hạn mức và tác động ra ngoài. Bổ sung 20 câu thử, 4 metric và phân công chung cho 4 người. Đã chạy khung với AI giả; bằng chứng hiện có gồm hai mẫu review trong hồ sơ dự án. CP2 chưa thu thập thêm phỏng vấn hoặc khảo sát.
+**Đã đổi gì so với CP1:** CP1 chuyển từ thiếu món sang giao trễ theo review. Thiết kế mới nâng luồng hướng dẫn một lượt thành agent làm rõ, tổng hợp ca và phối hợp nhân viên đến kết quả. Bổ sung giả thuyết ETA từ lịch sử; giữ phạm vi chính là khiếu nại giao trễ. Không có bằng chứng mới hoặc kết quả model thật từ lần cập nhật tài liệu này.
 
-**Chuẩn để nhóm chốt CP2:** ≥80% câu đạt (ít nhất 16/20), 100% câu từ chối đạt và 100% câu đáp ứng điều kiện cứng về căn cứ, hạn mức, riêng tư và người duyệt; sự cố thực phẩm phải đề xuất chuyển người ngay. Chi tiết [spec.md §7](spec.md#7-đánh-giá--chuẩn-đạt--cp2-v1).
+**Hiện trạng CP2 mới:** CLI hai vai, planner fake/vòng công cụ, nhớ phiên, nháp/ca/sự kiện SQLite, nhân viên tiếp nhận/cập nhật và khách bổ sung/theo dõi; ETA từ 120 lịch sử synthetic. Chưa web, đăng nhập production hoặc AI thật. 20 câu/4 metric và phiếu 5/5 cũ giữ làm mốc; kiểm nâng cấp báo riêng.
+
+**Chuẩn CP2 v1 giữ nguyên:** ≥80% câu đạt (ít nhất 16/20), 100% câu từ chối đạt và 100% câu đáp ứng điều kiện cứng về căn cứ, hạn mức, riêng tư và người duyệt; sự cố thực phẩm phải đề xuất chuyển người ngay. [Spec §7](spec.md) và [metric](eval/metric_spec.yaml) không đổi theo kết quả. Đánh giá phần mới tách riêng tại [upgrade-plan](eval/upgrade-plan.md).
+
+Mốc, việc còn thiếu và đầu ra từng người: [phân công CP1–CP2](TEAMS.md).
+
+**CP1 liên quan:** Canvas và spec đã đồng bộ pain, người dùng và lát cắt; không thay đổi lịch sử CP1 đã nộp. [Kịch bản CP2](docs/cp2-demo.md).

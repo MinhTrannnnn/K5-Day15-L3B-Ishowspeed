@@ -11,3 +11,18 @@
 | Kiểm tra code | Codex | Chạy check BTC, 6 unit test, 20 nhánh fake và CLI | Cả 4 đọc và giải thích phần phụ trách | Chỉ kiểm luồng fake, không phải điểm AI thật |
 
 Codex đã chấm thử 5 output từ model giả theo metric CP2. Chưa có điểm đánh giá CP3 trên model thật. Fake model không đọc benchmark/expected. Không ghi các việc chấm/duyệt người thật là đã hoàn tất khi chưa có kết quả. Sau khi chốt CP2 không sửa chuẩn đạt để khớp kết quả.
+
+
+## Cập nhật thiết kế theo yêu cầu Minh — 27/11/2026
+
+Codex cập nhật spec, canvas, README, kế hoạch CP2–CP4, phân công, giả thuyết, yêu cầu dữ liệu và kế hoạch đánh giá cho agent/hồ sơ/người duyệt/ETA. Minh chọn hướng sản phẩm trong trao đổi; chưa ghi nhận cả nhóm đã duyệt bản tài liệu mới. Lần này chưa viết code tính năng mới, chưa thu thập bằng chứng, chưa chấm model thật, không thay đổi chuẩn CP2 v1 hoặc kết quả fake cũ.
+
+
+## Nâng khung CP1–CP2 theo yêu cầu tiếp theo của Minh
+
+Codex triển khai CP2 fake nhiều lượt (cp2_demo.py, app.py, nhánh planner fake trong ai.py), SQLite lưu trạng thái local, generator 120 lịch sử synthetic và unit test cho quyền/chuyển bước/phiên/mâu thuẫn/ETA. Cập nhật lại hồ sơ CP1 và CP2 để khớp bản chạy, giữ lịch sử nộp/chuẩn/artifact cũ. Chưa nối API thật hoặc triển khai CP3; chưa có xác nhận các thành viên đã rà code mới.
+
+
+## Rà và tinh gọn trước push
+
+Minh xác nhận đã kiểm bản nâng cấp và OK. Gộp hai hướng dẫn trùng nội dung (`docs/cp1.md`, `docs/checkpoints.md`) vào canvas/spec, TEAMS và checklist README; giữ kịch bản CLI cần để demo. Chưa ghi nhận Thành, Quang, Cường đã rà bản nâng cấp.

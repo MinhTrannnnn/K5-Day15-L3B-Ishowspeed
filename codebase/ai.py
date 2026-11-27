@@ -50,6 +50,12 @@ def call_model(system: str, user: str) -> dict:
     if MODEL_PROVIDER == "fake":
         # Model giả mô phỏng chọn bước từ ngữ cảnh, không đọc benchmark/expected.
         context = json.loads(user)
+        if context.get('mode') == 'cp2_demo':
+            observed = context.get('observations', {})
+            step = next((name for name in ('get_order', 'get_policy', 'order_timeline')
+                         if name not in observed), 'finish')
+            return {'text': json.dumps({'tool': step}), 'model': 'fake',
+                    'tokens_in': 0, 'tokens_out': 0}
         message = context['message'].lower().replace('đ', 'd')
         message = ''.join(c for c in unicodedata.normalize('NFD', message)
                           if not unicodedata.combining(c))
