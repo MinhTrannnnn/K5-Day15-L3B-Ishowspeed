@@ -46,8 +46,8 @@ Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên
 - [x] Minh đã kiểm bản lõi; 22 test lõi/mở rộng do Codex chạy đã qua, xem [báo cáo kiểm](eval/cp2-upgrade-check.md).
 - [ ] Nhóm rà phần mở rộng mới: checklist, nháp nhắc và phản hồi/mở lại.
 - [ ] Thành, Quang, Cường rà và xác nhận phần phụ trách trong [TEAMS](TEAMS.md).
-- [ ] Lưu hai bộ điểm độc lập và đối chiếu ≥4/5; kiểm lại nguồn 7 câu data_that, không coi máy check là xác minh nguồn.
-- [ ] Lưu xác nhận chốt chuẩn theo mốc thật; kiểm nguồn bằng chứng và các giới hạn còn thiếu.
+- [x] Thành và Cường đã chốt chuẩn và chấm thử, đồng thuận 5/5 theo xác nhận của nhóm trưởng.
+- [ ] Lưu bảng điểm từng câu và xác minh nguồn của 7 câu `data_that`.
 - [ ] Minh kiểm link công khai và nộp form CP2; chưa ghi nhận đã nộp.
 
 ## Nhóm làm gì, khung làm gì

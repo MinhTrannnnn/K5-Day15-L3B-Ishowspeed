@@ -43,4 +43,4 @@ Phạm vi hiện tại thay thế thử nghiệm tự dự báo: đã bỏ công
 - 22 test qua: gồm 6 test mới về checklist, căn cứ xác minh, nhắc ca theo đồng hồ, quyền phản hồi/mở lại, chống gửi lặp và xác minh lại sau mở ca. Các test lõi đã điều chỉnh để tuân theo checklist mới, không sửa chuẩn BTC hoặc expected.
 - [Output tích hợp CLI mở rộng](cp2-extensions-smoke.json): checklist → nháp nhắc → nhân viên duyệt → khách phản hồi → tổng hợp → mở lại; thêm ca mâu thuẫn phải ghi mã căn cứ xác minh. Chạy database tạm, không sửa ca của người dùng.
 - Checklist chỉ chặn/chỉ rõ điều thiếu, không tự xác minh thực tế; nhắc ca không gửi hoặc lên lịch nền; lời khách được gắn chưa xác minh. Tất cả là fake/synthetic, chưa có AI thật hoặc hiệu quả ngoài thực tế.
-- Hồ sơ thiết kế bổ sung điều học/tránh, hợp đồng hàm và nguyên tắc gắn sơ đồ. Còn thiếu bằng chứng chốt chuẩn, hai bộ điểm độc lập và xác minh nguồn 7 câu; không dùng kết quả test để thay thế.
+- Hồ sơ thiết kế bổ sung điều học/tránh, hợp đồng hàm và nguyên tắc gắn sơ đồ. Nhóm trưởng xác nhận Thành và Cường đã chốt chuẩn và chấm thử với mức đồng thuận 5/5. Repo còn thiếu bảng điểm chi tiết và xác minh nguồn của 7 câu.

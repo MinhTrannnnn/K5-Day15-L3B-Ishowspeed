@@ -80,7 +80,7 @@ Code/hồ sơ được soạn với Codex; bảng này chỉ ra phần mỗi ng�
 | Quang | [Bằng chứng](evidence/summary.md), [data card](data/DATA_CARD.md), [giả thuyết](evidence/hypothesis.md), [canvas](canvas.md) | Đã cung cấp tài liệu review, xác nhận lát cắt và kiểm quyền repo ở CP1 theo sổ phân công. Chưa kiểm độc lập toàn bộ review hoặc giả thuyết mở rộng |
 | Cường | [Benchmark](eval/benchmark.csv), [metric](eval/metric_spec.yaml), [phiếu chấm cũ](eval/review-5.md), [kiểm CP2 mới](eval/cp2-upgrade-check.md) | Đã đồng ý 5/5 output khung cũ theo nhóm trưởng; kiểm kỹ thuật mới do Codex chạy. Chưa có lượt AI thật hoặc xác nhận rà bản nâng cấp |
 
-CP2 còn cần nhóm rà/xác nhận, lưu mốc chốt chuẩn và nộp form. Không sửa chuẩn chấm theo output. CP3/CP4 để sau.
+Theo xác nhận của nhóm trưởng, Thành và Cường đã chốt chuẩn và chấm thử CP2, đồng thuận 5/5. Repo chưa lưu điểm từng câu của lần chấm này. Minh phụ trách nộp form CP2.
 
 
 **Mở rộng CP2 đã có code:** Minh phụ trách rà tích hợp lệnh vào CLI; Thành phụ trách rà checklist/chốt duyệt/nháp nhắc và mở lại; Quang kiểm nhu cầu/nguồn, Cường rà test và hồ sơ chấm độc lập. Code do Codex triển khai; chưa ghi nhận các bạn đã rà phần mở rộng.
