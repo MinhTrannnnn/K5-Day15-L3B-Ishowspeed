@@ -1,18 +1,41 @@
-"""Công cụ của bài toán — NHÓM VIẾT. Điền ở guide bước 2.2 (thiết kế) và 3.2 (code).
+"""Công cụ D1 chỉ đọc fixtures; không gửi tin, hủy đơn hoặc chuyển tiền."""
+import json
+from pathlib import Path
+from tracing import tool
 
-Mỗi công cụ là một hàm Python có @tool. Docstring ghi đúng 4 ý như sơ đồ ở spec.md §4:
-    tên · input · output · có tác động ra ngoài không (gửi tin, sửa dữ liệu, chấm điểm…)
-Khung tự ghi mỗi lần gọi công cụ vào trace (tên, input, output rút gọn, thời gian, lỗi).
+DATA = Path(__file__).resolve().parents[1] / 'data'
 
-Số công cụ, kiểu công cụ do thiết kế của nhóm quyết định — có bài chỉ cần một công cụ tra cứu.
-Công cụ có tác động ra ngoài: KHÔNG tự làm. Trả về bản nháp chờ người duyệt (guide bước 2.2, "chỗ người duyệt").
-Dữ liệu công cụ đọc (bài mẫu, thông báo mẫu, lịch…): để trong data/ và mô tả ở data/DATA_CARD.md.
-"""
-from tracing import tool, TOOLS  # noqa: F401  (TOOLS: danh sách công cụ đã đăng ký, dùng khi viết vòng lặp agent)
+
+def _read(name):
+    return json.loads((DATA / name).read_text(encoding='utf-8'))
 
 
 @tool
-def search_example(query: str) -> list:
-    """(ví dụ — thay bằng công cụ của nhóm) Tra dữ liệu mẫu theo câu hỏi.
-    Input: câu hỏi (str). Output: danh sách đoạn {"code", "text"}. Không tác động ra ngoài."""
-    return [{"code": "VD-1", "text": "(ví dụ) đoạn dữ liệu giả — thay bằng dữ liệu thật của bài toán"}]
+def get_order(order_id: str):
+    """get_order · input mã đơn · output snapshot synthetic hoặc None · chỉ đọc, không tác động ngoài."""
+    for row in _read('demo_orders.json')['orders']:
+        if row['order_id'] == order_id:
+            return row
+    return None
+
+
+@tool
+def get_policy(issue_type: str) -> dict:
+    """get_policy · input late_delivery · output chính sách dựng · chỉ đọc, không tác động ngoài."""
+    if issue_type != 'late_delivery':
+        return {}
+    return _read('demo_policy.json')
+
+
+@tool
+def check_limit(order: dict, amount: int) -> dict:
+    """check_limit · input snapshot, số tiền VND · output eligible/allowed/reason · kiểm bằng code, không chuyển tiền."""
+    policy = _read('demo_policy.json')
+    delay = order.get('delay_minutes')
+    eligible = (order.get('consistent') is True
+                and order.get('status') in ('preparing', 'delivering', 'delivered', 'awaiting_driver')
+                and type(delay) is int and delay > policy['late_threshold_minutes'])
+    valid_amount = type(amount) is int and 0 < amount <= policy['max_voucher_vnd']
+    return {'eligible': eligible, 'allowed': eligible and valid_amount,
+            'max_vnd': policy['max_voucher_vnd'] if eligible else 0,
+            'reason': 'Chỉ đề xuất voucher khi trễ quá 30 phút; tối đa 50.000 VND, chờ người duyệt.'}

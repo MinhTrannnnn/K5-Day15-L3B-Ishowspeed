@@ -11,13 +11,15 @@ Hợp đồng (giữ nguyên để khung đo được token):
     Lỗi gọi model (hết lượt, sai key, mất mạng): cứ để exception bay ra — khung ghi lỗi vào cột error.
 
 Chế độ giả (mặc định khi .env chưa có MODEL_PROVIDER, hoặc MODEL_PROVIDER=fake):
-    trả một câu giả cố định, model "fake", token 0 — để luồng chạy hết từ trước CP2 (guide bước 3.2).
+    mô phỏng chọn action bằng luật đơn giản, model "fake", token 0 — để luồng chạy hết từ trước CP2 (guide bước 3.2).
     Lượt `run.py eval` / `run.py simulate` chạy bằng model giả KHÔNG được tính.
 
 Nối model thật: điền .env (chép từ .env.example), rồi viết nhánh gọi API ở dưới theo docs/connect-model.md
 (có ví dụ OpenAI, Claude, model chạy trên máy, và cách nối nhà cung cấp khác). Không dán API key vào file này.
 """
 import os
+import json
+import unicodedata
 
 from tracing import model_call
 
@@ -46,8 +48,21 @@ API_KEY = (os.environ.get("API_KEY") or "").strip()
 @model_call
 def call_model(system: str, user: str) -> dict:
     if MODEL_PROVIDER == "fake":
-        last = (user.strip().splitlines() or [""])[-1]
-        return {"text": "[câu trả lời giả — chưa nối model] " + last[:60], "model": "fake", "tokens_in": 0, "tokens_out": 0}
+        # Model giả mô phỏng chọn bước từ ngữ cảnh, không đọc benchmark/expected.
+        context = json.loads(user)
+        message = context['message'].lower().replace('đ', 'd')
+        message = ''.join(c for c in unicodedata.normalize('NFD', message)
+                          if not unicodedata.combining(c))
+        if any(term in message for term in ('bo qua', '100%', '500k', '500.000', 'khoa shop')):
+            action = 'human_review'
+        elif any(term in message for term in ('thieu mon', 'sai mon', 'dat mon', 'doi tai xe')):
+            action = 'out_of_scope'
+        elif 'huy' in message:
+            action = 'cancel_review'
+        else:
+            action = 'wait'
+        return {'text': json.dumps({'action': action}), 'model': 'fake',
+                'tokens_in': 0, 'tokens_out': 0}
 
     # NHÓM VIẾT: gọi model thật ở đây (theo MODEL_PROVIDER, MODEL_NAME, API_KEY) rồi trả đúng 4 khoá.
     # Ví dụ chép được cho từng nhà cung cấp: docs/connect-model.md mục 2.

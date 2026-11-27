@@ -17,11 +17,21 @@ Khách đặt đồ ăn qua app đã chờ lâu nhưng có lúc chưa rõ đơn 
 
 Bản đầu chọn thiếu món; tài liệu `CP1-D1/` do nhóm cung cấp gợi ý hướng chờ lâu có ví dụ trực tiếp hơn. Số liệu review trong repo được kế thừa từ tài liệu đó, chưa đối chiếu độc lập review gốc; không suy rộng thành tỷ lệ mọi người dùng.
 
-- [Canvas CP1](canvas.md) · [Thành viên và phần việc](TEAMS.md)
+- [Canvas CP2](canvas.md) · [Thành viên và phần việc](TEAMS.md)
 - [Spec và bảng so sánh 3 hướng](spec.md) · [Tổng hợp bằng chứng tham khảo](evidence/summary.md)
 - [Giả thuyết và lịch sử đổi hướng](evidence/hypothesis.md)
 
-Repo hiện có hồ sơ CP1 và phân công cho bốn thành viên. Luồng D1 vẫn ở giai đoạn thiết kế. Xem [tiến độ CP1](TEAMS.md#phần-việc--cp1).
+Bản CP2 chạy được workflow D1 bằng model giả, không cần key; đã có 4 thành viên và phân công chung/kiểm chéo trong `TEAMS.md`. Có 20 câu thử, 4 metric, data card và 10 đơn synthetic; chính sách DEMO-P1 là quy tắc dựng, không phải chính sách của hãng.
+
+```bash
+python3 run.py check
+MODEL_PROVIDER=fake python3 run.py
+MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
+```
+
+Thử nhập `D001 tôi muốn hủy`, `D004 tôi chờ lâu`, `D005 khi nào hoàn tiền`, hoặc hỏi số điện thoại tài xế. Mỗi lượt độc lập, cần mã đơn nếu muốn tra cứu. Dữ liệu là snapshot demo cố định, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
+
+**Tiến độ:** Nhóm trưởng đã nộp CP1 và kiểm tra bản CP2. Thành và Cường phụ trách chấm độc lập [5 output](eval/review-5.md) trước khi nhóm chốt chuẩn §7. CP2 đang dùng model giả.
 
 ---
 
@@ -60,7 +70,7 @@ Gõ `dir` (Windows) hoặc `ls` (macOS / Linux): thấy `run.py` và `README.md`
 
 - Windows: gõ `python` mà mở Microsoft Store hoặc báo không có lệnh → dùng `py`. Chưa có Python: cài từ python.org, **tick "Add python.exe to PATH"**, mở lại PowerShell.
 - macOS: báo `command not found: python` là bình thường → dùng `python3`.
-- `python run.py` in ra "[câu trả lời giả — chưa nối model] …" là khung chạy đúng. Nối model thật: [docs/connect-model.md](docs/connect-model.md).
+- `python run.py` hiện trả hướng dẫn có nhãn DEMO; model fake có token 0. Chưa có AI thật trong bản CP2. Nối model thật: [docs/connect-model.md](docs/connect-model.md).
 
 Trong README này lệnh viết là `python …`; máy nhóm cần `python3` hay `py` thì gõ thay.
 
@@ -88,7 +98,7 @@ Nhóm dùng stack khác (Node, Streamlit, notebook…): sửa hàm `run_app()` t
 
 | File | Viết gì | Bước guide |
 |---|---|---|
-| `codebase/agent.py` | `answer(text)` — luồng chính, đúng hình dạng ở `spec.md` §4. Khung có sẵn một workflow 2 bước *ví dụ* | 3.2 |
+| `codebase/agent.py` | `answer(text)` — luồng chính, đúng hình dạng ở `spec.md` §4. Workflow D1: tra đơn, model chọn bước, code kiểm, soạn đề xuất | 3.2 |
 | `codebase/tools.py` | Công cụ của bài toán, mỗi công cụ một hàm có `@tool` | 2.2, 3.2 |
 | `codebase/ai.py` | `call_model(system, user)` — chỗ duy nhất gọi model. Chưa điền `.env` thì chạy **chế độ giả** | 3.3 |
 
@@ -100,14 +110,15 @@ Nhóm dùng stack khác (Node, Streamlit, notebook…): sửa hàm `run_app()` t
 
 | Thành phần | Thật / Giả | Ghi chú |
 |---|---|---|
-| Lời gọi AI ở quyết định trung tâm | **Thật** (bắt buộc từ CP3) | Model: ____ |
-|  |  |  |
+| Lời gọi AI ở quyết định trung tâm | **Giả tại CP2** | Model fake chọn action bằng luật đơn giản, token 0; CP3 cần nối model thật |
+| Dữ liệu và chính sách demo | **Synthetic** | 10 đơn, 1 chính sách DEMO-P1; seed 27112026 |
+| Tra dữ liệu, kiểm tiền và trace | Code chạy thật | Không kết nối sàn hoặc thao tác tiền thật |
 
 ## Dùng AI vào việc gì
 
 2–3 dòng (bắt buộc): nhóm dùng công cụ AI nào để làm gì, người kiểm lại phần nào. Chi tiết: [docs/ai-usage.md](docs/ai-usage.md). Coding agent đọc [AGENTS.md](AGENTS.md).
 
-Nhóm dùng Codex để chuẩn bị repo và tích hợp tài liệu CP1-D1 do nhóm cung cấp vào README, canvas, spec và hồ sơ bằng chứng. Lượt tích hợp chưa thu thập review mới hay đối chiếu độc lập review gốc; Trần Quang Minh cần kiểm lại nội dung và nguồn. Chưa có phỏng vấn hoặc khảo sát trong repo.
+Nhóm dùng Codex để soạn hồ sơ, code workflow/fake model, fixtures, câu thử và metric CP2; Codex chạy kiểm tra cấu trúc, luồng và chốt an toàn. Cả 4 thành viên cùng kiểm theo phân công trong TEAMS.md; chưa ghi nhận hai người chấm độc lập hoặc kiểm review gốc, chưa có phỏng vấn/khảo sát mới.
 
 ## File mẫu — điền ở bước nào
 

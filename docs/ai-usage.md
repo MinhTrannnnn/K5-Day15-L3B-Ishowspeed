@@ -1,18 +1,13 @@
-# Khai báo dùng AI
+# Khai báo dùng AI — CP1 và CP2
 
-README của nhóm có mục "Dùng AI vào việc gì" (2–3 dòng, bắt buộc). Ghi chi tiết vào bảng dưới đây.
-
-> Luật của đề: dùng AI để làm bài thoải mái, nhưng **ai không giải thích được phần có tên mình thì phần đó nhận 0 điểm**. Khai thiếu không bị trừ; giấu mới bị.
-
-| Việc | Công cụ AI | AI làm gì | Người kiểm/sửa gì | Ai phụ trách |
+| Việc | Công cụ | AI làm gì | Người phụ trách kiểm | Trạng thái kiểm của nhóm |
 |---|---|---|---|---|
-| Code bản chạy thử | | | | |
-| Prompt / thiết kế lời gọi mô hình | | | | |
-| Tài liệu review tham khảo | ChatGPT Codex (theo khai báo tài liệu CP1-D1) | Tài liệu nguồn khai báo đã lấy review và gắn nhãn; lượt tích hợp này chỉ đọc và kiểm tính nhất quán của tài liệu | Chưa kiểm lại review gốc; chưa có bản lưu toàn mẫu trong repo | Trần Duy Thành phụ trách đối chiếu review gốc và nhãn, Nguyễn Văn Cường phụ trách duyệt bản tổng hợp |
-| Rà câu hỏi phỏng vấn / khảo sát | | Chỉ rà câu dẫn dắt | | |
-| Viết câu thử (benchmark) | | | Mỗi câu thử có `source`; câu thử AI viết được ghi rõ | |
-| Sinh data `synthetic` (nếu có) | | | Seed __ · kiểm tay __ dòng | |
-| Chấm cột `pass` bằng LLM (nếu có) | | | Kiểm tra thủ công __ câu thử, khớp __/__ | |
-| Văn bản CP1 | ChatGPT Codex | Soạn bản nháp Canvas, spec và tổng hợp bằng chứng | Chờ Trần Quang Minh kiểm và duyệt nội dung; chưa duyệt số liệu nguồn | Trần Quang Minh |
+| Workflow/demo | Codex | Viết agent, fake model và tích hợp CLI | Trần Quang Minh; Quang kiểm chéo | Demo đã chạy và Trần Quang Minh đã kiểm tra bản CP2 |
+| Công cụ và dữ liệu demo | Codex | Viết tools, generator, 10 fixtures seed 27112026, policy synthetic | Trần Duy Thành; Cường kiểm chéo | Test code đã qua; chưa có log kiểm tay của nhóm |
+| Tài liệu review | Codex theo khai báo tài liệu CP1-D1 | Tài liệu nguồn có phân tích review; lượt CP2 chỉ tích hợp | Trần Duy Thành đối chiếu ở CP1, Nguyễn Văn Cường rà bản tổng hợp, Nguyễn Hải Quang phụ trách data card CP2 | Tiến độ CP1 ghi đã đối chiếu nhãn. Repo chưa có bản lưu toàn mẫu |
+| Benchmark | Codex | Diễn giải 7 tình huống từ tài liệu có dẫn mã, viết 13 tình huống từ lưới phủ | Nguyễn Văn Cường; Thành kiểm chéo | Không coi câu diễn giải là trích nguyên văn |
+| Metric và phiếu 5 output | Codex | Soạn 4 metric, chuẩn đạt và xuất output fake để chấm | Thành và Cường chấm độc lập | Chưa chấm, chưa ghi số khớp |
+| Spec/canvas/data card | Codex | Soạn bản CP2 từ tài liệu được cung cấp và code đã chạy | Cả 4 cùng duyệt theo TEAMS.md | Trần Quang Minh đã kiểm tra bản CP2. Chưa xác nhận chốt chuẩn |
+| Kiểm tra code | Codex | Chạy check BTC, 6 unit test, 20 nhánh fake và CLI | Cả 4 đọc và giải thích phần phụ trách | Chỉ kiểm luồng fake, không phải điểm AI thật |
 
-**Không dùng AI để:** tạo người được phỏng vấn, trích dẫn, câu trả lời khảo sát; sửa kết quả các lượt đã chạy (`eval/run-*.csv`, `cost/simulate-*.csv`, `traces/`).
+Chưa dùng LLM chấm điểm, chưa tạo phỏng vấn/khảo sát, chưa gọi API thật hoặc đưa key vào repo. Fake model không đọc benchmark/expected. Không ghi các việc chấm/duyệt người thật là đã hoàn tất khi chưa có kết quả. Sau khi chốt CP2 không sửa chuẩn đạt để khớp kết quả.

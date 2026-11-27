@@ -15,3 +15,7 @@
 - **R16 và R18.** Hai review trong mẫu đối chiếu kể chờ hoặc giao lâu kèm khó nhận hỗ trợ. R16 vẫn trước giờ dự kiến khi khách liên hệ, còn R18 mô tả đơn đã giao trễ. [Bảng gắn nhãn mẫu đối chiếu](data-mining-app-store-31.md#phụ-lục--bảng-đánh-nhãn-có-thể-kiểm-lại)
 
 **Kết luận sơ bộ.** Có ví dụ trực tiếp về khách chờ lâu và chưa nhận được hỗ trợ cho cùng một đơn. Có thể dùng làm cơ sở cho lát cắt giúp khách biết trạng thái và bước tiếp theo. Số liệu mô tả review đã đọc, chưa đo được tần suất trên số đơn, thời gian tìm hỗ trợ hay tác động theo tháng. Tần suất review từ hai mẫu được giữ riêng vì khác cách chọn mẫu và phạm vi.
+
+## Tiến độ chuẩn bị CP2
+
+Đã tích hợp hai tài liệu và đưa 7 tình huống nguồn (SF054, GF071, GF006, R16, R18, R07, R24) thành 7 câu diễn giải trong bộ 20 câu thử. Mọi mã đơn và snapshot dùng để chạy là synthetic. Sổ phân công CP1 ghi Thành đã đối chiếu review gốc và rà nhãn. Repo chưa có bản lưu toàn mẫu để tái kiểm độc lập. CP2 chưa thu thập thêm review, phỏng vấn hoặc khảo sát. Quang phụ trách hồ sơ nguồn và data card, Cường kiểm chéo.

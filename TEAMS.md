@@ -11,10 +11,10 @@
 
 | STT | Họ và tên | Mã học viên | Vai trò | Phần việc chính |
 |---|---|---|---|---|
-| 1 | Trần Quang Minh | 2A202603929 | Đội trưởng | Điều phối nhóm, quản lý repo và nộp checkpoint |
-| 2 | Trần Duy Thành | 2A202603919 | Thành viên | Cập nhật danh sách và phân công, đối chiếu review gốc và nhãn |
-| 3 | Nguyễn Hải Quang | 2A202603936 | Thành viên | Cung cấp tài liệu CP1-D1, xác nhận lát cắt và kiểm tra link repo |
-| 4 | Nguyễn Văn Cường | 2A202603750 | Thành viên | Rà soát hồ sơ review và bản tổng hợp bằng chứng |
+| 1 | Trần Quang Minh | 2A202603929 | Đội trưởng | Cùng làm CP2; phụ trách workflow, demo và tích hợp |
+| 2 | Trần Duy Thành | 2A202603919 | Thành viên | Cùng làm CP2; phụ trách công cụ, fixtures và kiểm rủi ro |
+| 3 | Nguyễn Hải Quang | 2A202603936 | Thành viên | Cùng làm CP2; phụ trách bằng chứng, data card và canvas |
+| 4 | Nguyễn Văn Cường | 2A202603750 | Thành viên | Cùng làm CP2; phụ trách benchmark, metric và hồ sơ chấm |
 
 **Quy tắc điền**
 - **Lớp:** `L3A` hoặc `L3B`. **Track:** một chữ `A` (EdTech), `B` (Y tế), `C` (Du lịch), `D` (Thương mại điện tử), `E` (Tài chính) hoặc `F` (Làn khác). **Link repo:** link GitHub công khai của nhóm.
@@ -30,14 +30,26 @@
 |---|---|---|
 | Tạo repo và chọn Track D1 | Trần Quang Minh | Đã làm |
 | Cung cấp tài liệu tham khảo CP1-D1 | Nguyễn Hải Quang | Đã làm |
-| Chuẩn bị khung repo, commit và push | Trần Quang Minh, Codex hỗ trợ thao tác | Đã làm |
-| Soạn README và canvas | Codex hỗ trợ, Trần Quang Minh phụ trách duyệt | Đã làm |
-| Soạn spec và bảng so sánh 3 hướng | Codex hỗ trợ, Trần Quang Minh phụ trách duyệt | Đã làm |
-| Tích hợp hồ sơ review, tổng hợp bằng chứng | Codex hỗ trợ, Nguyễn Văn Cường phụ trách duyệt | Đã làm |
+| Chuẩn bị khung repo, commit và push | Trần Quang Minh | Đã làm |
+| Soạn README và canvas | Trần Quang Minh | Đã làm |
+| Soạn spec và bảng so sánh 3 hướng | Trần Quang Minh | Đã làm |
+| Tích hợp hồ sơ review, tổng hợp bằng chứng | Trần Quang Minh tích hợp, Nguyễn Văn Cường phụ trách duyệt | Đã làm |
 | Đối chiếu review gốc và kiểm lại nhãn | Trần Duy Thành | Đã làm |
-| Bổ sung thành viên và phân công | Trần Duy Thành, Codex hỗ trợ | Đã làm |
+| Bổ sung thành viên và phân công | Trần Duy Thành | Đã làm |
 | Xác nhận lát cắt | Nguyễn Hải Quang | Đã làm |
-| Kiểm tra quyền xem repo công khai | Nguyễn Hải Quang phụ trách, Codex hỗ trợ kiểm tra | Đã làm |
-| Nộp form CP1 | Trần Quang Minh | Đã làm |
+| Kiểm tra quyền xem repo công khai | Nguyễn Hải Quang | Đã làm |
+| Nộp form CP1 | Trần Quang Minh | Đã nộp |
 
-Chưa thu thập phỏng vấn, khảo sát hoặc triển khai luồng D1 trong repo.
+
+## Phân công CP2 — 4 người cùng làm, chia đều phần phụ trách
+
+Trần Quang Minh phụ trách chuẩn bị và tổng hợp bản CP2. Cả 4 thành viên cùng rà bài, thử demo và thống nhất chuẩn đạt. Mỗi người có hai phần phụ trách chính và kiểm chéo một phần của bạn khác.
+
+| Thành viên | Hai phần phụ trách chính | Kiểm chéo | Trạng thái |
+|---|---|---|---|
+| Trần Quang Minh | Workflow `agent.py`; demo CLI và tích hợp spec | Data card/bằng chứng của Quang | Đã được Trần Quang Minh kiểm tra |
+| Trần Duy Thành | Công cụ `tools.py`; fixtures/chốt an toàn và test | Metric/câu thử của Cường; chấm độc lập 5 output | Đã được Trần Quang Minh kiểm tra. Chờ chấm độc lập |
+| Nguyễn Hải Quang | Bằng chứng và data card; canvas và sơ đồ | Workflow/demo của Minh | Đã được Trần Quang Minh kiểm tra phần hồ sơ. Chưa đối chiếu review gốc |
+| Nguyễn Văn Cường | Benchmark; metric và hồ sơ đánh giá | Công cụ/fixtures của Thành; chấm độc lập 5 output | Đã được Trần Quang Minh kiểm tra. Chờ chấm độc lập |
+
+Trần Quang Minh phụ trách nộp CP2 sau khi nhóm chốt chuẩn và hoàn tất chấm thử.

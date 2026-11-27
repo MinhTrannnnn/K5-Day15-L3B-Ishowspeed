@@ -1,0 +1,12 @@
+{
+  "version": "d1-cp2-v1",
+  "synthetic": true,
+  "policy_id": "DEMO-P1",
+  "description": "Chính sách dựng cho hackathon, không phải chính sách ShopeeFood/GrabFood.",
+  "late_threshold_minutes": 30,
+  "comparison": "strictly_greater",
+  "max_voucher_vnd": 50000,
+  "cancel_status": "awaiting_driver",
+  "cancel_requires_not_prepared": true,
+  "requires_human_approval": true
+}
