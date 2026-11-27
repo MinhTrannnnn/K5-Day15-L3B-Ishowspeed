@@ -30,7 +30,7 @@ def guard_decision(order, action):
         return 'human_review'
     if status not in ('awaiting_driver', 'preparing', 'delivering'):
         return 'human_review'
-    if action not in ('wait', 'cancel_review', 'human_review', 'out_of_scope'):
+    if action not in ('wait', 'cancel_review', 'refund_status', 'human_review', 'out_of_scope'):
         return 'human_review'
     return action
 
@@ -50,6 +50,9 @@ def render_response(order, policy, action):
     action = guard_decision(order, action)
     # Model chỉ chọn action. Mọi số tiền và khẳng định hiển thị được dựng từ dữ liệu đã kiểm.
     note('D1 action sau kiểm bằng code: ' + action)
+    if action == 'refund_status' and order['status'] != 'cancelled':
+        return _result(action, 'Đơn chưa hủy theo dữ liệu demo và chưa ghi nhận khoản hoàn. '
+                       'Bạn có thể đề nghị nhân viên xác minh.', order)
     if action == 'refund_status':
         state = order.get('refund_status')
         message = {'pending': 'Đơn đã hủy; khoản hoàn đang chờ xử lý, chưa có ngày hoàn xác nhận.',

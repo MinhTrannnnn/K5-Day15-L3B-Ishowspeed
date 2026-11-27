@@ -3,6 +3,18 @@
 
 # Ishowspeed — Trợ lý AI xử lý khiếu nại giao trễ
 
+## Chạy ứng dụng CP3 bằng Docker
+
+Mở Docker Desktop hoặc Docker Engine, rồi chạy trong thư mục repo:
+
+```sh
+docker compose up --build
+```
+
+Mở [ứng dụng local](http://localhost:8080). FastAPI phục vụ bản build React/TypeScript từ Vite, SQLite lưu hồ sơ và Ollama chạy `qwen2.5:1.5b` trên máy. Compose tự tải model ở lần đầu và giữ lại trong volume. Xem [hướng dẫn eval và video CP3](docs/cp3.md).
+
+Để dùng key OpenAI của nhóm, đặt `CP3_PROVIDER=openai`, `OPENAI_MODEL=gpt-5.4-nano` và `OPENAI_API_KEY` trong `.env`. Chạy `docker compose up -d --build` để nạp cấu hình. Xem [cấu hình OpenAI](docs/cp3.md#dùng-key-openai).
+
 **Thành viên, lớp, track:** xem [TEAMS.md](TEAMS.md). **Điền TEAMS.md đúng format**: khi chấm và đánh giá, BTC quét file này để ghép điểm cho từng người.
 
 *Lát cắt = phần nhỏ nhất làm xong được trong hackathon: một người dùng · một việc · một quyết định AI · một kết quả.*
@@ -22,7 +34,7 @@
 - [Bằng chứng và giới hạn](evidence/summary.md) · [Giả thuyết cần kiểm](evidence/hypothesis.md)
 - [Kế hoạch đánh giá bổ sung](eval/upgrade-plan.md)
 
-**Khung CP2 mới đã triển khai:** fake planner gọi công cụ trong vòng giới hạn, nhớ phiên, hồ sơ SQLite, bàn CLI khách/nhân viên, duyệt/cập nhật và theo dõi ca, đọc ETA nền tảng giả lập. Chưa có web, đăng nhập production hoặc AI thật. [Báo cáo kiểm kỹ thuật](eval/cp2-upgrade-check.md).
+**Khung CP2 đã triển khai:** fake planner gọi công cụ trong vòng giới hạn, nhớ phiên, hồ sơ SQLite, bàn CLI khách/nhân viên, duyệt/cập nhật và theo dõi ca, đọc ETA nền tảng giả lập. Khung CLI mô phỏng dùng dữ liệu synthetic. [Báo cáo kiểm kỹ thuật](eval/cp2-upgrade-check.md).
 
 Bản CP2 chạy được workflow D1 bằng model giả, không cần key; đã có 4 thành viên và phân công chung/kiểm chéo trong `TEAMS.md`. Có 20 câu thử, 4 metric, data card và 10 đơn synthetic; chính sách DEMO-P1 là quy tắc dựng, không phải chính sách của hãng.
 
@@ -34,7 +46,7 @@ MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
 
 Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên; `/nhanvien` → `/tiepnhan` để nhận ca; `/trangthai C001` để xem tiến độ. `/eta D004` xem ETA nền tảng từ snapshot. `/help` xem cú pháp. [Kịch bản đầy đủ](docs/cp2-demo.md). Dữ liệu synthetic/snapshot, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
 
-**Bản nâng cấp hiện tại:** code do Codex triển khai theo yêu cầu Minh; Minh đã kiểm tra bản lõi và xác nhận OK trước đợt mở rộng này. Phần mở rộng mới do Codex kiểm tự động, chưa có xác nhận nhóm đã rà. CP3 chưa triển khai.
+**CP3** bổ sung web local dùng cùng agent và SQLite với CLI. Docker Compose hỗ trợ Ollama và OpenAI. [Hướng dẫn CP3](docs/cp3.md).
 
 **Tiến độ lịch sử khung CP2 v1:** Nhóm trưởng đã nộp CP1. Cả nhóm đã kiểm tra bản CP2. Lượt chấm thử của Codex đạt 5/5 output từ model giả. Thành và Cường đã rà soát và đồng ý với kết quả 5/5 theo xác nhận của nhóm trưởng. Xem [phiếu chấm](eval/review-5.md).
 
@@ -48,7 +60,7 @@ Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên
 - [ ] Thành, Quang, Cường rà và xác nhận phần phụ trách trong [TEAMS](TEAMS.md).
 - [x] Thành và Cường đã chốt chuẩn và chấm thử, đồng thuận 5/5 theo xác nhận của nhóm trưởng.
 - [ ] Lưu bảng điểm từng câu và xác minh nguồn của 7 câu `data_that`.
-- [ ] Minh kiểm link công khai và nộp form CP2; chưa ghi nhận đã nộp.
+- [x] Minh xác nhận đã nộp form CP2.
 
 ## Nhóm làm gì, khung làm gì
 
@@ -127,7 +139,7 @@ Nhóm dùng stack khác (Node, Streamlit, notebook…): sửa hàm `run_app()` t
 
 | Thành phần | Thật / Giả | Ghi chú |
 |---|---|---|
-| Lời gọi AI ở quyết định trung tâm | **Giả tại CP2** | Model fake chọn action bằng luật đơn giản, token 0; CP3 cần nối model thật |
+| Lời gọi AI ở quyết định trung tâm | **Cấu hình được** | Ollama, OpenAI hoặc OpenRouter trả số token thực tế. Chế độ fake mặc định khi CLI chưa cấu hình. |
 | Dữ liệu và chính sách demo | **Synthetic** | 10 đơn, 1 chính sách DEMO-P1; seed 27112026 |
 | Tra dữ liệu, kiểm tiền và trace | Code chạy thật | Không kết nối sàn hoặc thao tác tiền thật |
 

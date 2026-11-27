@@ -75,12 +75,12 @@ Code/hồ sơ được soạn với Codex; bảng này chỉ ra phần mỗi ng�
 
 | Thành viên | Phần phụ trách và link xem | Xác nhận đã có |
 |---|---|---|
-| Minh | [Spec](spec.md), [canvas](canvas.md), [hội thoại và hồ sơ](codebase/agent.py), [CLI/tích hợp](codebase/app.py) | CP1 đã nộp; bản CP2 nâng cấp đã kiểm và xác nhận OK trong trao đổi; chưa xác nhận đã nộp CP2 |
+| Minh | [Spec](spec.md), [canvas](canvas.md), [hội thoại và hồ sơ](codebase/agent.py), [CLI/tích hợp](codebase/app.py) | CP1 đã nộp; bản CP2 nâng cấp đã kiểm và xác nhận OK trong trao đổi; đã nộp CP2 theo xác nhận của Minh |
 | Thành | [Công cụ/kiểm hạn mức](codebase/tools.py), [kho ca và trạng thái](codebase/agent.py), [fixtures đơn](data/demo_orders.json), [test](tests/test_agent.py) | Lịch sử CP1 ghi đối chiếu review/nhãn; đã đồng ý 5/5 output khung cũ theo nhóm trưởng. Chưa xác nhận rà code nâng cấp |
 | Quang | [Bằng chứng](evidence/summary.md), [data card](data/DATA_CARD.md), [giả thuyết](evidence/hypothesis.md), [canvas](canvas.md) | Đã cung cấp tài liệu review, xác nhận lát cắt và kiểm quyền repo ở CP1 theo sổ phân công. Chưa kiểm độc lập toàn bộ review hoặc giả thuyết mở rộng |
 | Cường | [Benchmark](eval/benchmark.csv), [metric](eval/metric_spec.yaml), [phiếu chấm cũ](eval/review-5.md), [kiểm CP2 mới](eval/cp2-upgrade-check.md) | Đã đồng ý 5/5 output khung cũ theo nhóm trưởng; kiểm kỹ thuật mới do Codex chạy. Chưa có lượt AI thật hoặc xác nhận rà bản nâng cấp |
 
-Theo xác nhận của nhóm trưởng, Thành và Cường đã chốt chuẩn và chấm thử CP2, đồng thuận 5/5. Repo chưa lưu điểm từng câu của lần chấm này. Minh phụ trách nộp form CP2.
+Theo xác nhận của nhóm trưởng, Thành và Cường đã chốt chuẩn và chấm thử CP2, đồng thuận 5/5. Repo chưa lưu điểm từng câu của lần chấm này. Minh xác nhận đã nộp form CP2.
 
 
 **Mở rộng CP2 đã có code:** Minh phụ trách rà tích hợp lệnh vào CLI; Thành phụ trách rà checklist/chốt duyệt/nháp nhắc và mở lại; Quang kiểm nhu cầu/nguồn, Cường rà test và hồ sơ chấm độc lập. Code do Codex triển khai; chưa ghi nhận các bạn đã rà phần mở rộng.

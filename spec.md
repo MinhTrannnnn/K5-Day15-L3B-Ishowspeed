@@ -153,3 +153,4 @@ Review được ghi theo mã và bỏ tên người viết. Bản chạy dùng �
 | 27/11/2026 18:52 | Dùng ETA từ nền tảng | Giữ đúng phạm vi khiếu nại giao trễ. |
 | 27/11/2026 19:02 | Thêm checklist, nhắc ca và phản hồi | Giúp nhân viên rà hồ sơ, theo dõi ca chờ và xử lý phản hồi. |
 | 27/11/2026 | Rút gọn đặc tả theo mẫu BTC | Nêu rõ phạm vi cả nhóm thống nhất và tính năng đang chạy. |
+| 28/11/2026 | Tích hợp web FastAPI/React và cấu hình Ollama/OpenAI vào lõi CP2 | CLI, web và bộ đánh giá dùng cùng agent. [Hướng dẫn CP3](docs/cp3.md) |
