@@ -25,88 +25,116 @@ Các bước hỗ trợ và hủy đơn tham chiếu tài liệu công khai củ
 
 | Hướng | Dấu hiệu trong review | Số lần/người/tháng | Mỗi lần tốn gì | Impact/tháng | Làm kịp? | Quyết định dự kiến |
 |---|---|---|---|---|---|---|
-| **Chờ lâu, chưa rõ trạng thái đơn** | Google Play: ShopeeFood 10/100 nói chờ/giao lâu, GrabFood 1/12 nói cả chờ lâu lẫn khó nhận hỗ trợ. Mẫu đối chiếu: 2/31 nói cả hai. | [NHÓM ĐIỀN số có nguồn hoặc tự ước tính] | SF054 kể tổng thời gian chờ 90 phút. GF071 kể giao muộn 22 phút so với mốc ban đầu, chưa đo thời gian tìm hỗ trợ riêng. | Xem công thức bên dưới. | Có thể demo bằng đơn giả lập và vài trạng thái đơn. | **Chọn dự kiến** |
+| **Chờ lâu, chưa rõ trạng thái đơn** | Google Play: ShopeeFood 10/100 nói chờ/giao lâu, GrabFood 1/12 nói cả chờ lâu lẫn khó nhận hỗ trợ. Mẫu đối chiếu: 2/31 nói cả hai. | Chưa đo; review không cho biết tần suất/người/tháng | SF054 kể tổng thời gian chờ 90 phút. GF071 kể giao muộn 22 phút so với mốc ban đầu, chưa đo thời gian tìm hỗ trợ riêng. | Xem công thức bên dưới. | Có thể demo bằng đơn giả lập và vài trạng thái đơn. | **Chọn dự kiến** |
 | **Thiếu món** | 0/100 review khách ShopeeFood và 0/12 review GrabFood nói đã nhận đơn thiếu món. Có một tranh chấp xác minh từ phía quán, SM023. | Chưa đo | Có thể cần giao bù hoặc hoàn tiền phần thiếu. Chưa đo thời gian xử lý. | Chưa tính | Có thể demo, nhưng cần dữ liệu món và quy tắc bồi hoàn rõ. | Chưa chọn vì mẫu hiện tại thiếu trường hợp trực tiếp từ phía khách. |
 | **Sai món** | 1/100 review ShopeeFood nêu nhận sai loại món, SF052. Trong tập GrabFood là 0/12. | Chưa đo | SF052 kể món giao sai loại và không hủy được đơn. Chưa đo thời gian xử lý hay chi phí. | Chưa tính | Có thể demo nếu có dữ liệu món đã đặt và món nhận được. | Chưa chọn vì bằng chứng trực tiếp ít hơn hướng chờ lâu. |
 
 **Công thức impact/tháng cho hướng chọn** = số khách gặp vấn đề trong phạm vi nhóm chọn × số lần mỗi khách gặp/tháng × số phút tìm hỗ trợ mỗi lần. Nhóm xác nhận ba đầu vào trước khi dùng làm dự báo. Ví dụ minh họa cách tính, **toàn bộ đầu vào là tự ước tính**: 10 khách × 1 lần/tháng × 5 phút = **50 phút tìm hỗ trợ/tháng**. Số 10 khách ở ví dụ độc lập với 10/100 review, và 90 phút chờ giao không được dùng làm số phút tìm hỗ trợ.
 
-**Tần suất cho persona:** [NHÓM ĐIỀN theo dữ kiện hoặc đánh dấu tự ước tính khi chốt phạm vi mô phỏng].
+**Tần suất cho persona:** Chưa đo tần suất thực tế. Giả định 1 lần cần hỗ trợ/người/tháng trong ví dụ trên là tự ước tính, chưa phải dữ liệu persona đã xác nhận.
 
 Chi tiết nguồn và mã review ở [bản Google Play](evidence/data-mining.md) và [bản đối chiếu](evidence/data-mining-app-store-31.md).
 
 **Tình trạng kiểm chứng:** Chưa có bản lưu đầy đủ review gốc hoặc bảng gắn nhãn toàn mẫu Google Play trong repo; các ví dụ Google Play là diễn giải, không phải trích dẫn nguyên văn. Chưa tuyên bố đạt ngưỡng bằng chứng CP3.
 
-## §3. Giải pháp tương tự *(guide 2.1)*
-- [sản phẩm / tính năng gần giống]: một điều đáng học · một điều đáng né · mình khác gì
+## §3. Giải pháp tương tự — dự kiến cho CP2
 
-## §4. Thiết kế *(guide 2.2, 3.2)*
-- **Lát cắt dự kiến:** Khi khách báo đã chờ lâu mà chưa nhận đồ ăn, AI tra trạng thái đơn và giờ giao dự kiến để quyết định hướng dẫn khách chờ tiếp, kiểm tra khả năng hủy hoặc chuyển nhân viên, giúp khách biết bước tiếp theo.
-- Không làm (≥3 điều):
-- **Sơ đồ** (ảnh / Mermaid / draw.io): [chèn ở đây]
-- **Hình dạng:** [ ] workflow cố định · [ ] một agent · [ ] nhiều agent — 2 dòng lý do, và vì sao **không** chọn hình dạng phức tạp hơn:
-- **AI dựa vào đâu** — mỗi công cụ (khớp `codebase/tools.py`):
+Tham chiếu hiện có là luồng Chi tiết đơn và Trung tâm Trợ giúp ShopeeFood nêu ở §0. Dự kiến học cách gắn hỗ trợ với một đơn cụ thể và giải thích bước tiếp theo từ trạng thái đơn. Chưa đánh giá trực tiếp sản phẩm đối chiếu.
 
-  | Công cụ | Input | Output | Tác động ra ngoài? |
-  |---|---|---|---|
-  |  |  |  |  |
+## §4. Thiết kế — bản dự kiến, chưa triển khai
 
-- **Mức tự động dự kiến:** AI tự tra cứu và soạn hướng dẫn từ trạng thái đơn; hủy đơn, hoàn tiền, gửi yêu cầu và chuyển ca ra ngoài cần người phụ trách duyệt. Hủy sai có thể làm quán mất đơn đã chuẩn bị, hoàn sai làm quán hoặc khách mất tiền.
-- **Chỗ chặn rủi ro dự kiến:** code kiểm điều kiện và hạn mức theo chính sách dựng có nguồn rõ; không suy ra lý do chậm khi dữ liệu không có; thiếu hoặc mâu thuẫn trạng thái thì đề xuất chuyển nhân viên; không coi mốc giao dự kiến là bảo đảm.
-- **Chỗ người duyệt:** mọi thao tác hủy đơn, hoàn tiền hoặc tác động ra ngoài; không hứa bồi thường vượt chính sách.
-- **Nguyên tắc thiết kế** (≥3, bắt buộc G10):
+- **Lát cắt:** Khi khách báo đã chờ lâu mà chưa nhận đồ ăn, AI tra trạng thái đơn và giờ giao dự kiến để quyết định hướng dẫn chờ tiếp, kiểm tra khả năng hủy hoặc chuyển nhân viên, giúp khách biết bước tiếp theo.
+- **Phạm vi:** một đơn của khách đang chờ. Không điều phối tài xế, sửa trạng thái đơn thật hoặc tự hủy/hoàn tiền.
+- **Hình dạng:** workflow cố định; AI soạn hướng dẫn từ dữ liệu đã tra. Luồng hẹp, điều kiện kiểm và điểm người duyệt rõ nên chưa cần nhiều agent.
 
-  | Nguyên tắc | Chỗ cụ thể trên sơ đồ / trong bản chạy thử |
-  |---|---|
-  | G10 — thu hẹp phạm vi khi không chắc |  |
-  |  |  |
-  |  |  |
+```mermaid
+flowchart TD
+    A[Khách báo chờ lâu] --> B{Đủ mã đơn?}
+    B -->|Chưa| C[Hỏi mã đơn]
+    B -->|Đủ| D[Tra đơn và chính sách]
+    D --> E{Dữ liệu nhất quán?}
+    E -->|Không| F[Đề xuất chuyển nhân viên]
+    E -->|Có| G[Giải thích trạng thái và bước tiếp theo]
+    G --> H{Cần tác động ra ngoài?}
+    H -->|Có| I[Soạn đề xuất, chờ người duyệt]
+    H -->|Không| J[Trả hướng dẫn có căn cứ]
+```
 
-- Phần còn giả: repo hiện vẫn là khung BTC, chưa triển khai luồng D1; demo dự kiến dùng đơn, quán, thanh toán và chính sách dựng có seed, không có giao dịch thật.
-
-## §5. Chỗ khó — 4 lớp + ≥6 kịch bản + 2 tấn công *(guide 2.3)*
-
-| Kịch bản | Lớp (1–4) | Hành vi mong muốn (nói gì, hiện gì, cho làm gì tiếp) | Câu thử |
+| Công cụ dự kiến | Input | Output | Tác động ra ngoài? |
 |---|---|---|---|
-|  |  |  |  |
-| *(tấn công)* |  |  |  |
-| *(tấn công)* |  |  |  |
+| `get_order(order_id)` | Mã đơn | Trạng thái, giờ dự kiến, mốc cập nhật, thanh toán | Chỉ đọc dữ liệu giả lập |
+| `get_policy(issue_type)` | Loại sự cố | Điều kiện xử lý, hạn mức theo chính sách dựng | Chỉ đọc |
+| `check_limit(issue_type, amount)` | Loại sự cố, số tiền | Kiểm điều kiện và hạn mức bằng code | Không |
 
-(1) nguồn sự thật · (2) mơ hồ / thiếu thông tin · (3) ngoài phạm vi / thẩm quyền · (4) đặc thù lĩnh vực (sai thì người dùng mất gì đắt nhất)
+Các công cụ trên chưa triển khai trong `codebase/tools.py`.
 
-## §6. Bốn đường đi của trải nghiệm
-- Mọi thứ suôn sẻ: · Không chắc (lớp 2): · Không có căn cứ (lớp 1): · Người dùng sửa:
-- Bị đòi ngoài phạm vi (lớp 3): · Trường hợp đặc thù lĩnh vực (lớp 4):
+- **Mức tự động:** AI tự tra cứu và soạn hướng dẫn; người phụ trách duyệt trước khi hủy, hoàn tiền, gửi yêu cầu hoặc chuyển ca ra ngoài. Hủy sai có thể làm quán mất đơn đã chuẩn bị; hoàn sai khiến quán hoặc khách mất tiền.
+- **Chặn rủi ro:** code kiểm điều kiện và hạn mức; không suy ra lý do chậm khi dữ liệu không có; không bảo đảm thời điểm giao từ một mốc dự kiến.
 
-## §7. Đánh giá & chuẩn "đạt" *(guide 2.4, 4.1)*
-- Data card: `data/DATA_CARD.md` · bộ câu thử: `eval/benchmark.csv` — __ câu (thuong __ · kho __ · tu_choi __) · metric: `eval/metric_spec.yaml` (__ metric)
-- **Chuẩn "đạt"** (chốt **trước 19:30 Thứ Sáu 27/11**, giữ nguyên đến 23:59 Thứ Bảy 28/11): "Đạt khi ≥ __% câu qua, và __"
-- Kết quả: lượt 1 __/__ (__%) · lượt 2 __/__ (__%) — run ID: __ / __ → chi tiết `eval/report.md`, hồ sơ `eval/README.md`
+| Nguyên tắc | Áp dụng dự kiến |
+|---|---|
+| G10 — thu hẹp phạm vi khi không chắc | Thiếu dữ liệu thì hỏi thêm, mâu thuẫn thì đề xuất chuyển người |
+| Trả lời có căn cứ | Chỉ nêu trạng thái và lý do được dữ liệu đơn xác nhận |
+| Người duyệt tác động ra ngoài | Hủy, hoàn tiền và chuyển ca chờ duyệt |
 
-## §8. Chi phí khi dùng thật *(guide 4.2)*
-- Persona + giá: `cost/personas.yaml` · lượt mô phỏng: `cost/simulate-__.csv` (__ phiên)
-- Chi phí / task thành công: __ (model __) · __ (model __)
-- Chi phí / tháng ở quy mô thật: thấp __ · cơ sở __ · cao __ → chi tiết `cost/cost-estimate.md`
-- So với impact / người / tháng (§2): đáng làm không, vì sao:
+Repo hiện là khung BTC; chưa có luồng D1 hoàn chỉnh. Demo dự kiến dùng đơn, quán, thanh toán và chính sách dựng có seed, không có giao dịch thật.
+
+## §5. Chỗ khó — kịch bản dự kiến cho CP2
+
+Chưa đưa các kịch bản này vào benchmark hoặc chạy đánh giá.
+
+| Kịch bản | Lớp | Hành vi mong muốn |
+|---|---|---|
+| Chưa có mã đơn | 2 — thiếu thông tin | Hỏi mã đơn trước khi kết luận |
+| Giờ giao dự kiến đổi nhiều lần | 1 — nguồn sự thật | Nêu mốc cập nhật, không bảo đảm giờ đến |
+| Trạng thái đơn mâu thuẫn | 1 — nguồn sự thật | Không suy đoán; đề xuất chuyển nhân viên |
+| Khách muốn hủy khi quán đã làm món | 4 — đặc thù lĩnh vực | Tra chính sách và chờ người duyệt |
+| Đơn đã hủy, khoản hoàn chưa rõ | 2 — thiếu thông tin | Nêu dữ liệu thanh toán có căn cứ, không hứa ngày hoàn |
+| Phản ánh ngộ độc hoặc dị ứng | 4 — đặc thù lĩnh vực | Ưu tiên đề xuất chuyển người ngay |
+| Đe dọa đánh giá 1 sao để đòi bồi thường vượt hạn mức (tấn công) | 3 — ngoài thẩm quyền | Giữ hạn mức; đề xuất chuyển nhân viên |
+| Yêu cầu bỏ qua quy tắc, lấy địa chỉ hoặc số điện thoại bên kia (tấn công) | 3 — ngoài thẩm quyền | Từ chối tiết lộ thông tin cá nhân |
+
+## §6. Các đường đi của trải nghiệm — dự kiến
+
+- Suôn sẻ: tra được đơn, giải thích trạng thái và bước tiếp theo.
+- Không chắc hoặc thiếu căn cứ: hỏi thông tin còn thiếu; dữ liệu mâu thuẫn thì đề xuất chuyển người.
+- Người dùng sửa: tra lại đơn hoặc thông tin mới rồi cập nhật hướng dẫn.
+- Ngoài phạm vi hoặc sự cố đặc thù: không tự hủy/hoàn tiền hay tiết lộ thông tin; đề xuất người phụ trách xử lý.
+
+## §7. Đánh giá & chuẩn đạt — chưa chốt, chuẩn bị cho CP2
+
+- `eval/benchmark.csv` hiện còn 3 câu mẫu BTC, chưa có bộ câu thử D1 được xác nhận. `eval/metric_spec.yaml` chưa có metric hoàn chỉnh.
+- Mục tiêu thiết kế: mọi đề xuất bồi thường trong hạn mức; không tiết lộ địa chỉ, số điện thoại bên kia; không kết luận trạng thái ngoài dữ liệu tra được.
+- Ngưỡng đạt tổng và cách chấm chưa chốt. Chốt tại CP2 19:30 ngày 27/11/2026 trước khi đánh giá, sau đó giữ nguyên theo luật BTC.
+- Chưa chạy đánh giá D1, chưa có run ID hoặc tỷ lệ đạt.
+
+## §8. Chi phí khi dùng thật — chưa đo, chuẩn bị cho CP3–CP4
+
+- Chưa chọn model, cập nhật giá có nguồn hoặc xác nhận persona D1; `cost/personas.yaml` vẫn là khung.
+- Chưa chạy mô phỏng, chưa có chi phí/phiên, /task thành công hoặc /tháng.
+- Chưa đủ căn cứ kết luận lợi ích so với chi phí; impact ở §2 mới có ví dụ tự ước tính.
 
 ## §9. Rủi ro & an toàn
-- Dữ liệu: đã ẩn danh gì, không thu gì, không đưa gì vào model gói miễn phí:
-- AI **không được** tự hủy hoặc hoàn tiền; bồi thường vượt hạn mức; tiết lộ địa chỉ, số điện thoại hai bên; coi lời dọa là căn cứ. Nghi ngộ độc, dị ứng hoặc dị vật phải đề xuất chuyển người ngay.
-- Ai có thể bị hại nếu AI sai, và nhóm chặn thế nào:
+
+- Tài liệu review dùng mã và bỏ tên người viết; demo dự kiến dùng đơn giả lập. Không đưa địa chỉ, số điện thoại, thông tin thanh toán thật hoặc bí mật truy cập vào model và repo.
+- Không tự hủy hoặc hoàn tiền, không bồi thường vượt hạn mức và không coi lời dọa là căn cứ. Nghi ngộ độc, dị ứng hoặc dị vật phải đề xuất chuyển người ngay.
+- Nếu AI sai, khách có thể chờ thêm hoặc mất quyền xử lý; quán có thể mất tiền cho món đã chuẩn bị. Thiết kế chặn bằng tra dữ liệu đơn, kiểm chính sách bằng code và người duyệt trước thao tác; chưa triển khai các chốt này trong code.
 
 ## §10. Phân công & changelog
-- Phân công: Trần Quang Minh điều phối nhóm, quản lý repo và nộp checkpoint; các thành viên khác chờ bổ sung, khớp TEAMS.md.
-- Dùng AI: Codex đối chiếu tài liệu CP1-D1 do nhóm cung cấp và soạn bản đầu canvas, spec, tổng hợp bằng chứng. Chưa đối chiếu độc lập review gốc; Trần Quang Minh cần kiểm lại nội dung trước khi dùng số liệu làm kết luận. Chi tiết: `docs/ai-usage.md`.
-- Nhật ký thay đổi — **mọi thay đổi sau CP2 19:30 Thứ Sáu 27/11 phải có dòng ở đây**:
 
-**CP2 → CP4** (vd thu hẹp lát cắt, hỏi thêm người dùng, lần cải tiến trước lượt 2)
-
-| Thời điểm | Đổi gì | Vì sao (trỏ về câu thử / lỗi / bằng chứng nào) |
+| Đầu việc | Người phụ trách | Trạng thái |
 |---|---|---|
-|  |  |  |
+| Tạo repo, chọn D1, cung cấp tài liệu | Trần Quang Minh | Đã làm |
+| Soạn README và canvas | Codex hỗ trợ; Trần Quang Minh phụ trách duyệt | Đã có bản nháp |
+| Soạn spec, tích hợp hồ sơ review | Codex hỗ trợ; Trần Quang Minh phụ trách duyệt | Đã có bản nháp, chưa kiểm review gốc |
+| Kiểm lại nguồn review | Chưa phân công | Chưa làm |
+| Bổ sung thành viên, xác nhận lát cắt, nộp form CP1 | Trần Quang Minh | Chưa hoàn tất |
+| Code, benchmark và mô phỏng | Chưa phân công | Chuẩn bị cho checkpoint sau |
 
-**Sau CP4 (đến 23:59 Thứ Bảy 28/11)** (sửa theo góp ý — không sửa chuẩn "đạt", câu thử, số bằng chứng, kết quả các lượt đã chạy)
+Chi tiết từng đầu việc: [TEAMS.md](TEAMS.md).
 
-| Thời điểm | Đổi gì | Vì sao |
-|---|---|---|
-|  |  |  |
+**Dùng AI:** Codex tích hợp tài liệu CP1-D1 do nhóm cung cấp và soạn bản đầu hồ sơ. Chưa đối chiếu độc lập review gốc; nhóm trưởng cần kiểm lại nội dung và nguồn. Chi tiết: [docs/ai-usage.md](docs/ai-usage.md).
+
+**Nhật ký trước CP2:** Bản đầu chọn thiếu món; sau khi nhận tài liệu CP1-D1 ngày 27/11/2026, chuyển lát cắt dự kiến sang chờ lâu, chưa rõ trạng thái đơn vì tài liệu có ví dụ trực tiếp hơn. Chưa kiểm chứng độc lập nguồn review.
+
+Chưa có thay đổi sau CP2/CP4 được ghi nhận. Mọi thay đổi sau các mốc này sẽ ghi ngày, nội dung, lý do và căn cứ tại đây theo luật BTC.

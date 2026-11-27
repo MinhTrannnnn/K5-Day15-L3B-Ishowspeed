@@ -23,3 +23,20 @@
 - **Mã học viên** ghi đúng như trên hệ thống của khoá, không có khoảng trắng. Đội trưởng nộp các checkpoint bằng mã ở dòng 1.
 - **Họ và tên** ghi đủ, có dấu.
 - **Phần việc chính:** 1 dòng ngắn, khớp với phần có tên người đó trong repo.
+
+## Phần việc — CP1
+
+| Đầu việc | Người phụ trách | Trạng thái |
+|---|---|---|
+| Tạo repo và chọn Track D1 | Trần Quang Minh | Đã làm |
+| Cung cấp tài liệu tham khảo CP1-D1 | Nguyễn Hải Quang | Đã làm |
+| Chuẩn bị khung repo, commit và push | Trần Quang Minh, Codex hỗ trợ thao tác | Đã làm |
+| Soạn README và canvas | Codex hỗ trợ; Trần Quang Minh phụ trách duyệt | Đã có bản nháp |
+| Soạn spec và bảng so sánh 3 hướng | Codex hỗ trợ; Trần Quang Minh phụ trách duyệt | Đã có bản nháp |
+| Tích hợp hồ sơ review, tổng hợp bằng chứng | Codex hỗ trợ; Nguyễn Văn Cường phụ trách duyệt | Đã tích hợp, chưa kiểm review gốc |
+| Đối chiếu review gốc và kiểm lại nhãn | Trần Duy Thành | Chưa làm |
+| Bổ sung thành viên và phân công | Trần Duy Thành | Chưa hoàn tất |
+| Xác nhận lát cắt, kiểm tra repo bằng cửa sổ ẩn danh | Nguyễn Hải Quang | Chưa xác nhận |
+| Nộp form CP1 | Trần Quang Minh | Chưa ghi nhận đã nộp |
+
+Tên và phần việc các thành viên khác sẽ bổ sung khi có danh sách. Chưa thu thập phỏng vấn, khảo sát hoặc triển khai luồng D1 trong repo.
