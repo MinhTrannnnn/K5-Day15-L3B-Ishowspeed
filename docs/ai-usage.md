@@ -6,8 +6,8 @@
 | Công cụ và dữ liệu demo | Codex | Viết tools, generator, 10 fixtures seed 27112026, policy synthetic | Trần Duy Thành; Cường kiểm chéo | Test code đã qua; chưa có log kiểm tay của nhóm |
 | Tài liệu review | Codex theo khai báo trong hồ sơ review | Tài liệu nguồn có phân tích review; lượt CP2 chỉ tích hợp | Trần Duy Thành đối chiếu ở CP1, Nguyễn Văn Cường rà bản tổng hợp, Nguyễn Hải Quang phụ trách data card CP2 | Tiến độ CP1 ghi đã đối chiếu nhãn. Repo chưa có bản lưu toàn mẫu |
 | Benchmark | Codex | Diễn giải 7 tình huống từ tài liệu có dẫn mã, viết 13 tình huống từ lưới phủ | Nguyễn Văn Cường; Thành kiểm chéo | Không coi câu diễn giải là trích nguyên văn |
-| Metric và phiếu 5 output | Codex | Soạn 4 metric, chuẩn đạt và xuất output fake để chấm | Thành và Cường chấm độc lập | Codex đã chấm thử, 5/5 câu đạt. Nhóm trưởng xác nhận Thành và Cường đồng ý với kết quả cả 5 câu. Phiếu lưu điểm đã xác nhận |
-| Spec/canvas/data card | Codex | Soạn bản CP2 từ tài liệu được cung cấp và code đã chạy | Cả 4 cùng duyệt theo TEAMS.md | Cả nhóm đã kiểm tra bản CP2. Chưa xác nhận chốt chuẩn |
+| Metric và phiếu 5 output | Codex | Soạn 4 metric, chuẩn đạt và xuất output fake để chấm | Thành và Cường rà kết quả; phiếu độc lập còn thiếu | Codex chấm thử 5/5 câu đạt; theo xác nhận của nhóm trưởng, Thành và Cường đồng ý. Không có hai bảng điểm riêng trước đối chiếu |
+| Spec/canvas/data card | Codex | Soạn bản CP2 từ tài liệu được cung cấp và code đã chạy | Cả 4 cùng duyệt theo TEAMS.md | Cả nhóm đã kiểm tra bản CP2; theo xác nhận của nhóm trưởng, Thành và Cường đã chốt chuẩn. Commit `41b2f4f` lưu ngưỡng lúc 17:05 ngày 27/11 |
 | Kiểm tra code | Codex | Chạy check BTC, 6 unit test, 20 nhánh fake và CLI | Cả 4 đọc và giải thích phần phụ trách | Chỉ kiểm luồng fake, không phải điểm AI thật |
 
 Codex đã chấm thử 5 output từ model giả theo metric CP2. Chưa có điểm đánh giá CP3 trên model thật. Fake model không đọc benchmark/expected. Không ghi các việc chấm/duyệt người thật là đã hoàn tất khi chưa có kết quả. Sau khi chốt CP2 không sửa chuẩn đạt để khớp kết quả.
