@@ -47,9 +47,9 @@ Trần Quang Minh phụ trách chuẩn bị và tổng hợp bản CP2. Cả 4 t
 
 | Thành viên | Hai phần phụ trách chính | Kiểm chéo | Trạng thái |
 |---|---|---|---|
-| Trần Quang Minh | Workflow `agent.py`; demo CLI và tích hợp spec | Data card/bằng chứng của Quang | Đã được Trần Quang Minh kiểm tra |
-| Trần Duy Thành | Công cụ `tools.py`; fixtures/chốt an toàn và test | Metric/câu thử của Cường; chấm độc lập 5 output | Đã được Trần Quang Minh kiểm tra. Chờ chấm độc lập |
-| Nguyễn Hải Quang | Bằng chứng và data card; canvas và sơ đồ | Workflow/demo của Minh | Đã được Trần Quang Minh kiểm tra phần hồ sơ. Chưa đối chiếu review gốc |
-| Nguyễn Văn Cường | Benchmark; metric và hồ sơ đánh giá | Công cụ/fixtures của Thành; chấm độc lập 5 output | Đã được Trần Quang Minh kiểm tra. Chờ chấm độc lập |
+| Trần Quang Minh | Workflow `agent.py`; demo CLI và tích hợp spec | Data card/bằng chứng của Quang | Đã được cả nhóm kiểm tra |
+| Trần Duy Thành | Công cụ `tools.py`; fixtures/chốt an toàn và test | Metric/câu thử của Cường; chấm độc lập 5 output | Đã được cả nhóm kiểm tra. Chờ chấm độc lập |
+| Nguyễn Hải Quang | Bằng chứng và data card; canvas và sơ đồ | Workflow/demo của Minh | Đã được cả nhóm kiểm tra phần hồ sơ. Chưa đối chiếu review gốc |
+| Nguyễn Văn Cường | Benchmark; metric và hồ sơ đánh giá | Công cụ/fixtures của Thành; chấm độc lập 5 output | Đã được cả nhóm kiểm tra. Chờ chấm độc lập |
 
 Trần Quang Minh phụ trách nộp CP2 sau khi nhóm chốt chuẩn và hoàn tất chấm thử.

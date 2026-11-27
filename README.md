@@ -31,7 +31,7 @@ MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
 
 Thử nhập `D001 tôi muốn hủy`, `D004 tôi chờ lâu`, `D005 khi nào hoàn tiền`, hoặc hỏi số điện thoại tài xế. Mỗi lượt độc lập, cần mã đơn nếu muốn tra cứu. Dữ liệu là snapshot demo cố định, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
 
-**Tiến độ:** Nhóm trưởng đã nộp CP1 và kiểm tra bản CP2. Thành và Cường phụ trách chấm độc lập [5 output](eval/review-5.md) trước khi nhóm chốt chuẩn §7. CP2 đang dùng model giả.
+**Tiến độ:** Nhóm trưởng đã nộp CP1. Cả nhóm đã kiểm tra bản CP2. Thành và Cường phụ trách chấm độc lập [5 output](eval/review-5.md) trước khi nhóm chốt chuẩn §7. CP2 đang dùng model giả.
 
 ---
 

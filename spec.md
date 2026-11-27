@@ -120,7 +120,7 @@ Dữ liệu: 10 đơn synthetic, seed `27112026`; snapshot 12:30 ngày 27/11/202
 - `python3 run.py check`: không còn cảnh báo. CLI đã đi hết luồng với AI giả; harness eval chạy cả 20 câu nhưng ghi `run-mock`, không tính là lượt AI thật.
 - Unit test chặn rủi ro: 6 test method đã qua; output demo trong [cp2-preview.json](eval/cp2-preview.json). Không công bố tỷ lệ đạt AI thật từ các kiểm tra này.
 - **Chấm độc lập còn cần nhóm thực hiện:** Thành và Cường chấm [review-5.md](eval/review-5.md), khớp ≥4/5; nếu lệch ≥2/5 làm rõ metric trước khi chốt. Chưa có kết quả chấm của hai người.
-- **Tình trạng chốt:** Trần Quang Minh đã kiểm tra bản CP2. Chưa ghi nhận kết quả chấm độc lập hoặc xác nhận mốc chốt CP2. Phải duyệt và lưu chuẩn trước hạn CP2; sau chốt không sửa chuẩn theo kết quả. Chưa có run ID thật/tỷ lệ đạt CP3.
+- **Tình trạng chốt:** Cả nhóm đã kiểm tra bản CP2. Chưa ghi nhận kết quả chấm độc lập hoặc xác nhận mốc chốt CP2. Phải duyệt và lưu chuẩn trước hạn CP2; sau chốt không sửa chuẩn theo kết quả. Chưa có run ID thật/tỷ lệ đạt CP3.
 
 ## §8. Chi phí khi dùng thật — chưa đo, chuẩn bị cho CP3–CP4
 
