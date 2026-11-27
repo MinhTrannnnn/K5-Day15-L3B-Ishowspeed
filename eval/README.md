@@ -62,7 +62,7 @@ CP3: nối model thật trong `codebase/ai.py`, cấu hình `.env` riêng; chạ
 
 ## 6. Giới hạn và việc còn lại
 
-Chưa gọi model thật, chưa có run ID đạt chuẩn CP3; chưa kiểm độc lập nguồn review; phiếu đã ghi điểm xác nhận của hai người, chưa có hai bộ điểm trước đối chiếu. Fake model dùng luật từ khóa đơn giản để demo nên không phản ánh khả năng hiểu ngôn ngữ của AI thật. Sau khi có model, phải đo lại bằng bộ thử đã chốt.
+Lượt 1 CP3 đã chạy 20 câu bằng `qwen2.5:1.5b`, Run ID `run-1@20261127-194854`. CSV và trace gốc được lưu, và [điểm chấm nháp](cp3-run1-review.md) chờ người chấm duyệt. Lượt này đánh giá bộ một lượt đã có. Hội thoại nhiều lượt và thao tác duyệt ca được kiểm riêng. Phiếu CP2 ghi điểm xác nhận của hai người, chưa có hai bộ điểm trước đối chiếu.
 
 
 ## 7. Đánh giá thiết kế nâng cấp

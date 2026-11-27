@@ -32,3 +32,15 @@ Không có bằng chứng mới được thu thập trong lần sửa tài liệ
 | Khách muốn xem thời gian giao từ lịch sử trước khi chọn shop | Hỏi lần chọn shop gần nhất, ETA đã ảnh hưởng quyết định thế nào, họ xử lý khi ETA không đáng tin ra sao; tránh chỉ hỏi có thích tính năng không | Quang |
 
 Không suy từ tổng thời gian giao ra thời gian tìm hỗ trợ; không dùng số review để suy ra tần suất theo đơn. Kế hoạch kiểm trước thu thập: [hypothesis](hypothesis.md). Việc ETA cần dữ liệu tất cả đơn hoàn tất là yêu cầu dữ liệu, không phải kết quả nghiên cứu người dùng.
+
+## CP3 · Năm đoạn trích nguyên văn, ẩn tên
+
+Đối chiếu ngày 27/11/2026 tại mục **Chính các đánh giá** của [bản lưu công khai review ShopeeFood từ App Store](https://opportunitymarket.org/vi/ung-dung/shopeefood-food-delivery). Mỗi dòng trích một cụm chữ nguyên văn từ một review khác nhau. Mã khớp [bảng mẫu 31 review](data-mining-app-store-31.md). Bản lưu tập trung vào lời phàn nàn nên chỉ dùng để xác định tình huống gặp phải.
+
+| Mã | Trích nguyên văn | Điều khách mô tả |
+|---|---|---|
+| R03 | “gần 2 tiếng” | Đợi gần hai tiếng mới nhận đơn. |
+| R07 | “ko có bất kì 1 ai hỗ trợ” | Không nhận được hỗ trợ qua chat sau khi đơn báo hủy. |
+| R13 | “1 đến 3 tiếng” | Khách mô tả thời gian chậm của các đơn được ghép. |
+| R16 | “chưa có tài xế” | Khách xem đơn hơn một tiếng sau khi đặt, lúc đó chưa đến giờ giao dự kiến. |
+| R24 | “7-30 ngày mới hoàn” | Khách kể mốc hoàn cho đơn trả trước đã bị hủy. |

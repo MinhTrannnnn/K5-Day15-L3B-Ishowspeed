@@ -45,6 +45,23 @@ class CP2DemoTests(unittest.TestCase):
         self.assertIn('Nhân viên xác minh', draft['proposal'])
         self.assertIn('nhận món chưa', self.demo.chat('other', 'D007 cần hỗ trợ'))
 
+    def test_explicit_staff_request_survives_model_clarification(self):
+        with patch('cp2_demo.MODEL_PROVIDER', 'ollama'), patch('cp2_demo.choose_action', return_value='clarify'):
+            self.demo.chat('demo', 'D007 kiểm tra đơn giúp mình')
+            self.assertIn('Bạn đã nhận món chưa?', self.demo.chat('demo', 'Nhân viên xử lý giúp mình'))
+            self.assertIn('HỒ SƠ NHÁP', self.demo.chat('demo', 'Chưa'))
+        draft = self.store.session('demo')['draft']
+        self.assertEqual(draft['customer_goal'], 'human_review')
+        self.assertTrue(draft['conflicts'])
+        self.assertEqual(self.store.find('demo', 'D007'), [])
+
+    def test_receipt_confirmation_waits_before_preparing_staff_draft(self):
+        self.assertIn('Bạn đã nhận món chưa?', self.demo.chat('demo', 'D007 nhờ nhân viên kiểm tra'))
+        self.assertIn('bạn có thể dừng ở đây', self.demo.chat('demo', 'Tôi đã nhận món.'))
+        self.assertIsNone(self.store.session('demo')['draft'])
+        self.assertIn('HỒ SƠ NHÁP', self.demo.chat('demo', 'Tôi vẫn cần nhân viên hỗ trợ đơn này.'))
+        self.assertEqual(self.store.session('demo')['draft']['customer_goal'], 'human_review')
+
     def test_only_operator_staff_can_receive_and_no_duplicate_or_cross_customer(self):
         self.demo.chat('demo', 'D001 tôi muốn hủy')
         with self.assertRaises(ValueError):
@@ -87,8 +104,16 @@ class CP2DemoTests(unittest.TestCase):
         self.assertEqual(self.store.find('demo', 'D004'), [])
         with patch('cp2_demo.call_model', return_value={'text': 'null'}):
             self.assertIn('không hợp lệ', self.demo.chat('demo', 'D004 hỗ trợ'))
+        with patch('cp2_demo.call_model', return_value={'text': '{"tool":[]}'}):
+            self.assertIn('không hợp lệ', self.demo.chat('demo', 'D004 hỗ trợ'))
         with patch('cp2_demo.call_model', return_value={'text': '{"tool":"finish"}'}):
             self.assertIn('đủ căn cứ', self.demo.chat('demo', 'D004 hỗ trợ'))
+
+    def test_refund_question_does_not_offer_voucher_for_active_order(self):
+        self.demo.chat('demo', 'D004 khi nào hoàn tiền?')
+        draft = self.store.session('demo')['draft']
+        self.assertEqual(draft['proposal_vnd'], 0)
+        self.assertIn('chưa ghi nhận khoản hoàn', draft['proposal'])
 
     def test_estimate_uses_completed_history_and_fallback(self):
         result = delivery_estimate('demo', 'S001')

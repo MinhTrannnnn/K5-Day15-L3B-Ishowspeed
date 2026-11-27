@@ -8,10 +8,12 @@
 
 | Lượt | Run ID | Đạt / tổng | % | thuong | kho | tu_choi | So với chuẩn "đạt" |
 |---|---|---|---|---|---|---|---|
-| 1 | | __/__ | | __/__ | __/__ | __/__ | đạt / chưa |
+| 1 | `run-1@20261127-194854` | 13/20 dự kiến | 65% dự kiến | 2/5 | 10/12 | 1/3 | Chưa đạt theo bản chấm nháp |
 | 2 | | __/__ | | __/__ | __/__ | __/__ | đạt / chưa |
 
 Kết quả từng câu: `eval/run-1.csv`, `eval/run-2.csv`. Trace: `traces/run-1.jsonl`, `traces/run-2.jsonl`.
+
+Lượt 1 dùng Ollama `qwen2.5:1.5b`. Có 15 câu gọi model thật và 5 câu được xử lý bằng các chốt code trước khi gọi. Cả 20 câu trả output, không có lỗi kỹ thuật. Điểm trong bảng là [bản chấm nháp](cp3-run1-review.md) để người chấm duyệt. CSV gốc vẫn để trống cột `pass` và `ghi_chu`.
 
 ## 2. Lỗi lượt 1 — gom thành nhóm có tên
 
@@ -42,7 +44,7 @@ Kết quả từng câu: `eval/run-1.csv`, `eval/run-2.csv`. Trace: `traces/run-
 - Nếu có thêm 1 tuần: __
 
 
-## 5. Báo cáo bổ sung — CP2 fake đã kiểm kỹ thuật, AI thật chưa đo
+## 5. Báo cáo bổ sung — các luồng mở rộng ngoài bộ 20 câu
 
 CP2 có [kiểm kỹ thuật](cp2-upgrade-check.md) và [output smoke](cp2-upgrade-smoke.json). Đây không phải đánh giá năng lực AI hoặc hiệu quả thực tế. Không dùng bảng này thay thế lượt 1/lượt 2 của bộ nền. Giao thức: [upgrade-plan](upgrade-plan.md). Chỉ điền khi đã có artifact và bộ ca cố định trước lượt chạy.
 

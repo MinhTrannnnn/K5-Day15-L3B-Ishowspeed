@@ -4,9 +4,10 @@ import re
 
 import tracing
 from agent import answer
+from ai import MODEL_PROVIDER
 from cp2_demo import CaseStore, Demo, LABELS, delivery_estimate, show_case
 
-HELP = '''CP2 — AI GIẢ, DỮ LIỆU SYNTHETIC, KHÔNG GIAO DỊCH THẬT
+HELP = '''D1 — DỮ LIỆU SYNTHETIC, KHÔNG GIAO DỊCH THẬT
 Đang dùng khách demo. Nhập câu hỏi tự nhiên, mã đơn sẽ được nhớ trong phiên.
   /khach demo                 chuyển về khách demo (hoặc mã khách giả khác)
   /nhanvien                   bàn nhân viên do người vận hành demo chọn
@@ -74,7 +75,7 @@ def main():
     store = CaseStore()
     demo = Demo(store)
     owner, role = 'demo', 'customer'
-    print(HELP)
+    print(f'Model: {MODEL_PROVIDER}\n{HELP}')
     blank = 0
     try:
         while True:
@@ -91,7 +92,7 @@ def main():
                     return 0
                 continue
             blank = 0
-            tracing.begin('cp2-demo')
+            tracing.begin('d1-demo')
             try:
                 if text.startswith('/'):
                     output, owner, role = command(store, owner, role, text)
@@ -99,8 +100,8 @@ def main():
                     output = demo.chat(owner, text)
                 else:
                     output = 'Bàn nhân viên dùng /tiepnhan, /capnhat hoặc /khach demo; gõ /help.'
-                print('[DEMO CP2 — chưa giao dịch thật]\n'+output)
-            except (ValueError, TypeError, KeyError, NotImplementedError) as error:
+                print('[DEMO D1 — chưa giao dịch thật]\n'+output)
+            except (ValueError, TypeError, KeyError, RuntimeError) as error:
                 print('[Chưa thực hiện] '+str(error))
             finally:
                 summary, _ = tracing.end()

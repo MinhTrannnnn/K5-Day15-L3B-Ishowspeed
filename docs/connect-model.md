@@ -1,5 +1,7 @@
 # Nối model vào `codebase/ai.py`
 
+**Bản hiện tại đã kết nối Ollama, OpenAI và OpenRouter.** Để đổi model cho app hoặc CLI, làm theo [hướng dẫn CP3](cp3.md#dùng-key-openai). Phần bên dưới là tài liệu tham khảo của khung BTC.
+
 > Làm ở guide bước 3.3. **Nên xong tối Thứ Sáu 27/11 trước khi ngủ** (sáng Thứ Bảy 28/11 không có lớp). Kẹt quá 20 phút thì hỏi ngay.
 
 Mục tiêu: `call_model()` trong `codebase/ai.py` gọi model thật và trả về câu trả lời kèm **số token** đo được. Prompt và luồng là phần nhóm tự viết trong `codebase/agent.py`. File này chỉ lo phần kết nối.

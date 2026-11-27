@@ -3,6 +3,18 @@
 
 # Ishowspeed — Trợ lý AI xử lý khiếu nại giao trễ
 
+## Chạy ứng dụng CP3 bằng Docker
+
+Mở Docker Desktop hoặc Docker Engine, rồi chạy trong thư mục repo:
+
+```sh
+docker compose up --build
+```
+
+Mở [ứng dụng local](http://localhost:8080). FastAPI phục vụ bản build React/TypeScript từ Vite, SQLite lưu hồ sơ và Ollama chạy `qwen2.5:1.5b` trên máy. Compose tự tải model ở lần đầu và giữ lại trong volume. Xem [hướng dẫn eval và video CP3](docs/cp3.md).
+
+Để dùng key OpenAI của nhóm, đặt `CP3_PROVIDER=openai`, `OPENAI_MODEL=gpt-5.4-nano` và `OPENAI_API_KEY` trong `.env`. Chạy `docker compose up -d --build` để nạp cấu hình. Xem [cấu hình OpenAI](docs/cp3.md#dùng-key-openai).
+
 **Thành viên, lớp, track:** xem [TEAMS.md](TEAMS.md). **Điền TEAMS.md đúng format**: khi chấm và đánh giá, BTC quét file này để ghép điểm cho từng người.
 
 *Lát cắt = phần nhỏ nhất làm xong được trong hackathon: một người dùng · một việc · một quyết định AI · một kết quả.*
@@ -34,7 +46,7 @@ MODEL_PROVIDER=fake python3 -m unittest discover -s tests -v
 
 Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên; `/nhanvien` → `/tiepnhan` để nhận ca; `/trangthai C001` để xem tiến độ. `/shop S001` xem khoảng ETA. `/help` xem cú pháp, `/cau D004 đang ở đâu?` chạy đường một lượt cũ. [Kịch bản đầy đủ](docs/cp2-demo.md). Dữ liệu synthetic/snapshot, không live. Trên PowerShell đặt `$env:MODEL_PROVIDER="fake"` rồi chạy `python run.py`.
 
-**Bản nâng cấp hiện tại:** code do Codex triển khai theo yêu cầu Minh; Minh đã kiểm tra và xác nhận OK trong trao đổi. Chưa có xác nhận các thành viên khác đã rà bản nâng cấp. CP3 chưa triển khai.
+**Bản nâng cấp CP2:** Minh đã kiểm tra demo nhiều lượt. Bản CP3 bổ sung web local và Docker Compose với Ollama theo [hướng dẫn ở đầu README](#chạy-ứng-dụng-cp3-bằng-docker).
 
 **Tiến độ lịch sử khung CP2 v1:** Nhóm trưởng đã nộp CP1. Cả nhóm đã kiểm tra bản CP2. Lượt chấm thử của Codex đạt 5/5 output từ model giả. Thành và Cường đã rà soát và đồng ý với kết quả 5/5 theo xác nhận của nhóm trưởng. Xem [phiếu chấm](eval/review-5.md).
 
@@ -125,7 +137,7 @@ Nhóm dùng stack khác (Node, Streamlit, notebook…): sửa hàm `run_app()` t
 
 | Thành phần | Thật / Giả | Ghi chú |
 |---|---|---|
-| Lời gọi AI ở quyết định trung tâm | **Giả tại CP2** | Model fake chọn action bằng luật đơn giản, token 0; CP3 cần nối model thật |
+| Lời gọi AI ở quyết định trung tâm | **Thật khi chạy Compose CP3** | Đọc số token Ollama trả về. CLI ngoài Compose mặc định dùng mock nếu chưa cấu hình. |
 | Dữ liệu và chính sách demo | **Synthetic** | 10 đơn, 1 chính sách DEMO-P1; seed 27112026 |
 | Tra dữ liệu, kiểm tiền và trace | Code chạy thật | Không kết nối sàn hoặc thao tác tiền thật |
 

@@ -247,3 +247,13 @@ Nâng từ hướng dẫn trạng thái một lượt sang agent làm rõ, đố
 ### Nâng thực thi CP1–CP2 cùng ngày 27/11/2026
 
 Theo yêu cầu Minh, đồng bộ lại nội dung CP1 (canvas, pain, phạm vi), không ghi lại lịch sử nộp. Triển khai ngay khung CP2 fake nhiều lượt và công cụ đọc giới hạn, SQLite lưu nháp/ca, CLI nhân viên tiếp nhận/cập nhật/bổ sung, khách theo dõi, ETA thống kê từ 120 đơn lịch sử synthetic. Không triển khai CP3: chưa nối API/model thật, chưa chạy lượt đánh giá AI thật hoặc chi phí. Chuẩn §7 CP2 v1 và artifact cũ giữ nguyên. Kết quả kiểm khung mới báo riêng tại eval/cp2-upgrade-check.md.
+
+### Bản chạy thử CP3 · 27/11/2026
+
+Nối Ollama với planner chọn công cụ đọc và bộ chọn hướng xử lý. Giao diện web local sử dụng lại SQLite, giới hạn duyệt và hồ sơ nhiều lượt của CP2. Bộ đánh giá BTC tiếp tục gọi `answer(text)` từng câu độc lập qua cùng bộ chọn hướng xử lý. Giữ nguyên benchmark, metric và chuẩn §7. Xem [hướng dẫn chạy CP3](docs/cp3.md).
+
+### Giao diện CP3 mẫu 2 · 27/11/2026
+
+Chuyển web sang FastAPI, React và Vite. Màn hình khách đặt thông tin đơn, tiến độ xác minh và phản hồi mới cạnh hội thoại để khách theo dõi được tình trạng hiện tại. Bàn nhân viên hiển thị danh sách ca, hồ sơ và lịch sử xử lý. Docker Compose chạy Ollama và dùng lại kho SQLite local. Bản quay CP3 ghi tình huống D007 từ lúc khách báo chưa nhận đến lúc thấy cập nhật của nhân viên.
+
+Thêm cấu hình OpenAI trực tiếp qua `.env` để nhóm dùng key của dự án. Quay lại tình huống D007 với thao tác bấm thực, lời thuyết minh và phụ đề. Xem [hướng dẫn và video CP3](docs/cp3.md).

@@ -1,0 +1,12 @@
+.git
+.env*
+**/__pycache__
+**/*.pyc
+data/runtime
+data-btc
+eval/run-*.csv
+cost/simulate-*.csv
+traces
+artifacts
+**/node_modules
+frontend/dist

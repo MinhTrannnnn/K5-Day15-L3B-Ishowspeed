@@ -1,4 +1,3 @@
-# Bộ khung (run.py, codebase/, eval/run_eval.py, cost/simulate.py) chỉ dùng thư viện chuẩn của Python 3.10+:
-# KHÔNG cần pip install để chạy.
-# Nhóm dùng thêm thư viện (vd SDK của nhà cung cấp model) thì ghi tên gói vào đây, mỗi dòng một gói,
-# và ghi lệnh cài vào README: python -m pip install -r requirements.txt
+# Chỉ giao diện web FastAPI cần cài các gói sau. CLI và khung đánh giá dùng thư viện chuẩn.
+fastapi==0.121.3
+uvicorn==0.38.0
