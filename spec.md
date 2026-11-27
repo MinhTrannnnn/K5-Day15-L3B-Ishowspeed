@@ -19,7 +19,7 @@ Các bước hỗ trợ và hủy đơn tham chiếu tài liệu công khai củ
 - **Họ đang xử lý thế nào:** Mở Chi tiết đơn, xem giờ dự kiến và trạng thái, rồi vào trợ giúp hoặc tìm nút hủy. Khi giờ dự kiến thay đổi nhiều lần hoặc phản hồi hỗ trợ chưa giải quyết được, họ vẫn chưa biết có nên chờ. Chi tiết đơn và trợ giúp trong app là các kênh khách có thể tìm ngay từ chính đơn đang chờ. [Quy trình ShopeeFood](https://help.shopee.vn/portal/4/article/79520-) · [Ví dụ GF071](evidence/data-mining.md#4-ví-dụ-ẩn-danh)
 - **Bài toán:** Khách đặt đồ ăn qua app kiểm tra đơn khi đã chờ lâu nhưng có lúc vẫn chưa rõ đơn còn được giao hay đã bị hủy. Họ có thể mất thêm thời gian tìm hỗ trợ trước khi biết nên chờ tiếp, hủy hay yêu cầu xử lý.
 - **Bằng chứng sơ bộ theo tài liệu CP1-D1, chưa đối chiếu nguồn gốc:** Trong 100 review ShopeeFood trên Google Play, 10 nói chờ lâu hoặc giao muộn. Trong 12 review nhận diện là GrabFood từ 100 review app Grab, 1 vừa nói chờ lâu vừa kể khó nhận hỗ trợ. Mẫu đối chiếu có 2/31 lời phàn nàn ShopeeFood mô tả cả hai. [Tổng hợp bằng chứng](evidence/summary.md)
-- **Tình huống cá nhân để thảo luận:** [NHÓM ĐIỀN những lần từng gặp theo guide 1.1, nếu có. Ghi việc đã làm, điểm vướng, thời gian hoặc kết quả. Không dùng trải nghiệm trong nhóm làm bằng chứng và bỏ thông tin nhận diện.]
+- **Tình huống cá nhân để thảo luận:** Đặt bữa trưa qua app, thấy giờ giao dự kiến là 12:00. Đến 12:15 vẫn chưa nhận món; giờ dự kiến đổi thành 12:30 nhưng màn hình không nói rõ tài xế đã nhận đơn hay chưa. Mở Chi tiết đơn, tìm nút hủy rồi vào Trợ giúp để hỏi có nên chờ tiếp. Sau khoảng 10 phút tìm và gửi yêu cầu thì vẫn chưa biết đơn còn được giao hay có thể hủy, nên chưa thể quyết định đặt món khác.
 
 ## §2. Impact & quyết định chọn *(guide 1.3)*
 
