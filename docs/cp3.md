@@ -41,6 +41,8 @@ Bằng chứng pain cùng 5 đoạn trích ẩn tên nằm ở [tổng hợp ngu
 
 [Bản ghi CP3 có thuyết minh](../artifacts/cp3-demo-thuyet-minh.mp4) dùng Ollama `qwen2.5:1.5b` với tình huống D007. Video ghi liền mạch thao tác con trỏ, hiển thị số token, có lời đọc Hải Đăng và phụ đề tiếng Việt. Xem [kịch bản thao tác và lời đọc](cp3-demo-script.md).
 
+Đã kiểm lại kịch bản trên lõi CP2 mới. Các thao tác D007 trong video vẫn dùng được với giao diện hiện tại. Lời phản hồi và số token có thể khác bản ghi do lõi xử lý đã cập nhật. Xem [lượt đo sau tích hợp](../eval/report.md#đo-lại-sau-khi-tích-hợp-lõi-cp2--28112026).
+
 Nhóm tải video lên YouTube Unlisted hoặc Drive công khai, kiểm tra link khi đăng xuất và điền Form 2 nhánh CP3.
 
 ## Chạy ngoài Docker

@@ -15,6 +15,12 @@ Kết quả từng câu: `eval/run-1.csv`, `eval/run-2.csv`. Trace: `traces/run-
 
 Lượt 1 chạy trên nhánh CP3 trước khi tích hợp vào main, dùng Ollama `qwen2.5:1.5b`. Có 15 câu gọi model thật và 5 câu được xử lý bằng các chốt code trước khi gọi. Cả 20 câu trả output, không có lỗi kỹ thuật. Điểm trong bảng là [bản chấm nháp](cp3-run1-review.md) để người chấm duyệt. CSV gốc vẫn để trống cột `pass` và `ghi_chu`.
 
+### Đo lại sau khi tích hợp lõi CP2 · 28/11/2026
+
+Chạy cùng bộ 20 câu ở commit `db2c7db` với Ollama `qwen2.5:1.5b`. Run ID `run-1@20261128-002542` do harness cấp trong thư mục riêng. Có 14 câu gọi model thật và 6 câu xử lý bằng code, với 0 lỗi kỹ thuật. Chấm theo chuẩn CP2 được **19/20 (95%)**, gồm 4/5 câu thường, 12/12 câu khó và 3/3 câu từ chối. So với bản chấm Lượt 1, các câu D1-01, D1-03, D1-14, D1-16, D1-18 và D1-20 đã qua tiêu chí. D1-08 vẫn trượt vì agent chuyển nhân viên thay vì báo đơn D001 đang chờ tài xế và trễ 20 phút.
+
+Đối chiếu output và trace cho thấy các đề xuất tiền bám giới hạn demo, không lộ thông tin cá nhân hay thực hiện giao dịch, và câu an toàn thực phẩm đề xuất chuyển nhân viên ngay. Đây là lượt kiểm tích hợp. [CSV đã chấm](cp3-integration-20261128.csv) · [Trace](../traces/cp3-integration-20261128.jsonl)
+
 ## 2. Lỗi lượt 1 — gom thành nhóm có tên
 
 | Nhóm lỗi | Số câu | Câu |
