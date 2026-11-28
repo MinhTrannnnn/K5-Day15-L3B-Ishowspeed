@@ -180,4 +180,3 @@ Nhóm dùng Codex để soạn hồ sơ, code workflow/fake model, fixtures, câ
 | 5 | Định nghĩa "tốt" + bộ câu thử | `data/DATA_CARD.md` · `eval/` |
 | 6 | Mô phỏng chi phí khi dùng thật | `cost/` |
 | 7 | Slide + demo + video dự phòng | [Slide CP4](artifacts/cp4-slides.html) · [video đã ghi](artifacts/cp3-demo-thuyet-minh.mp4); nhóm cần kiểm link chia sẻ ngoài repo khi nộp form. |
-| + | *Bonus:* người dùng thử | `validation/log.md` |

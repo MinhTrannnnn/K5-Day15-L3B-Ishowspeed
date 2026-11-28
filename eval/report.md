@@ -69,15 +69,3 @@ CP2 có [kiểm kỹ thuật](cp2-upgrade-check.md) và [output smoke](cp2-upgra
 | Chi phí nhiều lượt | Toàn bộ model/tool calls và token theo phiên, phạm vi hạ tầng | [Mô phỏng 50 phiên](../cost/simulate-2-summary.md) đã đo token/model/tool call với 1–3 lượt hỏi; chưa đo đầy đủ vòng đời ca và hạ tầng. |
 
 ETA là đầu vào nền tảng giả lập; không đánh giá mô hình dự báo riêng. Duyệt phương án không đồng nghĩa giao dịch thành công.
-
-## 6. Tự soát CP4
-
-| Yêu cầu | Tình trạng |
-|---|---|
-| Lượt 2, điểm, báo cáo lỗi và hồ sơ đánh giá | Có [lượt OpenAI](run-2.csv), [kiểm tích hợp cùng Ollama](cp3-integration-20261128.csv), báo cáo này và [hồ sơ một trang](README.md). Hai model/commit khác nhau ở hai lượt đánh số; phép so gần nhất cho cải tiến lõi là lượt Ollama 13/20 → 19/20. |
-| ≥50 phiên, 3 persona, 3 quy mô, 2 mức giá, chi phí/task thành công | Có [50 phiên đo token thật](../cost/simulate-2.csv), [giả định và phép tính](../cost/cost-estimate.md). Quy mô và tần suất *tự ước tính*; giá mini chỉ là kịch bản. |
-| `spec.md` đủ §0–§9 và impact có nguồn/nhãn ước tính | Có [spec](../spec.md); impact là kịch bản tự ước tính, chưa có số hiệu quả đo thật. |
-| Slide và video dự phòng | Có [slide HTML](../artifacts/cp4-slides.html) và [video đã ghi](../artifacts/cp3-demo-thuyet-minh.mp4). Nhóm cần kiểm link chia sẻ ngoài repo và tự nộp Form CP4. |
-| Bonus người dùng thử | Chưa có phiên thử với người dùng thật; [log](../validation/log.md) chưa có quan sát có thể dùng để kết luận. |
-
-Nguồn gốc của ba câu thử dẫn từ Google Play vẫn thiếu snapshot để tái kiểm đầy đủ tỷ lệ ≥1/3 dữ liệu thật. Điểm hai lượt AI thật do Codex chấm, thành viên nhóm chưa lưu phiếu chấm độc lập; cần khai đúng các giới hạn này khi nộp.
