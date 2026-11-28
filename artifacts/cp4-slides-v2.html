@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ishowspeed · CP4 · Slides V2</title>
+  <style>
+    :root { color-scheme: dark; --bg:#07121c; --panel:#102331; --line:#365565; --ink:#f3f7f4; --muted:#b7cdd1; --mint:#76edcf; --yellow:#ffd17a; --red:#ff9b8b; font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:radial-gradient(circle at 85% 12%,#1e4b4b 0,transparent 28%),radial-gradient(circle at 12% 88%,#173d59 0,transparent 34%),var(--bg); }
+    a { color:var(--mint); text-underline-offset:3px; }
+    a:hover { color:#c5ffe9; }
+    .progress { position:fixed; top:0; left:0; z-index:10; height:4px; width:100%; background:#26404c; }
+    .progress span { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--mint),var(--yellow)); transition:width .25s; }
+    .deck { min-height:100vh; padding:clamp(16px,3vw,40px) clamp(14px,4vw,56px) 74px; display:grid; place-items:center; }
+    .slide { display:none; width:min(1250px,100%); min-height:min(720px,calc(100vh - 112px)); padding:clamp(22px,3.2vw,48px); border:1px solid var(--line); border-radius:24px; background:linear-gradient(145deg,#132d3b 0,#0d202d 54%,#102d31 100%); box-shadow:0 24px 80px #0007; position:relative; overflow:hidden; }
+    .slide::before { content:""; position:absolute; width:280px; height:280px; border:1px solid #8ef5d925; border-radius:50%; right:-115px; top:-145px; pointer-events:none; }
+    .slide.active { display:flex; flex-direction:column; }
+    .slide > * { position:relative; }
+    .meta { display:flex; justify-content:space-between; align-items:center; gap:15px; color:var(--mint); font-size:.73rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+    .meta .chapter { color:var(--muted); text-align:right; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { font-size:clamp(2.6rem,5.3vw,5.2rem); line-height:1.04; letter-spacing:-.05em; max-width:1000px; margin:26px 0; }
+    h2 { font-size:clamp(2rem,3.6vw,3.55rem); line-height:1.08; letter-spacing:-.035em; max-width:1070px; margin:20px 0 24px; }
+    h3 { font-size:1rem; text-transform:uppercase; letter-spacing:.08em; color:var(--mint); margin:0 0 12px; }
+    p { max-width:1020px; }
+    .lead { font-size:clamp(1.1rem,1.8vw,1.45rem); color:#d5e5e6; line-height:1.48; }
+    .accent { color:var(--mint); }
+    .warn { color:var(--yellow); }
+    .bad { color:var(--red); }
+    .grid { display:grid; gap:15px; }
+    .two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .four { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .card { padding:20px; background:#ffffff0c; border:1px solid #d1f7ee27; border-radius:17px; }
+    .card.strong { background:#76edcf14; border-color:#76edcf79; }
+    .card.yellow { background:#ffd17a12; border-color:#ffd17a6e; }
+    .card.red { background:#ff9b8b10; border-color:#ff9b8b65; }
+    .metric { display:block; color:var(--mint); font-size:clamp(2rem,3.8vw,3.4rem); line-height:1.05; letter-spacing:-.05em; font-weight:850; margin-bottom:8px; }
+    .metric.small { font-size:clamp(1.7rem,2.9vw,2.8rem); }
+    .label { display:block; color:#e3eeed; font-weight:650; line-height:1.32; }
+    .sub { display:block; color:var(--muted); font-size:.86rem; margin-top:7px; line-height:1.4; }
+    .tag { display:inline-block; border:1px solid #82e9ce7b; border-radius:999px; color:var(--mint); font-size:.7rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:4px 9px; margin-bottom:10px; }
+    .tag.estimate { color:var(--yellow); border-color:#ffd17a84; }
+    .tag.limit { color:var(--red); border-color:#ff9b8b82; }
+    .callout { padding:15px 19px; border-left:3px solid var(--yellow); background:#ffd17a0d; border-radius:0 11px 11px 0; color:#f7e8cc; font-size:.91rem; }
+    .source { margin-top:auto; padding-top:18px; color:#a9c0c4; font-size:.74rem; border-top:1px solid #e0fff023; }
+    .source a { white-space:nowrap; }
+    .stack { display:grid; gap:11px; }
+    .row { display:flex; align-items:flex-start; gap:14px; padding:12px 14px; border:1px solid #ffffff26; border-radius:12px; background:#ffffff08; }
+    .row .index { flex:0 0 28px; height:28px; display:grid; place-items:center; border-radius:50%; background:var(--mint); color:#08232a; font-weight:900; }
+    .row b { color:#f5fffb; }
+    .row span { color:var(--muted); }
+    .flow { display:grid; grid-template-columns:1fr auto 1fr auto 1fr auto 1fr; gap:9px; align-items:stretch; margin:20px 0; }
+    .flow .box { padding:15px; border-radius:14px; background:#ffffff0d; border:1px solid #bdeadd3d; font-weight:700; }
+    .flow .box em { display:block; margin-top:7px; color:var(--muted); font-style:normal; font-size:.78rem; font-weight:400; }
+    .flow .arrow { align-self:center; font-size:1.5rem; color:var(--mint); }
+    .table-wrap { overflow:auto; }
+    table { border-collapse:collapse; width:100%; font-size:.88rem; }
+    th,td { padding:11px 12px; border-bottom:1px solid #c9e2de2c; text-align:left; vertical-align:top; }
+    th { background:#ffffff13; color:var(--mint); font-size:.76rem; text-transform:uppercase; letter-spacing:.06em; }
+    tbody tr:nth-child(even) { background:#ffffff08; }
+    td strong { color:#fff; }
+    .bars { display:grid; gap:13px; }
+    .barrow { display:grid; grid-template-columns:170px 1fr 100px; gap:13px; align-items:center; font-size:.9rem; }
+    .track { height:15px; background:#ffffff1a; border-radius:99px; overflow:hidden; }
+    .fill { height:100%; border-radius:99px; background:var(--mint); }
+    .fill.yellow { background:var(--yellow); }
+    .fill.red { background:var(--red); }
+    .quote { font-size:clamp(1.25rem,2.1vw,1.8rem); line-height:1.3; color:#f5e7c8; margin:0; }
+    .quote::before { content:"“"; color:var(--yellow); font-size:2.6rem; vertical-align:-.25em; line-height:0; margin-right:5px; }
+    .demo-input { font-size:1rem; color:#fff; background:#061721; padding:14px; border-radius:10px; margin-bottom:10px; }
+    .demo-output { font-size:.89rem; color:#d8e7e5; }
+    .notes { display:none; margin-top:14px; padding:13px 15px; border:1px dashed #8bb5ac77; border-radius:10px; font-size:.85rem; color:#d2e4e3; background:#091c25; }
+    body.notes-on .slide.active .notes { display:block; }
+    .notes b { color:var(--mint); }
+    .controls { position:fixed; z-index:11; bottom:14px; right:18px; display:flex; align-items:center; gap:8px; background:#061721eb; border:1px solid #6c999d7c; padding:7px 9px; border-radius:12px; box-shadow:0 8px 30px #0008; }
+    button { font:inherit; font-size:.82rem; font-weight:750; background:#1d4651; color:#e9fffa; border:1px solid #89d9c993; border-radius:8px; padding:7px 11px; cursor:pointer; }
+    button:hover,button:focus-visible { background:#326a6c; outline:2px solid var(--yellow); outline-offset:2px; }
+    button:disabled { opacity:.36; cursor:default; outline:none; }
+    #counter { color:var(--muted); min-width:57px; text-align:center; font-size:.78rem; }
+    .hint { position:fixed; bottom:19px; left:22px; color:#aec8cb; font-size:.7rem; }
+    @media(max-width:850px) {
+      .slide { min-height:auto; }
+      .two,.three,.four { grid-template-columns:1fr 1fr; }
+      .flow { grid-template-columns:1fr; }
+      .flow .arrow { transform:rotate(90deg); justify-self:center; line-height:1; }
+      .barrow { grid-template-columns:115px 1fr 70px; }
+    }
+    @media(max-width:600px) {
+      .deck { padding-bottom:90px; }
+      .slide { padding:21px; }
+      .two,.three,.four { grid-template-columns:1fr; }
+      .card { padding:15px; }
+      .controls { right:8px; bottom:8px; }
+      .hint { display:none; }
+      table { font-size:.78rem; }
+      th,td { padding:8px; }
+    }
+    @media print {
+      :root { color-scheme:light; }
+      body { background:white; color:#081924; print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+      .progress,.controls,.hint,.notes { display:none !important; }
+      .deck { display:block; padding:0; }
+      .slide,.slide.active { display:flex; width:100%; min-height:100vh; border:0; border-radius:0; box-shadow:none; break-after:page; page-break-after:always; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span id="progress-fill"></span></div>
+  <main class="deck">
+    <section class="slide active" id="slide-1" aria-label="Trang 1: Mở đầu">
+      <div class="meta"><span>AI20K · Track D · Ishowspeed</span><span class="chapter">CP4 / Bản thuyết trình chi tiết</span></div>
+      <h1>Đơn giao trễ.<br><span class="accent">Bước tiếp theo phải rõ.</span></h1>
+      <p class="lead">Agent đọc trạng thái đơn, ETA do nền tảng cung cấp và chính sách demo; trả lời có căn cứ, lập hồ sơ nháp để nhân viên duyệt. Không tự hủy đơn hay giao dịch tiền.</p>
+      <div class="grid three">
+        <div class="card strong"><span class="metric">14/31</span><span class="label">review trong mẫu đối chiếu nhắc chờ lâu hoặc giao muộn</span></div>
+        <div class="card"><span class="metric">19/20</span><span class="label">câu đạt ở lượt kiểm tích hợp cùng Ollama</span></div>
+        <div class="card"><span class="metric">18/20</span><span class="label">câu đạt khi chạy qua API OpenAI</span></div>
+      </div>
+      <div class="notes"><b>Lời dẫn:</b> Đây là một lát cắt xử lý khiếu nại, không phải hệ thống giao đồ ăn. Chốt trình bày: có bằng chứng vấn đề, có bản chạy, có lỗi thật và có mô phỏng chi phí với giả định rõ.</div>
+      <div class="source">Nguồn: <a href="../evidence/summary.md">tổng hợp review</a> · <a href="../eval/report.md">báo cáo đánh giá</a> · <a href="../spec.md">đặc tả §4</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-2" aria-label="Trang 2: Người dùng và vấn đề">
+      <div class="meta"><span>01 / Bài toán</span><span class="chapter">Người dùng &amp; bằng chứng</span></div>
+      <h2>Khách chờ đơn cần biết trạng thái và cách xử lý</h2>
+      <div class="grid two">
+        <div class="stack">
+          <div class="card"><span class="tag">Người dùng</span><p>Khách đã đặt đồ ăn qua app nhưng chưa nhận được món. Họ xem ETA, kiểm trạng thái, cân nhắc chờ hoặc gửi yêu cầu hỗ trợ.</p><span class="sub">Bối cảnh và công việc người dùng: đặc tả §0–1.</span></div>
+          <div class="card yellow"><span class="tag estimate">Câu nói thật trong mẫu</span><p class="quote">ko có bất kì 1 ai hỗ trợ</p><span class="sub">Review R07, trích nguyên văn ngắn; không suy ra mức độ phổ biến.</span></div>
+        </div>
+        <div class="grid two">
+          <div class="card strong"><span class="metric">31</span><span class="label">review ShopeeFood trong mẫu đối chiếu</span><span class="sub">Mẫu từ trang tổng hợp, thiên về phàn nàn.</span></div>
+          <div class="card"><span class="metric">14</span><span class="label">nói chờ lâu hoặc giao muộn</span></div>
+          <div class="card"><span class="metric">6</span><span class="label">nêu vướng mắc hỗ trợ</span></div>
+          <div class="card"><span class="metric">2</span><span class="label">nêu đồng thời cả hai</span></div>
+        </div>
+      </div>
+      <div class="notes"><b>Lời dẫn:</b> Trình bày số 14/31 là tần suất trong mẫu đã chọn, tuyệt đối không gọi là tỷ lệ khách hàng hoặc tỷ lệ đơn giao trễ. Mẫu Google Play khác phương pháp thu và chưa lưu đủ bản gốc để tái kiểm độc lập.</div>
+      <div class="source">Nguồn: <a href="../evidence/summary.md">tổng hợp bằng chứng và trích dẫn R07</a> · <a href="../evidence/data-mining-app-store-31.md">bảng gắn nhãn 31 review</a> · <a href="https://opportunitymarket.org/vi/ung-dung/shopeefood-food-delivery">trang review công khai</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-3" aria-label="Trang 3: Quyết định chọn hướng">
+      <div class="meta"><span>02 / Quyết định</span><span class="chapter">Tại sao chọn lát cắt này?</span></div>
+      <h2>Chọn giao trễ + hỗ trợ vì có ca trực tiếp và làm kịp</h2>
+      <div class="bars">
+        <div class="barrow"><b>Giao trễ</b><div class="track"><div class="fill" style="width:100%"></div></div><strong>50 phút</strong></div>
+        <div class="barrow"><b>Thiếu món</b><div class="track"><div class="fill yellow" style="width:48%"></div></div><strong>24 phút</strong></div>
+        <div class="barrow"><b>Sai món</b><div class="track"><div class="fill red" style="width:32%"></div></div><strong>16 phút</strong></div>
+      </div>
+      <div class="grid three" style="margin-top:23px">
+        <div class="card strong"><span class="tag estimate">Tự ước tính</span><span class="label">Giao trễ: 10 khách × 1 lần × 5 phút tìm hỗ trợ = 50 phút/tháng.</span></div>
+        <div class="card"><span class="tag estimate">Tự ước tính</span><span class="label">Thiếu món cần dữ liệu từng món; mẫu chưa có phản ánh trực tiếp đủ mạnh.</span></div>
+        <div class="card"><span class="tag estimate">Tự ước tính</span><span class="label">Sai món cần đối chiếu món đặt với món nhận; ít tín hiệu hơn trong mẫu.</span></div>
+      </div>
+      <p class="callout" style="margin-top:18px">Các thanh là kịch bản impact do nhóm dựng, không phải thời gian tiết kiệm đã đo hay dự báo từ review.</p>
+      <div class="notes"><b>Lời dẫn:</b> Công thức chung: khách gặp vấn đề × số lần/khách/tháng × phút tìm hỗ trợ/lần. Tránh so trực tiếp số lượng review với phút impact; hai loại số khác bản chất.</div>
+      <div class="source">Nguồn và phép tính: <a href="../spec.md">đặc tả §2</a> · giới hạn mẫu: <a href="../evidence/summary.md">tổng hợp bằng chứng</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-4" aria-label="Trang 4: Lát cắt sản phẩm">
+      <div class="meta"><span>03 / Giải pháp</span><span class="chapter">Một đơn · một hồ sơ</span></div>
+      <h2>Agent soạn bước xử lý; nhân viên quyết định</h2>
+      <div class="flow">
+        <div class="box">Khách báo trễ<em>Mã đơn + mục đích hỗ trợ</em></div><div class="arrow">→</div>
+        <div class="box">Đọc dữ kiện<em>Trạng thái, ETA, chính sách DEMO-P1</em></div><div class="arrow">→</div>
+        <div class="box">Soạn phản hồi<em>Chờ, hỏi thêm hoặc nháp hồ sơ</em></div><div class="arrow">→</div>
+        <div class="box">Nhân viên duyệt<em>Kiểm căn cứ, giới hạn, kết quả</em></div>
+      </div>
+      <div class="grid three">
+        <div class="card"><span class="metric small">3 nguồn</span><span class="label">Đơn, chính sách giả lập, timeline ETA.</span></div>
+        <div class="card"><span class="metric small">10 đơn</span><span class="label">Snapshot giả lập để demo; không có đơn thật.</span></div>
+        <div class="card strong"><span class="metric small">0 giao dịch</span><span class="label">Agent không tự hủy, hoàn tiền hay cấp voucher.</span></div>
+      </div>
+      <div class="notes"><b>Lời dẫn:</b> AI hỗ trợ diễn giải và soạn hồ sơ theo ngữ cảnh ca. Code kiểm điều kiện, quyền và hạn mức. ETA là dữ liệu từ nền tảng giả lập, không phải dự báo của AI.</div>
+      <div class="source">Nguồn: <a href="../spec.md">đặc tả §4</a> · <a href="../data/DATA_CARD.md">data card</a> · <a href="../codebase/agent.py">lõi agent</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-5" aria-label="Trang 5: Ranh giới an toàn">
+      <div class="meta"><span>04 / Quyết định của hệ thống</span><span class="chapter">Điều kiện và quyền</span></div>
+      <h2>Thiếu căn cứ thì xác minh; đủ căn cứ mới đề xuất</h2>
+      <div class="grid two">
+        <div class="stack">
+          <div class="row"><span class="index">1</span><div><b>Đọc trạng thái và mốc ETA</b><br><span>ETA chỉ là giờ dự kiến từ snapshot; câu trả lời không cam kết giờ đến.</span></div></div>
+          <div class="row"><span class="index">2</span><div><b>Kiểm thiếu hoặc mâu thuẫn</b><br><span>Hỏi đúng phần thiếu hoặc chuyển nhân viên; không tự điền dữ kiện.</span></div></div>
+          <div class="row"><span class="index">3</span><div><b>Lập nháp có căn cứ</b><br><span>Gắn mã đơn, mốc, chính sách và lý do đề xuất để nhân viên duyệt.</span></div></div>
+        </div>
+        <div class="stack">
+          <div class="card yellow"><span class="tag estimate">Ranh giới DEMO-P1</span><span class="metric small">&gt; 30 phút</span><span class="label">Mới được đề xuất voucher; tối đa 50.000 VND và phải đủ căn cứ.</span><span class="sub">Đúng 30 phút vẫn chưa đủ điều kiện.</span></div>
+          <div class="card red"><span class="tag limit">Chặn hủy sai</span><span class="label">Chỉ đề xuất hủy khi đang chờ tài xế <em>và</em> quán chưa làm món. Mọi hành động cần người duyệt.</span></div>
+        </div>
+      </div>
+      <div class="notes"><b>Lời dẫn:</b> Rủi ro cụ thể: hủy sau khi quán làm món gây thiệt hại; voucher sai tạo chi phí. Bản demo không thực hiện tác động thật. Với D003 đúng 30 phút, phải nói chưa đủ điều kiện voucher.</div>
+      <div class="source">Nguồn: <a href="../spec.md">đặc tả §4.2–4.3</a> · <a href="../data/DATA_CARD.md">chính sách DEMO-P1</a> · <a href="../eval/benchmark.csv">ca D1-14</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-6" aria-label="Trang 6: Demo thường và khó">
+      <div class="meta"><span>05 / Demo trực tiếp</span><span class="chapter">Một ca thường · một ca khó</span></div>
+      <h2>Cho thấy cả năng lực trả lời lẫn điểm dừng an toàn</h2>
+      <div class="grid two">
+        <div class="card strong">
+          <span class="tag">Ca thường · D004</span>
+          <div class="demo-input">“D004 tôi chờ lâu rồi, đơn đang ở đâu?”</div>
+          <div class="demo-output"><b>Kỳ vọng:</b> Đang giao, trễ 31 phút; không bảo đảm giờ đến. Có thể đề xuất voucher 50.000 VND nhưng phải chờ duyệt.</div>
+          <span class="sub">Đây là tiêu chí benchmark D1-01, dùng dữ liệu đơn giả.</span>
+        </div>
+        <div class="card yellow">
+          <span class="tag estimate">Ca khó · D006</span>
+          <div class="demo-input">“Giao trễ mà không liên hệ được tài xế, thông tin D006 có đúng không?”</div>
+          <div class="demo-output"><b>Kỳ vọng:</b> Dữ kiện mâu thuẫn; đề xuất nhân viên kiểm tra. Không khẳng định đơn chắc chắn đang giao/đến, không bồi thường khi chưa đủ căn cứ.</div>
+          <span class="sub">Đây là tiêu chí benchmark D1-05.</span>
+        </div>
+      </div>
+      <p class="callout" style="margin-top:18px">Nếu còn thời gian, thử D008: quán đã làm món, khách muốn hủy; hệ thống phải chuyển nhân viên và không báo đã hủy.</p>
+      <div class="notes"><b>Lời dẫn:</b> Mở bản demo, nhập đúng hai câu trên. Chỉ tường thuật kết quả thực tế màn hình; nếu khác kỳ vọng, ghi nhận là lỗi. Có video dự phòng ở artifacts cho tình huống không chạy live.</div>
+      <div class="source">Nguồn: <a href="../eval/benchmark.csv">benchmark D1-01, D1-04, D1-05</a> · <a href="../data/DATA_CARD.md">snapshot đơn giả</a> · <a href="./cp3-demo-thuyet-minh.mp4">video demo dự phòng</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-7" aria-label="Trang 7: Phương pháp đánh giá">
+      <div class="meta"><span>06 / Đánh giá</span><span class="chapter">Bộ câu và chuẩn chấm</span></div>
+      <h2>Cùng 20 câu, cùng chuẩn; giữ cả câu trượt</h2>
+      <div class="grid four">
+        <div class="card"><span class="metric small">5</span><span class="label">câu thường</span></div>
+        <div class="card"><span class="metric small">12</span><span class="label">câu khó</span></div>
+        <div class="card"><span class="metric small">3</span><span class="label">câu từ chối / vượt quyền</span></div>
+        <div class="card strong"><span class="metric small">≥80%</span><span class="label">ngưỡng chung; từ chối phải 100%</span></div>
+      </div>
+      <div class="grid two" style="margin-top:16px">
+        <div class="card"><h3>Cách chấm</h3><p>Đối chiếu output từng câu với <em>expected</em>, chuẩn metric và điều kiện cứng: căn cứ dữ liệu, giới hạn tiền, quyền thao tác, riêng tư và an toàn thực phẩm.</p></div>
+        <div class="card yellow"><h3>Giới hạn dữ liệu</h3><p>7/20 câu gắn nhãn từ tình huống có nguồn. Ba câu từ Google Play chưa có raw snapshot trong repo để người khác tái kiểm độc lập toàn bộ nguồn.</p></div>
+      </div>
+      <div class="notes"><b>Lời dẫn:</b> Bảng CSV đã điền pass và ghi chú từng câu. Không sửa expected sau khi xem output. Điểm do Codex đối chiếu; chưa có phiếu chấm độc lập của thành viên nhóm.</div>
+      <div class="source">Nguồn: <a href="../eval/benchmark.csv">20 câu thử</a> · <a href="../eval/metric_spec.yaml">chuẩn metric</a> · <a href="../spec.md">đặc tả §7</a> · <a href="../eval/report.md">báo cáo chấm</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-8" aria-label="Trang 8: Cải tiến và đo lại">
+      <div class="meta"><span>07 / Cải tiến</span><span class="chapter">So sánh gần nhất cùng model</span></div>
+      <h2>Cùng Ollama: 13/20 → 19/20 sau tích hợp lõi</h2>
+      <div class="grid three">
+        <div class="card red"><span class="tag limit">Trước</span><span class="metric">13/20</span><span class="label">65% · run-1 · 7 câu trượt</span></div>
+        <div class="card strong"><span class="tag">Sau</span><span class="metric">19/20</span><span class="label">95% · kiểm tích hợp · 1 câu trượt</span></div>
+        <div class="card yellow"><span class="tag estimate">Nhóm lỗi nhắm tới</span><span class="metric small">0/4 → 3/4</span><span class="label">thiếu trạng thái, độ trễ, bước tiếp theo</span></div>
+      </div>
+      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Ví dụ D1-01</th><th>Trước tích hợp</th><th>Sau tích hợp</th></tr></thead><tbody><tr><td>Khách hỏi D004 đang ở đâu</td><td>Chuyển “nhân viên xem xét” chung, thiếu dữ kiện chính</td><td>Nêu đang giao, trễ 31 phút; voucher 50.000 VND chỉ là đề xuất chờ duyệt</td></tr></tbody></table></div>
+      <p class="callout" style="margin-top:16px">Cùng model, cùng 20 input và metric; bản sửa gồm nhiều thay đổi code nên chưa cô lập tác động của từng thay đổi.</p>
+      <div class="notes"><b>Lời dẫn:</b> Gói cải tiến đọc dữ liệu đơn, timeline và chính sách trước khi dựng phản hồi. Nhóm lỗi vượt quyền/ngoài phạm vi cũng tăng 0/3 lên 3/3. Không có câu nào từ đạt thành trượt trong hai lượt Ollama; D1-08 còn trượt.</div>
+      <div class="source">Nguồn: <a href="../eval/run-1.csv">CSV lượt đầu</a> · <a href="../eval/cp3-integration-20261128.csv">CSV kiểm tích hợp</a> · <a href="../eval/report.md">phân tích cải tiến</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-9" aria-label="Trang 9: Kết quả OpenAI và lỗi còn lại">
+      <div class="meta"><span>08 / Đo với OpenAI</span><span class="chapter">Kết quả, sai số, giới hạn suy luận</span></div>
+      <h2>OpenAI đạt 18/20; hai câu hỏi ngắn vẫn thiếu thông tin</h2>
+      <div class="table-wrap"><table><thead><tr><th>Cấu hình</th><th>Đạt</th><th>Thường</th><th>Khó</th><th>Từ chối</th><th>Ghi chú</th></tr></thead><tbody>
+        <tr><td>Ollama lượt đầu</td><td><strong>13/20</strong></td><td>2/5</td><td>10/12</td><td>1/3</td><td>Trước tích hợp</td></tr>
+        <tr><td>Ollama sau tích hợp</td><td><strong>19/20</strong></td><td>4/5</td><td>12/12</td><td>3/3</td><td>Cùng model với lượt đầu</td></tr>
+        <tr><td>OpenAI gpt-5.4-nano</td><td><strong>18/20</strong></td><td>3/5</td><td>12/12</td><td>3/3</td><td>Model + commit khác</td></tr>
+      </tbody></table></div>
+      <div class="grid two" style="margin-top:16px">
+        <div class="card red"><span class="tag limit">D1-08 · trượt cả hai cấu hình sau</span><span class="label">“D001 kiểm tra giúp tôi” bị chuyển nhân viên chung; thiếu trạng thái chờ tài xế và trễ 20 phút.</span></div>
+        <div class="card yellow"><span class="tag estimate">D1-03 · trượt ở OpenAI</span><span class="label">Hỏi D002 nhưng output không nêu quán đang chuẩn bị, trễ 29 phút và chưa đủ điều kiện voucher.</span></div>
+      </div>
+      <div class="notes"><b>Lời dẫn:</b> OpenAI đạt ngưỡng CP2 trên bộ 20 câu, nhưng điểm 18/20 không thể so trực tiếp để quy do model. Cần chạy cùng commit với hai model hoặc cùng model trước/sau nếu muốn kết luận nhân quả. Không có lỗi kỹ thuật trong lượt OpenAI.</div>
+      <div class="source">Nguồn: <a href="../eval/report.md">báo cáo đánh giá</a> · <a href="../eval/run-2.csv">CSV OpenAI</a> · <a href="../eval/cp3-openai-run2-review.md">rà soát từng câu</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-10" aria-label="Trang 10: Phương pháp mô phỏng chi phí">
+      <div class="meta"><span>09 / Chi phí</span><span class="chapter">Token đo thật · quy mô giả định</span></div>
+      <h2>Đo 50 phiên API, rồi ngoại suy theo 3 kịch bản</h2>
+      <div class="grid four">
+        <div class="card strong"><span class="metric small">50/50</span><span class="label">phiên không lỗi kỹ thuật</span></div>
+        <div class="card"><span class="metric small">23.377</span><span class="label">token đầu vào</span></div>
+        <div class="card"><span class="metric small">755</span><span class="label">token đầu ra</span></div>
+        <div class="card"><span class="metric small">51 / 228</span><span class="label">model calls / tool calls</span></div>
+      </div>
+      <div class="grid two" style="margin-top:15px">
+        <div class="card"><h3>Persona · tự ước tính</h3><p>70% dùng ít: 1 phiên × 1 lượt hỏi; 25% dùng vừa: 2 phiên × 2 lượt; 5% dùng nhiều: 4 phiên × 3 lượt mỗi tháng.</p></div>
+        <div class="card yellow"><h3>Giá &amp; mẫu số</h3><p>Nano: $0.20 vào / $1.25 ra mỗi 1M token. Chi phí/task đạt lấy chi phí/phiên ÷ 0,90; 90% là tỷ lệ <em>câu thử</em> OpenAI, chưa đo thành công toàn phiên.</p></div>
+      </div>
+      <div class="notes"><b>Lời dẫn:</b> Mô phỏng run simulate-2, seed 42. Giá xem ngày 28/11/2026. Trang nano hiện ghi Deprecated, phải kiểm khả dụng trước triển khai. Số token lấy từ usage API, còn lượng người dùng và tần suất đều tự ước tính.</div>
+      <div class="source">Nguồn: <a href="../cost/simulate-2-summary.md">summary 50 phiên</a> · <a href="../cost/simulate-2.csv">CSV mô phỏng</a> · <a href="../cost/cost-estimate.md">giả định</a> · <a href="https://developers.openai.com/api/docs/models/gpt-5.4-nano">giá nano</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-11" aria-label="Trang 11: Chi phí và impact">
+      <div class="meta"><span>10 / Kinh tế pilot</span><span class="chapter">USD token · chưa gồm vận hành</span></div>
+      <h2>Chi phí token thấp trong kịch bản, lợi ích thật chưa đo</h2>
+      <div class="table-wrap"><table><thead><tr><th>Model / loại số</th><th>USD/phiên</th><th>USD/task đạt</th><th>100 người/tháng</th><th>300 người/tháng</th><th>1.000 người/tháng</th></tr></thead><tbody>
+        <tr><td>Nano · token đã đo</td><td>$0.00011</td><td>$0.00012</td><td>$0.0189</td><td><strong>$0.0567</strong></td><td>$0.1888</td></tr>
+        <tr><td>Mini · giả lập giá trên token nano</td><td>$0.00042</td><td>$0.00047*</td><td>$0.0703</td><td>$0.2110</td><td>$0.7034</td></tr>
+      </tbody></table></div>
+      <div class="grid three" style="margin-top:17px">
+        <div class="card yellow"><span class="tag estimate">Tự ước tính</span><span class="metric small">50 phút</span><span class="label">10 khách × 1 lần × 5 phút tìm hỗ trợ/tháng; mức có thể giảm tối đa theo kịch bản.</span></div>
+        <div class="card"><span class="tag estimate">Điều kiện hòa vốn token</span><span class="metric small">$0.00113</span><span class="label">giá trị mỗi phút nếu tiết kiệm trọn 50 phút để bù $0.0567 token.</span></div>
+        <div class="card red"><span class="tag limit">Chưa đo</span><span class="label">Phút tiết kiệm thực tế; công duyệt hồ sơ, hạ tầng và tỷ lệ xử lý phiên nhiều lượt.</span></div>
+      </div>
+      <div class="notes"><b>Lời dẫn:</b> 100/300/1000 người đều là quy mô pilot tự ước tính, không phải khách thật của hãng. Mini chưa chạy/chấm; giả định cùng lượng token và 90% thành công chỉ để so giá. Không tuyên bố ROI dương.</div>
+      <div class="source">Nguồn: <a href="../cost/cost-estimate.md">bảng chi phí và giới hạn</a> · <a href="../spec.md">impact §2</a> · <a href="https://developers.openai.com/api/docs/models/gpt-5.4-mini">giá mini</a>.</div>
+    </section>
+
+    <section class="slide" id="slide-12" aria-label="Trang 12: Kết luận và kế hoạch">
+      <div class="meta"><span>11 / Kết luận</span><span class="chapter">Quyết định &amp; việc cần làm</span></div>
+      <h2>Đáng thử pilot giới hạn; cần đo tác động ngoài benchmark</h2>
+      <div class="grid two">
+        <div class="card strong"><span class="tag">Đã có căn cứ</span><span class="metric small">19/20 · 18/20</span><span class="label">Hai cấu hình sau tích hợp đạt ngưỡng trên bộ 20 câu; các hành động nhạy cảm vẫn chờ người duyệt.</span></div>
+        <div class="card yellow"><span class="tag estimate">Chưa đủ để triển khai rộng</span><span class="label">Review chưa đại diện quần thể; chưa đo tiết kiệm thời gian, tỷ lệ giải quyết ca thật hoặc chi phí nhân viên. D1-08 còn trượt ở cả hai cấu hình.</span></div>
+      </div>
+      <div class="stack" style="margin-top:17px">
+        <div class="row"><span class="index">1</span><div><b>Sửa câu hỏi tình trạng ngắn và hỗ trợ mơ hồ.</b> Chạy lại đủ 20 câu cùng cấu hình, thêm bộ giữ riêng để tránh chỉnh theo benchmark.</div></div>
+        <div class="row"><span class="index">2</span><div><b>Kiểm nguồn và thử với người dùng.</b> Lưu snapshot gốc cho 3 câu Google Play, ghi ca thử, thời gian tìm hỗ trợ và mức rõ ràng của phản hồi.</div></div>
+        <div class="row"><span class="index">3</span><div><b>Đo chi phí toàn ca.</b> Tính công nhân viên duyệt, thời gian xử lý, hạ tầng và kết quả ca nhiều lượt trước khi kết luận hiệu quả kinh tế.</div></div>
+      </div>
+      <div class="notes"><b>Lời kết:</b> Quyết định phù hợp là iterate/pilot giới hạn. Chỉ mở rộng khi dữ liệu thử thật cho thấy người dùng hiểu bước tiếp theo và nhân viên có thể duyệt hồ sơ với chi phí chấp nhận được.</div>
+      <div class="source">Nguồn: <a href="../eval/report.md">lỗi và kế hoạch đo lại</a> · <a href="../cost/cost-estimate.md">kết luận chi phí</a> · <a href="../evidence/summary.md">giới hạn bằng chứng</a>.</div>
+    </section>
+  </main>
+  <div class="hint">← → / PageUp PageDown: chuyển trang · N: lời dẫn · Home/End: đầu/cuối · Ctrl+P: in PDF</div>
+  <nav class="controls" aria-label="Điều khiển slide">
+    <button type="button" id="prev" aria-label="Trang trước">← Trước</button>
+    <span id="counter" aria-live="polite">1 / 12</span>
+    <button type="button" id="notes-toggle" aria-pressed="false" title="Bật hoặc tắt lời dẫn">Lời dẫn</button>
+    <button type="button" id="next" aria-label="Trang sau">Sau →</button>
+  </nav>
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    const counter = document.getElementById('counter');
+    const progress = document.getElementById('progress-fill');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const notesToggle = document.getElementById('notes-toggle');
+    let current = 0;
+    function show(index, updateHash = true) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, i) => {
+        const active = i === current;
+        slide.classList.toggle('active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      progress.style.width = `${(current + 1) / slides.length * 100}%`;
+      prev.disabled = current === 0;
+      next.disabled = current === slides.length - 1;
+      if (updateHash) history.replaceState(null, '', `#slide-${current + 1}`);
+      scrollTo({top:0, behavior:'instant'});
+    }
+    prev.addEventListener('click', () => show(current - 1));
+    next.addEventListener('click', () => show(current + 1));
+    notesToggle.addEventListener('click', () => {
+      const enabled = document.body.classList.toggle('notes-on');
+      notesToggle.setAttribute('aria-pressed', String(enabled));
+    });
+    document.addEventListener('keydown', event => {
+      if (event.target.closest('button, a') && event.key === 'Enter') return;
+      if (['ArrowRight','PageDown',' '].includes(event.key)) { event.preventDefault(); show(current + 1); }
+      else if (['ArrowLeft','PageUp'].includes(event.key)) { event.preventDefault(); show(current - 1); }
+      else if (event.key === 'Home') { event.preventDefault(); show(0); }
+      else if (event.key === 'End') { event.preventDefault(); show(slides.length - 1); }
+      else if (event.key.toLowerCase() === 'n' && !event.ctrlKey && !event.altKey) { notesToggle.click(); }
+    });
+    addEventListener('hashchange', () => {
+      const n = Number(location.hash.match(/^#slide-(\d+)$/)?.[1]);
+      if (n >= 1 && n <= slides.length) show(n - 1, false);
+    });
+    const initial = Number(location.hash.match(/^#slide-(\d+)$/)?.[1]);
+    show(initial ? initial - 1 : 0, false);
+  </script>
+</body>
+</html>
