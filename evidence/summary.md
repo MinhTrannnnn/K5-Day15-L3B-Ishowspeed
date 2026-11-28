@@ -37,8 +37,6 @@ Không suy từ tổng thời gian giao ra thời gian tìm hỗ trợ; không d
 
 Đối chiếu ngày 27/11/2026 tại mục **Chính các đánh giá** của [bản lưu công khai review ShopeeFood từ App Store](https://opportunitymarket.org/vi/ung-dung/shopeefood-food-delivery). Mỗi dòng trích một cụm chữ nguyên văn từ một review khác nhau. Mã khớp [bảng mẫu 31 review](data-mining-app-store-31.md). Bản lưu tập trung vào lời phàn nàn nên chỉ dùng để xác định tình huống gặp phải.
 
-Kiểm lại ngày 28/11/2026: trang nguồn vẫn hiển thị 31 phản hồi trong mục trên; cả năm cụm trích R03, R07, R13, R16 và R24 đều có trên trang. Đếm lại 31 dòng ở phụ lục theo nhãn của nhóm cho kết quả 14 nhãn G, 6 nhãn H và 2 dòng có cả G,H. Nhãn của nhóm khác các danh mục tự động trên trang nguồn; mẫu này không đại diện cho mọi đơn hàng hoặc mọi người dùng. Mẫu Google Play chưa có bản lưu toàn bộ review gốc để tái kiểm như mẫu 31 dòng này.
-
 | Mã | Trích nguyên văn | Điều khách mô tả |
 |---|---|---|
 | R03 | “gần 2 tiếng” | Đợi gần hai tiếng mới nhận đơn. |

@@ -4,8 +4,6 @@
 > Số **không điền tay**: điền `cost/personas.yaml` → `python run.py simulate` → chép bảng trong `cost/simulate-N-summary.md` vào đây.
 > Lúc build dùng gói miễn phí vẫn tính theo **giá gói trả phí** — đây là chi phí cho lúc đưa vào dùng thật.
 
-**Trạng thái 28/11/2026:** [Lượt mô phỏng 50 phiên](simulate-1-summary.md) đã gọi OpenAI thật và không có phiên lỗi, nhưng [cấu hình](personas.yaml) vẫn chứa quy mô người dùng, persona và tên/giá model ví dụ. Chỉ dùng lượt này để kiểm `run.py simulate` chạy được; bảng tiền trong lượt đó chưa hợp lệ để kết luận hoặc nộp CP4. Cần thay các giả định bằng số có nguồn hoặc đánh dấu *tự ước tính*, dùng tên và giá model thực có nguồn, rồi chạy lượt mới. Giữ nguyên lượt đã chạy.
-
 ## 1. Đầu vào
 
 - **Persona** (`cost/personas.yaml`): ≥3 kiểu — tỉ lệ, số phiên / người / tháng, số lượt hỏi / phiên. Nguồn: __

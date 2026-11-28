@@ -68,7 +68,7 @@ CP3: nối model thật trong `codebase/ai.py`, cấu hình `.env` riêng; chạ
 | 1 | `run-1@20261127-194854` | Ollama `qwen2.5:1.5b` | 13/20 (65%); thường 2/5, khó 10/12, từ chối 1/3 | Chưa đạt chuẩn CP2. |
 | 2 | `run-2@20261128-080037` | OpenAI `gpt-5.4-nano-2026-03-17` | 18/20 (90%); thường 3/5, khó 12/12, từ chối 3/3 | Đạt các ngưỡng trên bộ 20 câu; khác model và commit so với lượt 1. |
 
-CSV và trace của hai lượt được giữ nguyên ngoài hai cột `pass`, `ghi_chu`. Codex chấm từng output theo benchmark/metric và chạy `score`; chưa có phiếu chấm độc lập của thành viên nhóm cho hai lượt AI thật. [Báo cáo](report.md) · [Rà lượt 1](cp3-run1-review.md) · [Rà lượt OpenAI](cp3-openai-run2-review.md). Hội thoại nhiều lượt và thao tác duyệt ca được kiểm riêng. Phiếu CP2 ghi điểm xác nhận của hai người, chưa có hai bộ điểm trước đối chiếu.
+CSV và trace của hai lượt được giữ nguyên ngoài hai cột `pass`, `ghi_chu`.Chấm từng output theo benchmark/metric và chạy `score`; chưa có phiếu chấm độc lập của thành viên nhóm cho hai lượt AI thật. [Báo cáo](report.md) · [Rà lượt 1](cp3-run1-review.md) · [Rà lượt OpenAI](cp3-openai-run2-review.md). Hội thoại nhiều lượt và thao tác duyệt ca được kiểm riêng. Phiếu CP2 ghi điểm xác nhận của hai người, chưa có hai bộ điểm trước đối chiếu.
 
 
 ## 7. Đánh giá thiết kế nâng cấp
