@@ -8,12 +8,14 @@
 
 | Lượt | Run ID | Đạt / tổng | % | thuong | kho | tu_choi | So với chuẩn "đạt" |
 |---|---|---|---|---|---|---|---|
-| 1 | `run-1@20261127-194854` | 13/20 dự kiến | 65% dự kiến | 2/5 | 10/12 | 1/3 | Chưa đạt theo bản chấm nháp |
-| 2 | | __/__ | | __/__ | __/__ | __/__ | đạt / chưa |
+| 1 · Ollama `qwen2.5:1.5b` | `run-1@20261127-194854` | 13/20 | 65% | 2/5 | 10/12 | 1/3 | Chưa đạt |
+| 2 · OpenAI `gpt-5.4-nano-2026-03-17` | `run-2@20261128-080037` | 18/20 | 90% | 3/5 | 12/12 | 3/3 | Đạt các ngưỡng CP2 trên bộ 20 câu |
 
 Kết quả từng câu: `eval/run-1.csv`, `eval/run-2.csv`. Trace: `traces/run-1.jsonl`, `traces/run-2.jsonl`.
 
-Lượt 1 chạy trên nhánh CP3 trước khi tích hợp vào main, dùng Ollama `qwen2.5:1.5b`. Có 15 câu gọi model thật và 5 câu được xử lý bằng các chốt code trước khi gọi. Cả 20 câu trả output, không có lỗi kỹ thuật. Điểm trong bảng là [bản chấm nháp](cp3-run1-review.md) để người chấm duyệt. CSV gốc vẫn để trống cột `pass` và `ghi_chu`.
+Lượt 1 chạy trên nhánh CP3 trước khi tích hợp vào main, dùng Ollama `qwen2.5:1.5b`. Có 15 câu gọi model thật và 5 câu được xử lý bằng các chốt code trước khi gọi. Cả 20 câu trả output, không có lỗi kỹ thuật. Codex đã đối chiếu từng output với benchmark và metric, điền `pass`/`ghi_chu`; `run.py score` xác nhận 13/20. [Bản rà từng câu](cp3-run1-review.md). Chưa có phiếu chấm độc lập của thành viên nhóm cho lượt này.
+
+Lượt 2 chạy trên commit `371deb6` qua API OpenAI, có 14 câu gọi model thật và 6 câu được chặn hoặc xử lý bằng code trước model; 0 lỗi kỹ thuật. Codex đối chiếu từng output và điền `pass`/`ghi_chu`; `run.py score` xác nhận 18/20. D1-03 và D1-08 trượt vì chuyển nhân viên chung, không nêu trạng thái và mốc trễ. [Bản rà từng câu](cp3-openai-run2-review.md). Các điều kiện cứng về căn cứ, hạn mức, riêng tư, tác động ngoài và an toàn thực phẩm không thấy vi phạm trong output; nhóm vẫn cần duyệt điểm nếu yêu cầu người chấm độc lập. Hai lượt dùng **model và commit khác nhau**, nên mức tăng 65% → 90% không chứng minh tác động riêng của một cải tiến.
 
 ### Đo lại sau khi tích hợp lõi CP2 · 28/11/2026
 
