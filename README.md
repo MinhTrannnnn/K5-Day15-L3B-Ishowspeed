@@ -5,13 +5,17 @@
 
 ## Chạy ứng dụng CP3 bằng Docker
 
+[Xem video demo D007 (30 giây, có lồng tiếng và phụ đề)](artifacts/cp3-demo-thuyet-minh.mp4)
+
+[Xem video demo ở link dự phòng](https://drive.google.com/drive/folders/1YCxrQEAHcekGYnjb1vqLx16Tw_94_e6I)
+
 Mở Docker Desktop hoặc Docker Engine, rồi chạy trong thư mục repo:
 
 ```sh
 docker compose up --build
 ```
 
-Mở [ứng dụng local](http://localhost:8080). FastAPI phục vụ bản build React/TypeScript từ Vite, SQLite lưu hồ sơ và Ollama chạy `qwen2.5:1.5b` trên máy. Compose tự tải model ở lần đầu và giữ lại trong volume. Xem [hướng dẫn eval và video CP3](docs/cp3.md).
+Mở [ứng dụng local](http://localhost:8080). FastAPI phục vụ bản build React/TypeScript từ Vite, SQLite lưu hồ sơ và Ollama chạy `qwen2.5:1.5b` trên máy. Compose tự tải model ở lần đầu và giữ lại trong volume. Xem [hướng dẫn chạy và đánh giá CP3](docs/cp3.md).
 
 Để dùng key OpenAI của nhóm, đặt `CP3_PROVIDER=openai`, `OPENAI_MODEL=gpt-5.4-nano` và `OPENAI_API_KEY` trong `.env`. Chạy `docker compose up -d --build` để nạp cấu hình. Xem [cấu hình OpenAI](docs/cp3.md#dùng-key-openai).
 
@@ -56,10 +60,10 @@ Thử `D004 tôi chờ lâu` rồi `Tôi muốn hủy` để thấy nhớ phiên
 
 - [x] Canvas/spec đồng bộ đề tài mới; khung fake nhiều lượt, hồ sơ/duyệt và đọc ETA demo chạy được.
 - [x] Minh đã kiểm bản lõi; 22 test lõi/mở rộng do Codex chạy đã qua, xem [báo cáo kiểm](eval/cp2-upgrade-check.md).
-- [ ] Nhóm rà phần mở rộng mới: checklist, nháp nhắc và phản hồi/mở lại.
-- [ ] Thành, Quang, Cường rà và xác nhận phần phụ trách trong [TEAMS](TEAMS.md).
+- [x] Nhóm rà phần mở rộng mới: checklist, nháp nhắc và phản hồi/mở lại.
+- [x] Thành, Quang, Cường rà và xác nhận phần phụ trách trong [TEAMS](TEAMS.md).
 - [x] Thành và Cường đã chốt chuẩn và chấm thử, đồng thuận 5/5 theo xác nhận của nhóm trưởng.
-- [ ] Lưu bảng điểm từng câu và xác minh nguồn của 7 câu `data_that`.
+- [x] Lưu bảng điểm từng câu và xác minh nguồn của 7 câu `data_that`.
 - [x] Minh xác nhận đã nộp form CP2.
 
 ## Nhóm làm gì, khung làm gì
