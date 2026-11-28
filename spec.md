@@ -126,12 +126,12 @@ CLI chạy bằng model giả, 10 đơn giả lập và chính sách DEMO-P1. Kh
 
 - **Chốt chuẩn:** Theo xác nhận của nhóm trưởng, Thành và Cường đã thống nhất chuẩn trên. Ngưỡng được lưu trong commit `41b2f4f` ngày 27/11, lúc 17:05.
 
-- **Kết quả CP2 và CP3:** Kiểm cấu trúc và 22 test kỹ thuật CP2 đã qua. Theo xác nhận của nhóm trưởng, Thành và Cường đồng ý 5/5 output fake đã được Codex chấm thử; repo không có hai bảng điểm độc lập trước đối chiếu nên chưa kiểm chứng được mức khớp giữa hai người chấm. Năm output bổ sung đã lưu nhưng chưa có phiếu chấm. Lượt 1 Ollama `run-1@20261127-194854` đạt **13/20 (65%)**, từ chối **1/3**; lượt 2 OpenAI `run-2@20261128-080037` đạt **18/20 (90%)**, từ chối **3/3**, theo `run.py score`. Hai lượt dùng model và commit khác nhau nên không quy chênh lệch riêng cho một cải tiến. [Kiểm kỹ thuật](eval/cp2-upgrade-check.md) · [Hồ sơ chấm](eval/independent-review.md) · [Báo cáo đánh giá](eval/report.md)
+- **Kết quả CP2–CP4:** Kiểm cấu trúc và 22 test kỹ thuật CP2 đã qua. Theo xác nhận của nhóm trưởng, Thành và Cường đồng ý 5/5 output fake đã được Codex chấm thử; repo không có hai bảng điểm độc lập trước đối chiếu nên chưa kiểm chứng được mức khớp giữa hai người chấm. Năm output bổ sung đã lưu nhưng chưa có phiếu chấm. Lượt 1 Ollama `run-1@20261127-194854` đạt **13/20 (65%)**, từ chối **1/3**; lượt 2 OpenAI `run-2@20261128-080037` đạt **18/20 (90%)**, từ chối **3/3**, theo `run.py score`. Hai lượt chính dùng model và commit khác nhau nên không quy chênh lệch riêng cho một cải tiến. Lượt kiểm tích hợp riêng dùng cùng Ollama trên bộ 20 câu sau khi thay lõi xử lý đạt **19/20 (95%)**, nhóm lỗi trọng tâm 0/4 → 3/4; bản sửa code là một gói thay đổi rộng, chưa cô lập từng nguyên nhân. [Kiểm kỹ thuật](eval/cp2-upgrade-check.md) · [Hồ sơ chấm](eval/independent-review.md) · [Báo cáo đánh giá](eval/report.md)
 
 
 ## §8. Chi phí khi dùng thật *(guide 4.2)*
 
-Chưa đo chi phí mỗi tác vụ thành công hoặc chi phí theo tháng. [Persona](cost/personas.yaml) · [Ước tính chi phí](cost/cost-estimate.md)
+Mô phỏng OpenAI thật 50 phiên, 0 lỗi, trên seed 42. Kịch bản pilot 100/300/1.000 người *(tự ước tính)*, ba persona *(tự ước tính)* và hai mức giá model có [nguồn OpenAI](https://developers.openai.com/api/docs/models/compare?model=gpt-5.4-nano). Ở mức cơ sở 300 người, giá token nano là **$0.0567/tháng**, chi phí trung bình **$0.00012/task thành công** khi dùng tỷ lệ đạt 18/20 của bộ câu thử. Đây là mô phỏng theo giả định, chưa tính nhân viên, hạ tầng hoặc xác nhận hiệu quả thật. [Persona](cost/personas.yaml) · [CSV mô phỏng](cost/simulate-2.csv) · [Ước tính chi phí](cost/cost-estimate.md)
 
 ## §9. Rủi ro & an toàn
 
@@ -157,3 +157,4 @@ Review được ghi theo mã và bỏ tên người viết. Bản chạy dùng �
 | 27/11/2026 | Rút gọn đặc tả theo mẫu BTC | Nêu rõ phạm vi cả nhóm thống nhất và tính năng đang chạy. |
 | 28/11/2026 | Tích hợp web FastAPI/React và cấu hình Ollama/OpenAI vào lõi CP2 | CLI, web và bộ đánh giá dùng cùng agent. [Hướng dẫn CP3](docs/cp3.md) |
 | 28/11/2026 08:27 | Chấm `pass` và `score` hai lượt AI thật; điền impact minh họa ba hướng và ghi rõ giả định | Hoàn thiện hồ sơ CP3 theo kết quả `run-1`, `run-2` |
+| 28/11/2026 09:20 | Tổng hợp lỗi và cải tiến cùng model; chạy mô phỏng 50 phiên với persona pilot tự ước tính và giá OpenAI có nguồn | Hoàn thiện hồ sơ CP4, giữ rõ giới hạn về nguồn review, hiệu quả thực tế và chi phí nhân viên. [Báo cáo](eval/report.md) · [Chi phí](cost/cost-estimate.md) |

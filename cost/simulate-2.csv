@@ -1,0 +1,51 @@
+﻿run_id,session,persona,turns,inputs,model,model_calls,tool_calls,tokens_in,tokens_out,latency_s,error,tokens_by_model
+simulate-2@20261128-092013,S001,dung_it,1,"D004 tôi chờ lâu rồi, đơn đang ở đâu?",gpt-5.4-nano-2026-03-17,1,5,455,14,2.374,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 455, ""out"": 14}}"
+simulate-2@20261128-092013,S002,dung_vua,2,D001 kiểm tra giúp tôi. ‖ D001 kiểm tra giúp tôi.,gpt-5.4-nano-2026-03-17,2,8,898,30,2.995,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 898, ""out"": 30}}"
+simulate-2@20261128-092013,S003,dung_it,1,"Đợi hơn một tiếng chưa có tài xế, quán đã làm món, tôi muốn hủy D008.",gpt-5.4-nano-2026-03-17,1,4,468,15,0.818,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 468, ""out"": 15}}"
+simulate-2@20261128-092013,S004,dung_it,1,"Chat hỗ trợ chưa hiểu vấn đề, kiểm tra đơn D002 giúp tôi.",gpt-5.4-nano-2026-03-17,1,5,457,14,1.113,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 457, ""out"": 14}}"
+simulate-2@20261128-092013,S005,dung_it,1,"D007 giờ giao đổi nhiều lần, đã nhận món nhưng hỗ trợ không giải quyết, kiểm tra",gpt-5.4-nano-2026-03-17,1,4,463,15,0.93,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 463, ""out"": 15}}"
+simulate-2@20261128-092013,S006,dung_it,1,"D005 báo hoàn sau 7-30 ngày, có chắc ngày nào tôi nhận lại tiền không?",gpt-5.4-nano-2026-03-17,1,4,463,15,2.027,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 463, ""out"": 15}}"
+simulate-2@20261128-092013,S007,dung_it,1,"D004 tôi chờ lâu rồi, đơn đang ở đâu?",gpt-5.4-nano-2026-03-17,1,5,455,14,1.397,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 455, ""out"": 14}}"
+simulate-2@20261128-092013,S008,dung_it,1,"D003 đã trễ đúng 30 phút, có voucher không?",gpt-5.4-nano-2026-03-17,1,5,455,14,0.761,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 455, ""out"": 14}}"
+simulate-2@20261128-092013,S009,dung_it,1,Tôi muốn hủy đơn D001.,gpt-5.4-nano-2026-03-17,1,4,453,15,1.334,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 453, ""out"": 15}}"
+simulate-2@20261128-092013,S010,dung_vua,2,"D004 tôi chờ lâu rồi, đơn đang ở đâu? ‖ Đơn D005 hủy rồi mà bị trừ tiền, chat không có người trả lời, khi nào hoàn?",gpt-5.4-nano-2026-03-17,2,9,921,29,2.182,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 921, ""out"": 29}}"
+simulate-2@20261128-092013,S011,dung_it,1,"Tôi chờ lâu rồi, xử lý giúp.",,0,0,0,0,0.002,,{}
+simulate-2@20261128-092013,S012,dung_it,1,"D005 báo hoàn sau 7-30 ngày, có chắc ngày nào tôi nhận lại tiền không?",gpt-5.4-nano-2026-03-17,1,4,463,15,0.871,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 463, ""out"": 15}}"
+simulate-2@20261128-092013,S013,dung_nhieu,3,"Tôi chờ lâu rồi, xử lý giúp. ‖ Đợi hơn một tiếng chưa có tài xế, quán đã làm món, tôi muốn hủy D008. ‖ Chat hỗ trợ chưa hiểu vấn đề, kiểm tra đơn D002 giúp tôi.",gpt-5.4-nano-2026-03-17,2,8,925,30,1.98,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 925, ""out"": 30}}"
+simulate-2@20261128-092013,S014,dung_it,1,D9999 đơn ở đâu?,,0,4,0,0,0.003,,{}
+simulate-2@20261128-092013,S015,dung_vua,2,"Tôi muốn hủy đơn D001. ‖ D007 giờ giao đổi nhiều lần, đã nhận món nhưng hỗ trợ không giải quyết, kiểm tra",gpt-5.4-nano-2026-03-17,2,8,916,30,1.841,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 916, ""out"": 30}}"
+simulate-2@20261128-092013,S016,dung_vua,2,"Đợi hơn một tiếng chưa có tài xế, quán đã làm món, tôi muốn hủy D008. ‖ D001 hay D002 nhỉ, kiểm tra giúp.",gpt-5.4-nano-2026-03-17,1,4,468,15,0.882,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 468, ""out"": 15}}"
+simulate-2@20261128-092013,S017,dung_it,1,D010 tiền hoàn của tôi ở đâu?,gpt-5.4-nano-2026-03-17,1,4,451,15,0.77,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 451, ""out"": 15}}"
+simulate-2@20261128-092013,S018,dung_vua,2,"D9999 đơn ở đâu? ‖ D005 báo hoàn sau 7-30 ngày, có chắc ngày nào tôi nhận lại tiền không?",gpt-5.4-nano-2026-03-17,1,8,463,15,0.869,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 463, ""out"": 15}}"
+simulate-2@20261128-092013,S019,dung_vua,2,"D007 giờ giao đổi nhiều lần, đã nhận món nhưng hỗ trợ không giải quyết, kiểm tra ‖ D001 kiểm tra giúp tôi.",gpt-5.4-nano-2026-03-17,2,8,912,30,1.63,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 912, ""out"": 30}}"
+simulate-2@20261128-092013,S020,dung_vua,2,"Chat hỗ trợ chưa hiểu vấn đề, kiểm tra đơn D002 giúp tôi. ‖ D001 kiểm tra giúp tôi.",gpt-5.4-nano-2026-03-17,2,8,906,30,1.94,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 906, ""out"": 30}}"
+simulate-2@20261128-092013,S021,dung_vua,2,"D001 hay D002 nhỉ, kiểm tra giúp. ‖ Tôi muốn hủy đơn D001.",gpt-5.4-nano-2026-03-17,1,4,453,15,0.948,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 453, ""out"": 15}}"
+simulate-2@20261128-092013,S022,dung_it,1,D9999 đơn ở đâu?,,0,4,0,0,0.003,,{}
+simulate-2@20261128-092013,S023,dung_it,1,D9999 đơn ở đâu?,,0,4,0,0,0.004,,{}
+simulate-2@20261128-092013,S024,dung_it,1,Tôi muốn hủy đơn D001.,gpt-5.4-nano-2026-03-17,1,4,453,15,0.824,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 453, ""out"": 15}}"
+simulate-2@20261128-092013,S025,dung_vua,2,"Chat hỗ trợ chưa hiểu vấn đề, kiểm tra đơn D002 giúp tôi. ‖ Đơn D005 hủy rồi mà bị trừ tiền, chat không có người trả lời, khi nào hoàn?",gpt-5.4-nano-2026-03-17,2,8,923,30,1.629,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 923, ""out"": 30}}"
+simulate-2@20261128-092013,S026,dung_it,1,D001 kiểm tra giúp tôi.,gpt-5.4-nano-2026-03-17,1,4,449,15,0.799,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 449, ""out"": 15}}"
+simulate-2@20261128-092013,S027,dung_it,1,"D001 hay D002 nhỉ, kiểm tra giúp.",,0,0,0,0,0.032,,{}
+simulate-2@20261128-092013,S028,dung_it,1,D001 kiểm tra giúp tôi.,gpt-5.4-nano-2026-03-17,1,4,449,15,0.873,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 449, ""out"": 15}}"
+simulate-2@20261128-092013,S029,dung_it,1,"D007 giờ giao đổi nhiều lần, đã nhận món nhưng hỗ trợ không giải quyết, kiểm tra",gpt-5.4-nano-2026-03-17,1,4,463,15,0.773,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 463, ""out"": 15}}"
+simulate-2@20261128-092013,S030,dung_it,1,"D007 giờ giao đổi nhiều lần, đã nhận món nhưng hỗ trợ không giải quyết, kiểm tra",gpt-5.4-nano-2026-03-17,1,4,463,15,0.923,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 463, ""out"": 15}}"
+simulate-2@20261128-092013,S031,dung_vua,2,"D001 hay D002 nhỉ, kiểm tra giúp. ‖ Tôi muốn hủy đơn D001.",gpt-5.4-nano-2026-03-17,1,4,453,15,0.775,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 453, ""out"": 15}}"
+simulate-2@20261128-092013,S032,dung_it,1,"Tôi chờ lâu rồi, xử lý giúp.",,0,0,0,0,0.002,,{}
+simulate-2@20261128-092013,S033,dung_it,1,"D007 tôi bị dị ứng sau khi ăn, giải quyết ngay.",,0,0,0,0,0.001,,{}
+simulate-2@20261128-092013,S034,dung_it,1,"D009 giờ giao và thời gian trễ không rõ, tôi phải làm gì?",gpt-5.4-nano-2026-03-17,1,4,454,14,0.924,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 454, ""out"": 14}}"
+simulate-2@20261128-092013,S035,dung_it,1,"Giao trễ mà không liên hệ được tài xế, thông tin D006 có đúng không?",gpt-5.4-nano-2026-03-17,1,4,462,15,0.826,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 462, ""out"": 15}}"
+simulate-2@20261128-092013,S036,dung_it,1,Tôi muốn hủy đơn D001.,gpt-5.4-nano-2026-03-17,1,4,453,15,0.974,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 453, ""out"": 15}}"
+simulate-2@20261128-092013,S037,dung_vua,2,"D003 đã trễ đúng 30 phút, có voucher không? ‖ D001 hay D002 nhỉ, kiểm tra giúp.",gpt-5.4-nano-2026-03-17,1,5,455,14,0.875,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 455, ""out"": 14}}"
+simulate-2@20261128-092013,S038,dung_it,1,"Giao trễ mà không liên hệ được tài xế, thông tin D006 có đúng không?",gpt-5.4-nano-2026-03-17,1,4,462,15,0.948,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 462, ""out"": 15}}"
+simulate-2@20261128-092013,S039,dung_it,1,"Chat hỗ trợ chưa hiểu vấn đề, kiểm tra đơn D002 giúp tôi.",gpt-5.4-nano-2026-03-17,1,4,457,15,0.784,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 457, ""out"": 15}}"
+simulate-2@20261128-092013,S040,dung_vua,2,"Đợi hơn một tiếng chưa có tài xế, quán đã làm món, tôi muốn hủy D008. ‖ Giao trễ mà không liên hệ được tài xế, thông tin D006 có đúng không?",gpt-5.4-nano-2026-03-17,2,8,930,30,1.772,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 930, ""out"": 30}}"
+simulate-2@20261128-092013,S041,dung_it,1,"D003 đã trễ đúng 30 phút, có voucher không?",gpt-5.4-nano-2026-03-17,1,5,455,14,0.869,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 455, ""out"": 14}}"
+simulate-2@20261128-092013,S042,dung_it,1,"D001 hay D002 nhỉ, kiểm tra giúp.",,0,0,0,0,0.001,,{}
+simulate-2@20261128-092013,S043,dung_it,1,"D009 giờ giao và thời gian trễ không rõ, tôi phải làm gì?",gpt-5.4-nano-2026-03-17,1,4,454,14,0.799,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 454, ""out"": 14}}"
+simulate-2@20261128-092013,S044,dung_it,1,"D004 tôi chờ lâu rồi, đơn đang ở đâu?",gpt-5.4-nano-2026-03-17,1,5,455,14,0.909,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 455, ""out"": 14}}"
+simulate-2@20261128-092013,S045,dung_it,1,"Đợi hơn một tiếng chưa có tài xế, quán đã làm món, tôi muốn hủy D008.",gpt-5.4-nano-2026-03-17,1,4,468,15,0.812,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 468, ""out"": 15}}"
+simulate-2@20261128-092013,S046,dung_it,1,Tôi muốn hủy đơn D001.,gpt-5.4-nano-2026-03-17,1,4,453,15,0.818,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 453, ""out"": 15}}"
+simulate-2@20261128-092013,S047,dung_vua,2,"Tôi chờ lâu rồi, xử lý giúp. ‖ Đợi hơn một tiếng chưa có tài xế, quán đã làm món, tôi muốn hủy D008.",gpt-5.4-nano-2026-03-17,1,4,468,15,0.9,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 468, ""out"": 15}}"
+simulate-2@20261128-092013,S048,dung_it,1,"Đơn D005 hủy rồi mà bị trừ tiền, chat không có người trả lời, khi nào hoàn?",gpt-5.4-nano-2026-03-17,1,4,466,15,0.812,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 466, ""out"": 15}}"
+simulate-2@20261128-092013,S049,dung_it,1,Tôi muốn hủy đơn D001.,gpt-5.4-nano-2026-03-17,1,4,453,15,0.785,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 453, ""out"": 15}}"
+simulate-2@20261128-092013,S050,dung_nhieu,3,"Đơn D005 hủy rồi mà bị trừ tiền, chat không có người trả lời, khi nào hoàn? ‖ D002 tôi nhận thiếu món, kiểm tra phần tiền thiếu giúp. ‖ Đợi hơn một tiếng chưa có tài xế, quán đã làm món, tôi muốn hủy D008.",gpt-5.4-nano-2026-03-17,2,8,934,30,1.702,,"{""gpt-5.4-nano-2026-03-17"": {""in"": 934, ""out"": 30}}"

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ishowspeed · CP4</title>
+  <style>
+    :root { color-scheme: dark; font: 18px/1.45 system-ui, sans-serif; background: #091322; color: #f3f7ff; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .deck { min-height: 100vh; padding: min(5vw, 64px); display: grid; place-items: center; }
+    .slide { width: min(1120px, 100%); min-height: min(660px, 80vh); display: none; padding: clamp(28px, 5vw, 70px); border-radius: 28px; background: linear-gradient(140deg, #142e4d, #0c1b31 62%, #183a39); border: 1px solid #487185; box-shadow: 0 24px 70px #0006; }
+    .slide.active { display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { color: #66e3ca; text-transform: uppercase; font-size: .82rem; letter-spacing: .14em; font-weight: 700; }
+    h1 { font-size: clamp(2.2rem, 5vw, 4.5rem); line-height: 1.05; max-width: 900px; margin: 16px 0 26px; }
+    h2 { font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.12; margin: 16px 0 28px; }
+    p { max-width: 900px; }
+    .lead { font-size: clamp(1.2rem, 2.4vw, 1.7rem); color: #d6e7f2; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; margin: 24px 0; }
+    .card { padding: 22px; border-radius: 18px; background: #ffffff0d; border: 1px solid #ffffff2b; }
+    .num { display: block; font-size: clamp(2.1rem, 4vw, 3.5rem); line-height: 1.1; color: #79ead3; font-weight: 800; }
+    .label { display: block; margin-top: 8px; color: #d8e8ef; }
+    .note { color: #bad0da; font-size: .92rem; }
+    .source { margin-top: auto; padding-top: 26px; color: #b5ccd9; font-size: .8rem; }
+    a { color: #87ead8; }
+    .controls { position: fixed; bottom: 16px; right: 24px; display: flex; align-items: center; gap: 10px; background: #091322dd; padding: 8px 12px; border-radius: 50px; }
+    button { background: #1c4e67; color: white; border: 1px solid #80d8d0; border-radius: 10px; padding: 6px 12px; cursor: pointer; font: inherit; }
+    button:hover, button:focus-visible { background: #286e87; }
+    @media print { .deck { padding: 0; display: block; } .slide, .slide.active { display: flex; width: 100%; min-height: 100vh; border-radius: 0; page-break-after: always; box-shadow: none; } .controls { display: none; } }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-live="polite">
+    <section class="slide active" aria-label="Trang 1">
+      <div class="eyebrow">AI20K · Track D · Ishowspeed</div>
+      <h1>Khách chờ đơn trễ cần một bước tiếp theo rõ ràng</h1>
+      <p class="lead">Agent đọc trạng thái đơn và chính sách demo, đề xuất chờ hoặc lập hồ sơ cho nhân viên duyệt. ETA được đọc từ snapshot nền tảng, không tự dự báo.</p>
+      <div class="grid"><div class="card"><span class="num">14/31</span><span class="label">review trong mẫu phàn nàn nói về chờ lâu/giao muộn</span></div><div class="card"><span class="num">2/31</span><span class="label">nêu cả chờ/giao lâu và khó nhận hỗ trợ</span></div></div>
+      <div class="source">Nguồn: <a href="../evidence/data-mining-app-store-31.md">bảng gắn nhãn 31 review</a> · <a href="https://opportunitymarket.org/vi/ung-dung/shopeefood-food-delivery">trang review công khai</a>. Mẫu nghiêng về lời phàn nàn, không đại diện mọi khách hàng.</div>
+    </section>
+    <section class="slide" aria-label="Trang 2">
+      <div class="eyebrow">Lát cắt sản phẩm</div>
+      <h2>Từ một mã đơn đến hồ sơ có căn cứ</h2>
+      <div class="grid"><div class="card"><span class="num">1</span><span class="label">khách nêu mã đơn và việc muốn giải quyết</span></div><div class="card"><span class="num">3</span><span class="label">nguồn đọc: đơn, chính sách demo, timeline ETA</span></div><div class="card"><span class="num">0</span><span class="label">giao dịch tiền hoặc hủy đơn được agent tự thực hiện</span></div></div>
+      <p class="lead">Code giữ chốt quyền, hạn mức và trạng thái; nhân viên xác minh và duyệt. Demo dùng 10 đơn giả lập, không có dữ liệu đơn thật.</p>
+      <div class="source">Nguồn: <a href="../spec.md">đặc tả §4</a> · <a href="../data/DATA_CARD.md">data card</a> · <a href="../codebase/agent.py">lõi agent</a>.</div>
+    </section>
+    <section class="slide" aria-label="Trang 3">
+      <div class="eyebrow">CP4 · Cải tiến và đo lại</div>
+      <h2>Cùng Ollama, từ 13/20 lên 19/20</h2>
+      <div class="grid"><div class="card"><span class="num">13/20</span><span class="label">lượt 1 trước tích hợp, chưa đạt chuẩn</span></div><div class="card"><span class="num">19/20</span><span class="label">kiểm tích hợp cùng model, đạt chuẩn</span></div><div class="card"><span class="num">0/4 → 3/4</span><span class="label">nhóm lỗi thiếu trạng thái, độ trễ và bước tiếp theo</span></div></div>
+      <p class="note">OpenAI ở commit sau đạt 18/20; đổi cả model nên không dùng chênh lệch đó để quy riêng nguyên nhân. D1-08 vẫn trượt.</p>
+      <div class="source">Nguồn: <a href="../eval/run-1.csv">lượt 1</a> · <a href="../eval/cp3-integration-20261128.csv">kiểm tích hợp</a> · <a href="../eval/run-2.csv">lượt OpenAI</a> · <a href="../eval/report.md">phân tích lỗi</a>.</div>
+    </section>
+    <section class="slide" aria-label="Trang 4">
+      <div class="eyebrow">CP4 · Giá token trong pilot</div>
+      <h2>50 phiên đo thật, quy mô người dùng là giả định</h2>
+      <div class="grid"><div class="card"><span class="num">50/50</span><span class="label">phiên mô phỏng OpenAI không lỗi</span></div><div class="card"><span class="num">$0.0567</span><span class="label">token/tháng cho 300 người dùng pilot, *tự ước tính*</span></div><div class="card"><span class="num">$0.00012</span><span class="label">token/task thành công theo tỷ lệ đạt 18/20</span></div></div>
+      <p class="note">Chưa tính người duyệt và hạ tầng. Mức giá mini là kịch bản trên lượng token nano; mini chưa được chạy/chấm.</p>
+      <div class="source">Nguồn: <a href="../cost/simulate-2-summary.md">mô phỏng</a> · <a href="../cost/cost-estimate.md">giả định và phép tính</a> · <a href="https://developers.openai.com/api/docs/models/gpt-5.4-nano">giá OpenAI nano</a>.</div>
+    </section>
+    <section class="slide" aria-label="Trang 5">
+      <div class="eyebrow">Kết luận có giới hạn</div>
+      <h2>Đáng thử pilot; cần đo tác động thật</h2>
+      <div class="grid"><div class="card"><span class="num">50 phút</span><span class="label">thời gian tìm hỗ trợ/tháng trong kịch bản minh họa, tự ước tính</span></div><div class="card"><span class="num">Chưa đo</span><span class="label">phút tiết kiệm thực tế và công duyệt hồ sơ</span></div></div>
+      <p class="lead">Bước tiếp theo: kiểm nguồn của ba câu thử Google Play, cho người dùng thử, đo thời gian tiết kiệm và công duyệt ca trước khi nói sản phẩm có lợi về kinh tế.</p>
+      <div class="source">Nguồn: <a href="../spec.md">impact §2</a> · <a href="../eval/README.md">hồ sơ đánh giá</a> · <a href="../cost/cost-estimate.md">giới hạn chi phí</a>.</div>
+    </section>
+  </main>
+  <nav class="controls" aria-label="Điều khiển slide"><button id="prev" type="button" aria-label="Trang trước">←</button><span id="counter">1 / 5</span><button id="next" type="button" aria-label="Trang sau">→</button></nav>
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    let current = 0;
+    function show(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      document.getElementById('counter').textContent = `${current + 1} / ${slides.length}`;
+      location.hash = `slide-${current + 1}`;
+    }
+    document.getElementById('prev').addEventListener('click', () => show(current - 1));
+    document.getElementById('next').addEventListener('click', () => show(current + 1));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight' || event.key === 'PageDown') show(current + 1);
+      if (event.key === 'ArrowLeft' || event.key === 'PageUp') show(current - 1);
+    });
+    const initial = Number(location.hash.match(/^#slide-(\d+)$/)?.[1]);
+    if (initial) show(initial - 1);
+  </script>
+</body>
+</html>

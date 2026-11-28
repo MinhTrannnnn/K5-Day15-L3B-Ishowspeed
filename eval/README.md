@@ -68,7 +68,11 @@ CP3: nối model thật trong `codebase/ai.py`, cấu hình `.env` riêng; chạ
 | 1 | `run-1@20261127-194854` | Ollama `qwen2.5:1.5b` | 13/20 (65%); thường 2/5, khó 10/12, từ chối 1/3 | Chưa đạt chuẩn CP2. |
 | 2 | `run-2@20261128-080037` | OpenAI `gpt-5.4-nano-2026-03-17` | 18/20 (90%); thường 3/5, khó 12/12, từ chối 3/3 | Đạt các ngưỡng trên bộ 20 câu; khác model và commit so với lượt 1. |
 
-CSV và trace của hai lượt được giữ nguyên ngoài hai cột `pass`, `ghi_chu`.Chấm từng output theo benchmark/metric và chạy `score`; chưa có phiếu chấm độc lập của thành viên nhóm cho hai lượt AI thật. [Báo cáo](report.md) · [Rà lượt 1](cp3-run1-review.md) · [Rà lượt OpenAI](cp3-openai-run2-review.md). Hội thoại nhiều lượt và thao tác duyệt ca được kiểm riêng. Phiếu CP2 ghi điểm xác nhận của hai người, chưa có hai bộ điểm trước đối chiếu.
+CSV và trace của hai lượt được giữ nguyên ngoài hai cột `pass`, `ghi_chu`. Chấm từng output theo benchmark/metric và chạy `score`; chưa có phiếu chấm độc lập của thành viên nhóm cho hai lượt AI thật. [Báo cáo](report.md) · [Rà lượt 1](cp3-run1-review.md) · [Rà lượt OpenAI](cp3-openai-run2-review.md). Hội thoại nhiều lượt và thao tác duyệt ca được kiểm riêng. Phiếu CP2 ghi điểm xác nhận của hai người, chưa có hai bộ điểm trước đối chiếu.
+
+**CP4 — một gói cải tiến lõi xử lý:** Lượt 1 sai bảy câu, chia thành nhóm thiếu trạng thái/mốc trễ/bước tiếp theo (D1-01,03,08,14) và nhóm hiểu nhầm yêu cầu vượt quyền/ngoài phạm vi (D1-16,18,20). Sau khi tích hợp lõi, lượt kiểm riêng dùng **cùng Ollama `qwen2.5:1.5b` và cùng 20 câu** đạt **19/20 (95%)**, nhóm trọng tâm **0/4 → 3/4**, không có câu từ đạt thành trượt; D1-08 còn trượt. [CSV kiểm tích hợp](cp3-integration-20261128.csv) · [phân tích ≥3 lỗi và bản sửa](report.md). `run-2.csv` dùng OpenAI ở commit khác, đạt 18/20; không dùng chênh lệch giữa hai model để quy nguyên nhân cải tiến.
+
+**Chi phí CP4:** [mô phỏng mới](../cost/simulate-2-summary.md) chạy 50 phiên OpenAI, 0 lỗi. Ba persona và quy mô pilot 100/300/1.000 người đều *tự ước tính*; giá nano và mini lấy từ tài liệu OpenAI. Mức 300 người với nano tính **$0.0567/tháng tiền token** và **$0.00012/task thành công** theo tỷ lệ đạt 18/20; chưa tính chi phí người duyệt/hạ tầng hoặc hiệu quả thực tế. [Phân tích chi phí và impact](../cost/cost-estimate.md).
 
 
 ## 7. Đánh giá thiết kế nâng cấp
