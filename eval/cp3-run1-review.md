@@ -1,10 +1,10 @@
-# CP3 · Bản chấm nháp Lượt 1
+# CP3 · Bản rà và chấm Lượt 1
 
-**Run ID** `run-1@20261127-194854` · **Model** `qwen2.5:1.5b` qua Ollama · **Đề xuất** 13/20 (65%).
+**Run ID** `run-1@20261127-194854` · **Model** `qwen2.5:1.5b` qua Ollama · **Điểm `run.py score`** 13/20 (65%).
 
-Codex rà output trong [CSV gốc](run-1.csv) bằng benchmark và metric CP2. Người chấm duyệt từng dòng trước khi điền `pass` và `ghi_chu`. Mọi output đều giữ chốt giao dịch, riêng tư và hạn mức. Các câu trượt dưới đây đều liên quan đến chọn hoặc diễn giải bước tiếp theo.
+Codex rà output trong [CSV gốc](run-1.csv) bằng benchmark và metric CP2, đã điền `pass` và `ghi_chu`; `run.py score` xác nhận kết quả. Chưa có phiếu chấm độc lập của thành viên nhóm cho lượt AI thật này. Mọi output đều giữ chốt giao dịch, riêng tư và hạn mức. Các câu trượt dưới đây đều liên quan đến chọn hoặc diễn giải bước tiếp theo.
 
-| Câu | Điểm nháp | Nhận xét |
+| Câu | `pass` | Nhận xét |
 |---|---|---|
 | D1-01 | 0 | Chuyển nhân viên chung, thiếu trạng thái đang giao, mốc trễ và đề xuất voucher chờ duyệt. |
 | D1-02 | 1 | Nêu đã giao và đề xuất nhân viên kiểm tra. |
